@@ -12,17 +12,17 @@ const BEAST_WILD = "https://redcateyewear.com/cdn/shop/files/Redcat_BEAST_Aron_i
 
 const CDN = "https://cdn.shopify.com/s/files/1/0774/1784/0936/files";
 const STATIC_PRODUCTS = [
-  { id: "1", handle: "beast", title: "BEAST™", priceRange: { minVariantPrice: { amount: "204.99" } }, images: [{ url: `${CDN}/beast_red_frame_brown_with_red_mirror_lenses_1.jpg`, altText: "BEAST" }] },
-  { id: "2", handle: "roar", title: "ROAR™", priceRange: { minVariantPrice: { amount: "184.99" } }, images: [{ url: `${CDN}/roar_matte_met_cyan_gray_green_oil_slick_mirror_1.jpg`, altText: "ROAR" }] },
-  { id: "3", handle: "leap", title: "LEAP™", priceRange: { minVariantPrice: { amount: "144.99" } }, images: [{ url: `${CDN}/leap_matte_metallic_red_gray_polar_blue_mirror_1.jpg`, altText: "LEAP" }] },
-  { id: "4", handle: "strike", title: "STRIKE™", priceRange: { minVariantPrice: { amount: "119.99" } }, images: [{ url: `${CDN}/strike_matte_tortoise_gray_polar_green_mirror_1.jpg`, altText: "STRIKE" }] },
+  { id: "1", handle: "beast", title: "Beast", priceRange: { minVariantPrice: { amount: "204.99" } }, images: [{ url: `${CDN}/beast_red_frame_brown_with_red_mirror_lenses_1.jpg`, altText: "Beast" }] },
+  { id: "2", handle: "roar", title: "Roar", priceRange: { minVariantPrice: { amount: "184.99" } }, images: [{ url: `${CDN}/roar_matte_met_cyan_gray_green_oil_slick_mirror_1.jpg`, altText: "Roar" }] },
+  { id: "3", handle: "leap", title: "Leap", priceRange: { minVariantPrice: { amount: "144.99" } }, images: [{ url: `${CDN}/leap_matte_metallic_red_gray_polar_blue_mirror_1.jpg`, altText: "Leap" }] },
+  { id: "4", handle: "strike", title: "Strike", priceRange: { minVariantPrice: { amount: "119.99" } }, images: [{ url: `${CDN}/strike_matte_tortoise_gray_polar_green_mirror_1.jpg`, altText: "Strike" }] },
 ];
 
 const ACTIVITIES = [
-  { name: "PICKLEBALL", href: "/activities/pickleball", image: "https://redcateyewear.com/cdn/shop/files/LEAP_Pickleball_-_Dark_Blue_with_Dark_Green_Lenses_3840x2160_12ac36d4-ede4-4785-811b-4ac3d3ec569c.jpg?crop=center&height=800&v=1713192324&width=800", lens: "LumiGlo™ / FireGlo™" },
-  { name: "CYCLING", href: "/activities/cycling", image: "https://redcateyewear.com/cdn/shop/files/mountain-bike-cycling-and-fitness.jpg?crop=center&height=800&v=1719939492&width=800", lens: "CarbonGlo™ / BronzeGlo™" },
-  { name: "TENNIS", href: "/activities/tennis", image: "https://redcateyewear.com/cdn/shop/files/AdobeStock_321178379.jpg?crop=center&height=800&v=1721052329&width=800", lens: "LumiGlo™" },
-  { name: "GOLF & OUTDOORS", href: "/activities/golf", image: BEAST_WILD, lens: "CarbonGlo™" },
+  { name: "PICKLEBALL", href: "/activities/pickleball", image: "https://redcateyewear.com/cdn/shop/files/LEAP_Pickleball_-_Dark_Blue_with_Dark_Green_Lenses_3840x2160_12ac36d4-ede4-4785-811b-4ac3d3ec569c.jpg?crop=center&height=800&v=1713192324&width=800", lens: "LumiGlo / FireGlo" },
+  { name: "CYCLING", href: "/activities/cycling", image: "https://redcateyewear.com/cdn/shop/files/mountain-bike-cycling-and-fitness.jpg?crop=center&height=800&v=1719939492&width=800", lens: "CarbonGlo / BronzeGlo" },
+  { name: "TENNIS", href: "/activities/tennis", image: "https://redcateyewear.com/cdn/shop/files/AdobeStock_321178379.jpg?crop=center&height=800&v=1721052329&width=800", lens: "LumiGlo" },
+  { name: "GOLF & OUTDOORS", href: "/activities/golf", image: BEAST_WILD, lens: "CarbonGlo" },
 ];
 
 const CHAPTERS = [
@@ -72,7 +72,7 @@ export default function Home() {
               <span className="text-xs font-bold tracking-[0.3em] uppercase text-rc-red">Elite Performance Eyewear</span>
             </motion.div>
 
-            {["SEE FASTER.", "BE FASTER.™"].map((line, i) => (
+            {["SEE FASTER.", "BE FASTER."].map((line, i) => (
               <div key={line} className="line-mask">
                 <motion.h1
                   initial={{ y: "105%" }}
@@ -145,7 +145,7 @@ export default function Home() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="flex flex-col justify-center px-8 lg:px-16 py-16 bg-gray-50 dark:bg-rc-dark"
+          className="flex flex-col justify-center px-8 lg:px-16 py-16 bg-[#FAFAFA] dark:bg-rc-dark"
         >
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-rc-cyan mb-5">color-tuned technology</span>
           <h2
@@ -245,7 +245,7 @@ export default function Home() {
       </section>
 
       {/* ─── TECHNOLOGY MANIFESTO ────────────────── */}
-      <section data-testid="manifesto-section" className="bg-gray-50 dark:bg-rc-surface py-24 px-6">
+      <section data-testid="manifesto-section" className="bg-[#FAFAFA] dark:bg-rc-surface py-24 px-6">
         <div className="max-w-screen-xl mx-auto">
           <motion.div
             variants={fadeUp()}
@@ -377,7 +377,7 @@ export default function Home() {
       </section>
 
       {/* ─── NEWSLETTER ───────────────────────────── */}
-      <section data-testid="newsletter-section" className="py-24 px-6 bg-gray-50 dark:bg-rc-surface">
+      <section data-testid="newsletter-section" className="py-24 px-6 bg-[#FAFAFA] dark:bg-rc-surface">
         <div className="max-w-screen-xl mx-auto">
           <div className="max-w-xl mx-auto text-center">
             <motion.div

@@ -22,7 +22,7 @@ db = mongo_client[os.environ['DB_NAME']]
 
 SHOPIFY_STORE_DOMAIN = "abf950-4.myshopify.com"
 SHOPIFY_STOREFRONT_TOKEN = os.environ.get('SHOPIFY_STOREFRONT_TOKEN', '')
-SHOPIFY_API_VERSION = "2024-10"
+SHOPIFY_API_VERSION = "2026-07"
 SHOPIFY_URL = f"https://{SHOPIFY_STORE_DOMAIN}/api/{SHOPIFY_API_VERSION}/graphql.json"
 
 app = FastAPI()
@@ -34,7 +34,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(level
 
 async def shopify_gql(query: str, variables: dict = None) -> dict:
     headers = {
-        "X-Shopify-Storefront-Access-Token": SHOPIFY_STOREFRONT_TOKEN,
+        "Shopify-Storefront-Private-Token": SHOPIFY_STOREFRONT_TOKEN,
         "Content-Type": "application/json",
     }
     payload = {"query": query}
@@ -95,7 +95,7 @@ query Product($handle: String!) {
     variants(first: 60) {
       edges {
         node {
-          id title availableForSale quantityAvailable
+          id title availableForSale
           price { amount currencyCode }
           selectedOptions { name value }
           image { url altText }
@@ -471,10 +471,25 @@ async def get_products():
 
 @api_router.get("/products/{handle}")
 async def get_product(handle: str):
+    # Static variant image map for enriching live data
+    static_product = next((p for p in STATIC_PRODUCTS if p["handle"] == handle), None)
+    static_vi_map = {}
+    if static_product:
+        for v in static_product.get("variants", []):
+            frame = next((o["value"] for o in v.get("selectedOptions", []) if o["name"] == "Frame Color"), None)
+            if frame and v.get("variantImages"):
+                static_vi_map[frame] = v["variantImages"]
+
     try:
         data = await shopify_gql(PRODUCT_QUERY, {"handle": handle})
         p = data.get("productByHandle")
         if p:
+            variants = []
+            for e in p["variants"]["edges"]:
+                v = e["node"]
+                frame = next((o["value"] for o in v.get("selectedOptions", []) if o["name"] == "Frame Color"), None)
+                v["variantImages"] = static_vi_map.get(frame, [])
+                variants.append(v)
             return {
                 "id": p["id"],
                 "handle": p["handle"],
@@ -485,15 +500,14 @@ async def get_product(handle: str):
                 "productType": p["productType"],
                 "priceRange": p["priceRange"],
                 "images": [e["node"] for e in p["images"]["edges"]],
-                "variants": [e["node"] for e in p["variants"]["edges"]],
+                "variants": variants,
                 "options": p["options"],
             }
     except Exception as e:
         logger.warning(f"Shopify API unavailable for {handle}, using static: {e}")
     # Fallback to static data
-    static = next((p for p in STATIC_PRODUCTS if p["handle"] == handle), None)
-    if static:
-        return static
+    if static_product:
+        return static_product
     raise HTTPException(status_code=404, detail="Product not found")
 
 

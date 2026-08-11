@@ -11,10 +11,10 @@ const navLinks = [
     href: "/collections",
     children: [
       { label: "All Products", href: "/collections" },
-      { label: "BEAST™", href: "/products/beast" },
-      { label: "ROAR™", href: "/products/roar" },
-      { label: "LEAP™", href: "/products/leap" },
-      { label: "STRIKE™", href: "/products/strike" },
+      { label: "Beast", href: "/products/beast" },
+      { label: "Roar", href: "/products/roar" },
+      { label: "Leap", href: "/products/leap" },
+      { label: "Strike", href: "/products/strike" },
     ],
   },
   { label: "BRAND", href: "/brand" },
@@ -58,9 +58,9 @@ export default function Navbar() {
         <Link
           to="/"
           data-testid="navbar-logo"
-          className="font-display text-2xl font-black tracking-widest uppercase text-white hover:text-rc-red transition-colors duration-200"
+          className="font-display text-2xl font-black tracking-widest text-white hover:text-rc-red transition-colors duration-200"
         >
-          REDCAT<span className="text-rc-red">®</span>
+          Redcat
         </Link>
 
         {/* Desktop Nav */}

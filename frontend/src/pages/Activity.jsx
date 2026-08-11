@@ -7,55 +7,55 @@ const ACTIVITY_CONFIG = {
   pickleball: {
     name: "Pickleball",
     headline: "See the Ball Like It Glows.",
-    sub: "LumiGlo™ & FireGlo™ lenses",
-    description: "Our LumiGlo™ lenses boost high-visibility green balls by up to 35%, making them practically glow. FireGlo™ amplifies pink, orange, and red balls by up to 30%. Both available in indoor and outdoor options.",
+    sub: "LumiGlo & FireGlo lenses",
+    description: "Our LumiGlo lenses boost high-visibility green balls by up to 35%, making them practically glow. FireGlo amplifies pink, orange, and red balls by up to 30%. Both available in indoor and outdoor options.",
     heroImage: "https://redcateyewear.com/cdn/shop/files/LEAP_Pickleball_-_Dark_Blue_with_Dark_Green_Lenses_3840x2160_12ac36d4-ede4-4785-811b-4ac3d3ec569c.jpg?crop=center&height=900&v=1713192324&width=1920",
-    lenses: ["LumiGlo™ Outdoor", "LumiGlo™ Indoor", "FireGlo™ Outdoor", "FireGlo™ Indoor"],
+    lenses: ["LumiGlo Outdoor", "LumiGlo Indoor", "FireGlo Outdoor", "FireGlo Indoor"],
     color: "#7BC743",
   },
   tennis: {
     name: "Tennis",
     headline: "Track the Ball. Win the Point.",
-    sub: "LumiGlo™ lenses",
-    description: "LumiGlo™ lenses boost yellow-green hues so the tennis ball stands out sharply against any court surface — clay, hard, or grass. See it sooner. React faster.",
+    sub: "LumiGlo lenses",
+    description: "LumiGlo lenses boost yellow-green hues so the tennis ball stands out sharply against any court surface — clay, hard, or grass. See it sooner. React faster.",
     heroImage: "https://redcateyewear.com/cdn/shop/files/AdobeStock_321178379.jpg?crop=center&height=900&v=1721052329&width=1920",
-    lenses: ["LumiGlo™ Outdoor", "LumiGlo™ Indoor"],
+    lenses: ["LumiGlo Outdoor", "LumiGlo Indoor"],
     color: "#C8D400",
   },
   cycling: {
     name: "Cycling",
     headline: "See Every Road Detail.",
-    sub: "CarbonGlo™ & BronzeGlo™ lenses",
-    description: "CarbonGlo™ boosts cool tones — aquas, greens, and blue-gray — perfect for road and trail visibility. BronzeGlo™ amplifies warm tones, sharpening hazard detection. Add PolarGlo™ for glare elimination.",
+    sub: "CarbonGlo & BronzeGlo lenses",
+    description: "CarbonGlo boosts cool tones — aquas, greens, and blue-gray — perfect for road and trail visibility. BronzeGlo amplifies warm tones, sharpening hazard detection. Add PolarGlo for glare elimination.",
     heroImage: "https://redcateyewear.com/cdn/shop/files/mountain-bike-cycling-and-fitness.jpg?crop=center&height=900&v=1719939492&width=1920",
-    lenses: ["CarbonGlo™", "BronzeGlo™", "PolarGlo™"],
+    lenses: ["CarbonGlo", "BronzeGlo", "PolarGlo"],
     color: "#00C9D4",
   },
   "mountain-biking": {
     name: "Mountain Biking",
     headline: "Read the Trail. Ride Faster.",
-    sub: "CarbonGlo™ lenses",
-    description: "CarbonGlo™ enhances trail visibility by boosting greens, aquas, and terrain contrast so you can read the trail farther ahead. Our AirFlo™ vent system keeps vision clear on extended climbs.",
+    sub: "CarbonGlo lenses",
+    description: "CarbonGlo enhances trail visibility by boosting greens, aquas, and terrain contrast so you can read the trail farther ahead. Our AirFlo vent system keeps vision clear on extended climbs.",
     heroImage: "https://redcateyewear.com/cdn/shop/files/mountain-bike-cycling-and-fitness.jpg?crop=center&height=900&v=1719939492&width=1920",
-    lenses: ["CarbonGlo™", "BronzeGlo™"],
+    lenses: ["CarbonGlo", "BronzeGlo"],
     color: "#7BC743",
   },
   golf: {
     name: "Golf",
     headline: "Track Every Shot.",
-    sub: "CarbonGlo™ lenses",
-    description: "CarbonGlo™ boosts green-aqua tones for exceptional course visibility, ball tracking against the sky, and hazard definition. See the grain on every green.",
-    heroImage: "https://redcateyewear.com/cdn/shop/files/Redcat_BEAST_Aron_in_the_Wild.png?crop=center&height=900&v=1764667927&width=1920",
-    lenses: ["CarbonGlo™", "PolarGlo™"],
+    sub: "CarbonGlo lenses",
+    description: "CarbonGlo boosts green-aqua tones for exceptional course visibility, ball tracking against the sky, and hazard definition. See the grain on every green.",
+    heroImage: "https://images.unsplash.com/photo-1611374243147-44a702c2d44c?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85",
+    lenses: ["CarbonGlo", "PolarGlo"],
     color: "#00C9D4",
   },
   outdoors: {
     name: "Outdoors",
     headline: "See More. Go Further.",
     sub: "All Redcat lenses",
-    description: "Whether you're hiking, driving, or just living life, Redcat color-tuned lenses counteract the natural decline in color vision, restoring vibrancy and contrast to everything you see.",
+    description: "Whether you're hiking, driving, or just living life, Redcat® color-tuned lenses counteract the natural decline in color vision, restoring vibrancy and contrast to everything you see.",
     heroImage: "https://redcateyewear.com/cdn/shop/files/Redcat_BEAST_Aron_in_the_Wild.png?crop=center&height=900&v=1764667927&width=1920",
-    lenses: ["BronzeGlo™", "CarbonGlo™", "PolarGlo™"],
+    lenses: ["BronzeGlo", "CarbonGlo", "PolarGlo"],
     color: "#D90012",
   },
 };
@@ -67,10 +67,10 @@ const fadeUp = (delay = 0) => ({
 
 const CDN = "https://cdn.shopify.com/s/files/1/0774/1784/0936/files";
 const STATIC_PRODUCTS = [
-  { id: "1", handle: "beast", title: "BEAST™", priceRange: { minVariantPrice: { amount: "204.99" } }, images: [{ url: `${CDN}/beast_red_frame_brown_with_red_mirror_lenses_1.jpg` }] },
-  { id: "2", handle: "roar", title: "ROAR™", priceRange: { minVariantPrice: { amount: "184.99" } }, images: [{ url: `${CDN}/roar_matte_met_cyan_gray_green_oil_slick_mirror_1.jpg` }] },
-  { id: "3", handle: "leap", title: "LEAP™", priceRange: { minVariantPrice: { amount: "144.99" } }, images: [{ url: `${CDN}/leap_matte_metallic_red_gray_polar_blue_mirror_1.jpg` }] },
-  { id: "4", handle: "strike", title: "STRIKE™", priceRange: { minVariantPrice: { amount: "119.99" } }, images: [{ url: `${CDN}/strike_matte_tortoise_gray_polar_green_mirror_1.jpg` }] },
+  { id: "1", handle: "beast", title: "Beast", priceRange: { minVariantPrice: { amount: "204.99" } }, images: [{ url: `${CDN}/beast_red_frame_brown_with_red_mirror_lenses_1.jpg` }] },
+  { id: "2", handle: "roar", title: "Roar", priceRange: { minVariantPrice: { amount: "184.99" } }, images: [{ url: `${CDN}/roar_matte_met_cyan_gray_green_oil_slick_mirror_1.jpg` }] },
+  { id: "3", handle: "leap", title: "Leap", priceRange: { minVariantPrice: { amount: "144.99" } }, images: [{ url: `${CDN}/leap_matte_metallic_red_gray_polar_blue_mirror_1.jpg` }] },
+  { id: "4", handle: "strike", title: "Strike", priceRange: { minVariantPrice: { amount: "119.99" } }, images: [{ url: `${CDN}/strike_matte_tortoise_gray_polar_green_mirror_1.jpg` }] },
 ];
 
 export default function Activity() {
@@ -118,7 +118,7 @@ export default function Activity() {
       </section>
 
       {/* Recommended lenses */}
-      <div className="bg-gray-50 dark:bg-rc-surface border-y border-black/10 dark:border-white/10 py-5 px-6">
+      <div className="bg-[#FAFAFA] dark:bg-rc-surface border-y border-black/10 dark:border-white/10 py-5 px-6">
         <div className="max-w-screen-xl mx-auto flex flex-wrap items-center gap-4">
           <span className="text-xs font-bold tracking-widest uppercase text-gray-400 dark:text-white/30">Recommended Lenses:</span>
           {config.lenses.map((lens) => (

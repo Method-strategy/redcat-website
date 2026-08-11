@@ -40,7 +40,12 @@ export function CartProvider({ children }) {
 
   const getCheckoutUrl = useCallback(() => {
     if (!items.length) return STORE_URL;
-    const params = items.map(i => `${i.variantId}:${i.quantity}`).join(",");
+    // Extract numeric ID from Shopify GID (gid://shopify/ProductVariant/12345) or use raw numeric string
+    const numericId = (id) => {
+      if (typeof id === "string" && id.includes("/")) return id.split("/").pop();
+      return id;
+    };
+    const params = items.map(i => `${numericId(i.variantId)}:${i.quantity}`).join(",");
     return `${STORE_URL}/cart/${params}`;
   }, [items]);
 

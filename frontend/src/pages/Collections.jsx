@@ -15,10 +15,10 @@ const FILTERS = [
 
 const CDN = "https://cdn.shopify.com/s/files/1/0774/1784/0936/files";
 const STATIC_PRODUCTS = [
-  { id: "1", handle: "beast", title: "BEAST™", description: "Shield style. Mountain biking, cycling, and general outdoors.", tags: ["cycling", "mountain biking", "outdoors"], priceRange: { minVariantPrice: { amount: "204.99" } }, images: [{ url: `${CDN}/beast_red_frame_brown_with_red_mirror_lenses_1.jpg`, altText: "BEAST" }] },
-  { id: "2", handle: "roar", title: "ROAR™", description: "Wrap shield. Pickleball, tennis, cycling, running.", tags: ["pickleball", "tennis", "cycling"], priceRange: { minVariantPrice: { amount: "184.99" } }, images: [{ url: `${CDN}/roar_matte_met_cyan_gray_green_oil_slick_mirror_1.jpg`, altText: "ROAR" }] },
-  { id: "3", handle: "leap", title: "LEAP™", description: "Wrap frame. Pickleball, tennis, and general sports.", tags: ["pickleball", "tennis", "golf"], priceRange: { minVariantPrice: { amount: "144.99" } }, images: [{ url: `${CDN}/leap_matte_metallic_red_gray_polar_blue_mirror_1.jpg`, altText: "LEAP" }] },
-  { id: "4", handle: "strike", title: "STRIKE™", description: "Classic wrap. Pickleball, tennis, running, general sports.", tags: ["pickleball", "tennis", "outdoors"], priceRange: { minVariantPrice: { amount: "119.99" } }, images: [{ url: `${CDN}/strike_matte_tortoise_gray_polar_green_mirror_1.jpg`, altText: "STRIKE" }] },
+  { id: "1", handle: "beast", title: "Beast", description: "Shield style. Mountain biking, cycling, and general outdoors.", tags: ["cycling", "mountain biking", "outdoors"], priceRange: { minVariantPrice: { amount: "204.99" } }, images: [{ url: `${CDN}/beast_red_frame_brown_with_red_mirror_lenses_1.jpg`, altText: "Beast" }] },
+  { id: "2", handle: "roar", title: "Roar", description: "Wrap shield. Pickleball, tennis, cycling, running.", tags: ["pickleball", "tennis", "cycling"], priceRange: { minVariantPrice: { amount: "184.99" } }, images: [{ url: `${CDN}/roar_matte_met_cyan_gray_green_oil_slick_mirror_1.jpg`, altText: "Roar" }] },
+  { id: "3", handle: "leap", title: "Leap", description: "Wrap frame. Pickleball, tennis, and general sports.", tags: ["pickleball", "tennis", "golf"], priceRange: { minVariantPrice: { amount: "144.99" } }, images: [{ url: `${CDN}/leap_matte_metallic_red_gray_polar_blue_mirror_1.jpg`, altText: "Leap" }] },
+  { id: "4", handle: "strike", title: "Strike", description: "Classic wrap. Pickleball, tennis, running, general sports.", tags: ["pickleball", "tennis", "outdoors"], priceRange: { minVariantPrice: { amount: "119.99" } }, images: [{ url: `${CDN}/strike_matte_tortoise_gray_polar_green_mirror_1.jpg`, altText: "Strike" }] },
 ];
 
 const TAG_MAP = {
@@ -39,7 +39,10 @@ export default function Collections() {
   const [activeFilter, setActiveFilter] = useState(collection || "all");
   const { products: liveProducts, isLoading } = useProducts();
 
-  const allProducts = !isLoading && liveProducts.length > 0 ? liveProducts : STATIC_PRODUCTS;
+  const MAIN_HANDLES = ["beast", "roar", "leap", "strike"];
+  const allProducts = !isLoading && liveProducts.length > 0
+    ? liveProducts.filter(p => MAIN_HANDLES.includes(p.handle))
+    : STATIC_PRODUCTS;
 
   const displayProducts = activeFilter === "all"
     ? allProducts

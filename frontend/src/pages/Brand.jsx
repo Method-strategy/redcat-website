@@ -9,18 +9,18 @@ const ROAR_IMG = "https://redcateyewear.com/cdn/shop/files/ROAR_Matte_Crystal_wi
 const BEAST_IMG = "https://redcateyewear.com/cdn/shop/files/John_in_BEAST.png?crop=center&v=1720547259&width=1600";
 
 const BRAND_PILLARS = [
-  { icon: "01", title: "SEE FASTER. BE FASTER.™", body: "Redcat™ is driven by a passion to elevate athletes' performance. Our mission is to seamlessly blend cutting-edge vision technology with bold, purpose-built design." },
-  { icon: "02", title: "STYLE MEETS PERFORMANCE", body: "Every pair of Redcat Eyewear is crafted in Italy, combining timeless style with performance-enhancing features. Our ultra-lightweight TR-90® frames come in a fierce palette of matte metallics and neutrals." },
-  { icon: "03", title: "BOOST YOUR VISION", body: "BronzeGlo™ amplifies warm tones — pink, red, orange, brown. CarbonGlo™ boosts cool tones — aqua, green, blue-gray. PolarGlo™ adds polarization without sacrificing color tuning." },
-  { icon: "04", title: "PERFORM AT YOUR PEAK", body: "By accelerating your ability to see and track the ball, ColorBoost™ significantly improves reaction time. Especially advantageous for older athletes, as color vision naturally diminishes with age." },
+  { icon: "01", title: "SEE FASTER. BE FASTER.", body: "Redcat® is driven by a passion to elevate athletes' performance. Our mission is to seamlessly blend cutting-edge vision technology with bold, purpose-built design." },
+  { icon: "02", title: "STYLE MEETS PERFORMANCE", body: "Every pair of Redcat® Eyewear is crafted in Italy, combining timeless style with performance-enhancing features. Our ultra-lightweight TR-90 frames come in a fierce palette of matte metallics and neutrals." },
+  { icon: "03", title: "BOOST YOUR VISION", body: "BronzeGlo amplifies warm tones — pink, red, orange, brown. CarbonGlo boosts cool tones — aqua, green, blue-gray. PolarGlo adds polarization without sacrificing color tuning." },
+  { icon: "04", title: "PERFORM AT YOUR PEAK", body: "By accelerating your ability to see and track the ball, our color-tuned technology significantly improves reaction time. Especially advantageous for older athletes, as color vision naturally diminishes with age." },
 ];
 
 const LENSES = [
-  { name: "LumiGlo™", sub: "Outdoor & Indoor", color: "#7BC743", desc: "Boosts yellow-green hues by up to 35%. Ideal for high-visibility green pickleball and tennis balls." },
-  { name: "FireGlo™", sub: "Outdoor & Indoor", color: "#FF4B2B", desc: "Amplifies pink, orange, and red by up to 30%. Ideal for colored pickleball, soccer, or golf balls." },
-  { name: "BronzeGlo™", sub: "Warm Spectrum", color: "#C87941", desc: "Boosts warm tones — red, orange, brown — by up to 30%. Enhanced acuity and clarity for a vivid picture overall." },
-  { name: "CarbonGlo™", sub: "Cool Spectrum", color: "#7CB9E8", desc: "Boosts aquas, greens, and blue-grays by up to 37%. The lens for water, golf, and road cycling." },
-  { name: "PolarGlo™", sub: "Polarized", color: "#8ECAE6", desc: "Cuts glare off water, wet roads, and hard surfaces while staying color-tuned. Best of both worlds." },
+  { name: "LumiGlo", sub: "Outdoor & Indoor", color: "#7BC743", desc: "Boosts yellow-green hues by up to 35%. Ideal for high-visibility green pickleball and tennis balls." },
+  { name: "FireGlo", sub: "Outdoor & Indoor", color: "#FF4B2B", desc: "Amplifies pink, orange, and red by up to 30%. Ideal for colored pickleball, soccer, or golf balls." },
+  { name: "BronzeGlo", sub: "Warm Spectrum", color: "#C87941", desc: "Boosts warm tones — red, orange, brown — by up to 30%. Enhanced acuity and clarity for a vivid picture overall." },
+  { name: "CarbonGlo", sub: "Cool Spectrum", color: "#7CB9E8", desc: "Boosts aquas, greens, and blue-grays by up to 37%. The lens for water, golf, and road cycling." },
+  { name: "PolarGlo", sub: "Polarized", color: "#8ECAE6", desc: "Cuts glare off water, wet roads, and hard surfaces while staying color-tuned. Best of both worlds." },
 ];
 
 const fadeUp = (delay = 0) => ({
@@ -56,10 +56,10 @@ export default function Brand() {
               initial={{ y: "105%" }}
               animate={{ y: "0%" }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-              className="font-display font-black uppercase text-white"
+              className="font-display font-black text-white"
               style={{ fontSize: "clamp(3.5rem, 9vw, 8rem)", lineHeight: "0.9" }}
             >
-              REDCAT
+              Redcat
             </motion.h1>
           </div>
           <div className="line-mask">
@@ -111,7 +111,7 @@ export default function Brand() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="flex flex-col justify-center px-8 lg:px-16 py-16 bg-gray-50 dark:bg-rc-surface order-2 lg:order-1"
+          className="flex flex-col justify-center px-8 lg:px-16 py-16 bg-[#FAFAFA] dark:bg-rc-surface order-2 lg:order-1"
         >
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-rc-cyan mb-5">Sport-Specific Performance</span>
           <h2
@@ -121,7 +121,7 @@ export default function Brand() {
             Lens Technology for Every Sport
           </h2>
           <p className="text-gray-500 dark:text-white/50 text-sm leading-relaxed mb-6 max-w-md">
-            From LumiGlo™ and FireGlo™ for racket sports to BronzeGlo™ and CarbonGlo™ for outdoor and road — every lens is tuned to a specific performance spectrum.
+            From LumiGlo and FireGlo for racket sports to BronzeGlo and CarbonGlo for outdoor and road — every lens is tuned to a specific performance spectrum.
           </p>
           <Link
             to="/collections"
@@ -183,7 +183,7 @@ export default function Brand() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="flex flex-col justify-center px-8 lg:px-16 py-16 bg-gray-50 dark:bg-rc-surface"
+          className="flex flex-col justify-center px-8 lg:px-16 py-16 bg-[#FAFAFA] dark:bg-rc-surface"
         >
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-rc-cyan mb-5">Manufacturing</span>
           <h2

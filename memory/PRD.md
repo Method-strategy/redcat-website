@@ -72,6 +72,17 @@ Sports-active consumers (pickleball, MTB, cycling, tennis, golf) seeking premium
 - **CartDrawer**: Shows product image, title, variant, price, qty controls; always-dark overlay
 - Cart persists via localStorage across page refreshes
 
+### Phase 4 (Session 4 — Trademark Compliance + Live Shopify API) — Feb 2026
+- **Logo fixed**: `REDCAT®` → `Redcat` in Navbar and Footer (Caterpillar trademark compliance)
+- **® rule**: Redcat® kept in body paragraph text only, stripped from all headings/subheads/nav
+- **™ stripped**: All ™ removed from nav links, headings, subheads; footer trademark notice added
+- **Golf activity image**: Replaced with active golfer Unsplash photo (photo-1611374243147)
+- **Light mode brightened**: CSS variables bumped to near-white, bg-gray-50 → bg-[#FAFAFA]
+- **Shopify Storefront API LIVE**: Fixed header (`Shopify-Storefront-Private-Token`), correct token, API 2026-07
+- **22 live products** from Shopify; frontend filters to 4 main handles
+- **Variant image enrichment**: Live variants merged with curated multi-angle variantImages
+- **Cart GID fix**: `getCheckoutUrl` strips Shopify GID prefix to numeric ID
+
 ---
 
 ## Key API Endpoints
@@ -98,10 +109,15 @@ Sports-active consumers (pickleball, MTB, cycling, tennis, golf) seeking premium
 - [x] Dynamic variant images
 - [x] Real Shopify checkout (cart permalink)
 - [x] Real Shopify variant IDs
+- [x] Logo trademark fix (Redcat, no all-caps, no ® in logo)
+- [x] Remove ™/® from all subheads/headings/nav (footer notice added)
+- [x] Light mode brightened
+- [x] Golf activity image → active golfer
+- [x] Live Shopify Storefront API (header fix + scope fix)
+- [x] Cart GID numeric ID fix
 
 ### P1
-- [ ] Restore Shopify Storefront API (needs Storefront API scopes enabled + token regenerated in Shopify Admin)
-- [ ] When API works: live product sync, real inventory levels
+- [ ] Clean up ™ symbols in Shopify Admin product/variant names (store-side change)
 
 ### P2
 - [ ] Activity Quiz ("Which lens is right for my sport?")
