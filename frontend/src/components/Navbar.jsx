@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingBag, X, ChevronDown, Menu, Sun, Moon } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useTheme } from "@/context/ThemeContext";
+import { Logo } from "@/components/Logo";
 
 const navLinks = [
   {
@@ -29,6 +30,7 @@ const navLinks = [
       { label: "Golf", href: "/activities/golf" },
     ],
   },
+  { label: "FIND YOUR LENS", href: "/quiz", accent: true },
 ];
 
 export default function Navbar() {
@@ -55,13 +57,7 @@ export default function Navbar() {
     >
       <div className="max-w-screen-xl mx-auto px-6 h-full flex items-center justify-between">
         {/* Logo */}
-        <Link
-          to="/"
-          data-testid="navbar-logo"
-          className="font-display text-2xl font-black tracking-widest text-white hover:text-rc-red transition-colors duration-200"
-        >
-          Redcat
-        </Link>
+        <Logo size="md" data-testid="navbar-logo" />
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-8" data-testid="desktop-nav">
@@ -69,13 +65,17 @@ export default function Navbar() {
             <div
               key={link.label}
               className="relative"
-              onMouseEnter={() => setActiveDropdown(link.label)}
+              onMouseEnter={() => link.children && setActiveDropdown(link.label)}
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <Link
                 to={link.href}
-                className="flex items-center gap-1 text-xs font-body font-semibold tracking-widest uppercase text-white/80 hover:text-white transition-colors duration-200"
-                data-testid={`nav-${link.label.toLowerCase()}`}
+                className={`flex items-center gap-1 text-xs font-body font-semibold tracking-widest uppercase transition-colors duration-200 ${
+                  link.accent
+                    ? "text-rc-red hover:text-red-400 border border-rc-red/40 hover:border-rc-red px-3 py-1.5"
+                    : "text-white/80 hover:text-white"
+                }`}
+                data-testid={`nav-${link.label.toLowerCase().replace(/ /g, "-")}`}
               >
                 {link.label}
                 {link.children && <ChevronDown size={12} />}

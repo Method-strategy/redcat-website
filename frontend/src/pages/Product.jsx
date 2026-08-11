@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Check, ShoppingBag } from "lucide-react";
 import { useProduct } from "@/hooks/useShopify";
 import { useCart } from "@/context/CartContext";
+import { useSEO } from "@/hooks/useSEO";
 
 const COLOR_MAP = {
   black: "#1C1C1C", pink: "#D4496C", orange: "#E8642C",
@@ -45,6 +46,53 @@ export default function Product() {
   const { handle } = useParams();
   const { product, isLoading, error } = useProduct(handle);
   const { addToCart } = useCart();
+
+  const specs = PRODUCT_SPECS[handle] || {};
+
+  // SEO with Product schema
+  useSEO({
+    title: product
+      ? `${product.title} Sport Sunglasses | Redcat® Eyewear`
+      : `${handle.charAt(0).toUpperCase() + handle.slice(1)} | Redcat® Eyewear`,
+    description: product
+      ? `The ${product.title} by Redcat® — ${specs.activities || "performance sport sunglasses"}. ${product.description || ""} Made in Italy.`
+      : "Performance sport sunglasses with color-tuned lenses. Crafted in Italy.",
+    keywords: `${handle} sunglasses, Redcat ${handle}, ${specs.activities || "sport sunglasses"}, color tuned lenses`,
+    image: product?.images?.[0]?.url,
+    path: `/products/${handle}`,
+    schema: product
+      ? {
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: product.title,
+          description: product.description,
+          brand: { "@type": "Brand", name: "Redcat® Eyewear" },
+          image: product.images?.map((i) => i.url) || [],
+          sku: handle,
+          category: "Sport Sunglasses",
+          countryOfOrigin: "Italy",
+          material: "Polycarbonate lenses, TR-90 frames",
+          offers: product.variants?.length
+            ? product.variants.map((v) => ({
+                "@type": "Offer",
+                price: v.price?.amount || product.priceRange?.minVariantPrice?.amount,
+                priceCurrency: "USD",
+                availability: v.availableForSale
+                  ? "https://schema.org/InStock"
+                  : "https://schema.org/OutOfStock",
+                url: `https://redcateyewear.com/products/${handle}`,
+                itemCondition: "https://schema.org/NewCondition",
+              }))
+            : {
+                "@type": "Offer",
+                price: product.priceRange?.minVariantPrice?.amount,
+                priceCurrency: "USD",
+                availability: "https://schema.org/InStock",
+                url: `https://redcateyewear.com/products/${handle}`,
+              },
+        }
+      : undefined,
+  });
 
   const [selectedOptions, setSelectedOptions] = useState({});
   const [mainImageIndex, setMainImageIndex] = useState(0);
@@ -102,7 +150,6 @@ export default function Product() {
 
   const mainImage = galleryImages[mainImageIndex] || galleryImages[0] || null;
   const price = currentVariant?.price?.amount || product?.priceRange?.minVariantPrice?.amount;
-  const specs = PRODUCT_SPECS[handle] || {};
 
   const handleAddToCart = () => {
     if (!currentVariant?.id) return;

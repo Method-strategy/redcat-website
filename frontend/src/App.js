@@ -11,6 +11,7 @@ import Brand from "@/pages/Brand";
 import Product from "@/pages/Product";
 import Activity from "@/pages/Activity";
 import Collections from "@/pages/Collections";
+import Quiz from "@/pages/Quiz";
 import { useLenis } from "@/hooks/useLenis";
 
 function AppInner() {
@@ -26,6 +27,7 @@ function AppInner() {
         <Route path="/activities/:activity" element={<Activity />} />
         <Route path="/collections" element={<Collections />} />
         <Route path="/collections/:collection" element={<Collections />} />
+        <Route path="/quiz" element={<Quiz />} />
       </Routes>
       <Footer />
     </div>

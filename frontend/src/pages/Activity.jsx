@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useProductsByActivity } from "@/hooks/useShopify";
+import { useSEO } from "@/hooks/useSEO";
 
 const ACTIVITY_CONFIG = {
   pickleball: {
@@ -78,6 +79,14 @@ export default function Activity() {
   const config = ACTIVITY_CONFIG[activity] || ACTIVITY_CONFIG.outdoors;
   const { products: liveProducts, isLoading } = useProductsByActivity(activity);
   const displayProducts = !isLoading && liveProducts.length > 0 ? liveProducts : STATIC_PRODUCTS;
+
+  useSEO({
+    title: `${config.name} Sunglasses | Redcat® ${config.lens.split("&")[0].trim()} Lenses`,
+    description: config.description,
+    keywords: `${config.name.toLowerCase()} sunglasses, ${config.name.toLowerCase()} eyewear, ${config.lenses.join(", ").toLowerCase()}, sport sunglasses`,
+    image: config.heroImage,
+    path: `/activities/${activity}`,
+  });
 
   return (
     <div className="bg-white dark:bg-rc-dark" data-testid="activity-page">

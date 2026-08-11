@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Logo } from "@/components/Logo";
 
 const footerLinks = {
   SHOP: [
@@ -17,6 +18,7 @@ const footerLinks = {
   ],
   SUPPORT: [
     { label: "Brand Story", href: "/brand" },
+    { label: "Find Your Lens", href: "/quiz" },
     { label: "FAQ", href: "https://redcateyewear.com/pages/faq" },
     { label: "Warranty & Returns", href: "https://redcateyewear.com/pages/warranty-and-returns" },
     { label: "Customer Support", href: "https://redcateyewear.com/pages/contact" },
@@ -32,11 +34,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
           {/* Brand col */}
           <div className="lg:col-span-2">
-            <Link to="/" className="font-display text-3xl font-black tracking-widest text-white">
-              Redcat
-            </Link>
+            <Logo size="lg" />
             <p className="mt-4 text-sm text-white/50 leading-relaxed max-w-xs">
-              Elite performance eyewear with color-tuned lens technology. See faster. Be faster. Made in Italy.
+              Performance sport sunglasses engineered with color-tuned lens technology. See the ball like it glows. Made in Italy.
             </p>
             <div className="mt-6 flex gap-3">
               <a

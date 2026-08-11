@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 
 const HERO_IMG = "https://redcateyewear.com/cdn/shop/files/Redcat_Hero_1_4K_7d6a3cb8-6a17-4bc8-9c40-1e9b6b5b2cae.png?crop=center&v=1724073572&width=1920";
 const MTB_IMG = "https://redcateyewear.com/cdn/shop/files/mountain-bike-cycling-and-fitness.jpg?crop=center&height=900&v=1719939492&width=1600";
@@ -29,6 +30,12 @@ const fadeUp = (delay = 0) => ({
 });
 
 export default function Brand() {
+  useSEO({
+    title: "The Science Behind the Lens | Redcat® Eyewear Brand Story",
+    description: "Redcat® sport sunglasses are built around color-tuned lens technology that amplifies specific wavelengths to make balls more visible and terrain sharper. Crafted in Italy.",
+    keywords: "color tuned lens technology, sport sunglasses technology, LumiGlo, FireGlo, CarbonGlo, BronzeGlo, PolarGlo, performance eyewear Italy",
+    path: "/brand",
+  });
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 700], [0, 100]);
 

@@ -4,7 +4,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import axios from "axios";
 import { useProducts } from "@/hooks/useShopify";
-
 const HERO_IMG = "https://redcateyewear.com/cdn/shop/files/ROAR_Redcat_red_with_Red_Rave_Mirror_c08b4d6e-d0ba-401c-b8ee-70753c68da81.png?crop=center&v=1763566571&width=1920";
 const MTB_IMG = "https://redcateyewear.com/cdn/shop/files/mountain-bike-cycling-and-fitness.jpg?crop=center&height=900&v=1719939492&width=1600";
 const ROAR_FLOAT = "https://redcateyewear.com/cdn/shop/files/Redcat_ROAR_Cyan_Floating_Product_Shot.png?crop=center&v=1764667633&width=1600";
@@ -36,7 +35,15 @@ const fadeUp = (delay = 0) => ({
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay } },
 });
 
+import { useSEO } from "@/hooks/useSEO";
+
 export default function Home() {
+  useSEO({
+    title: "Redcat® Eyewear | Color-Tuned Performance Sport Sunglasses",
+    description: "Redcat® sport sunglasses use color-tuned lens technology to make balls easier to track and terrain sharper to read. Crafted in Italy. Free shipping on orders over $150.",
+    keywords: "sport sunglasses, pickleball sunglasses, tennis sunglasses, cycling sunglasses, color tuned lenses, performance eyewear",
+    path: "/",
+  });
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
   const heroImgY = useTransform(scrollY, [0, 700], [0, 110]);

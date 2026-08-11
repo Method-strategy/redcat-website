@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useProducts } from "@/hooks/useShopify";
+import { useSEO } from "@/hooks/useSEO";
 
 const FILTERS = [
   { id: "all", label: "All" },
@@ -38,6 +39,13 @@ export default function Collections() {
   const { collection } = useParams();
   const [activeFilter, setActiveFilter] = useState(collection || "all");
   const { products: liveProducts, isLoading } = useProducts();
+
+  useSEO({
+    title: "Shop Performance Sport Sunglasses | Redcat® Eyewear",
+    description: "Browse all Redcat® sport sunglasses. The Beast, Roar, Leap, and Strike — each engineered with color-tuned lenses for pickleball, tennis, cycling, and golf. Made in Italy.",
+    keywords: "buy sport sunglasses, pickleball glasses, cycling eyewear, tennis sunglasses, golf sunglasses, Redcat Beast, Redcat Roar",
+    path: "/collections",
+  });
 
   const MAIN_HANDLES = ["beast", "roar", "leap", "strike"];
   const allProducts = !isLoading && liveProducts.length > 0

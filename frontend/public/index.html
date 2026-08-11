@@ -2,42 +2,96 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="description" content="A product of emergent.sh" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#D90012" />
+
+        <!-- SEO defaults (overridden per-page by useSEO hook) -->
+        <title>Redcat® Eyewear | Performance Sport Sunglasses | Color-Tuned Lens Technology</title>
+        <meta name="description" content="Redcat® sport sunglasses engineered with color-tuned lens technology that makes the ball easier to track. Crafted in Italy. Shop pickleball, tennis, cycling, and golf lenses." />
+        <meta name="keywords" content="sport sunglasses, pickleball sunglasses, tennis sunglasses, cycling sunglasses, golf sunglasses, color tuned lenses, performance eyewear, Redcat eyewear" />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Redcat Eyewear" />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Redcat® Eyewear" />
+        <meta property="og:title" content="Redcat® Eyewear | Performance Sport Sunglasses" />
+        <meta property="og:description" content="Color-tuned lens technology that amplifies the ball. Crafted in Italy. Built for pickleball, tennis, cycling, and golf." />
+        <meta property="og:url" content="https://redcateyewear.com" />
+        <meta property="og:image" content="https://redcateyewear.com/cdn/shop/files/Redcat_BEAST_Aron_in_the_Wild.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Redcat® Eyewear | Color-Tuned Sport Sunglasses" />
+        <meta name="twitter:description" content="Make the ball easier to see. Crafted in Italy. Shop pickleball, tennis, cycling & golf lenses." />
+        <meta name="twitter:image" content="https://redcateyewear.com/cdn/shop/files/Redcat_BEAST_Aron_in_the_Wild.png" />
+
+        <!-- Mobile -->
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <!-- Performance: preconnect to critical CDNs -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet" />
-        <!--
-        manifest.json provides metadata used when your web app is installed on a
-        user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-        -->
-        <!--
-        Notice the use of %PUBLIC_URL% in the tags above.
-        It will be replaced with the URL of the `public` folder during the build.
-        Only files inside the `public` folder can be referenced from the HTML.
+        <link rel="preconnect" href="https://customer-assets-v7afamib.emergentagent.net" crossorigin />
+        <link rel="preconnect" href="https://cdn.shopify.com" crossorigin />
+        <link rel="preconnect" href="https://redcateyewear.com" crossorigin />
 
-        Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-        work correctly both with client-side routing and a non-root public URL.
-        Learn how to configure a non-root public URL by running `npm run build`.
-        -->
-        <title>Emergent | Fullstack App</title>
+        <!-- Performance: preload critical brand assets -->
+        <link rel="preload" as="image" href="https://customer-assets-v7afamib.emergentagent.net/job_redcat-astro-build/artifacts/g47ddfql_redcat-silhouette-logo.webp" fetchpriority="high" />
+        <link rel="preload" as="image" href="https://customer-assets-v7afamib.emergentagent.net/job_redcat-astro-build/artifacts/u05abkcl_redcat-registered-trademark-logotext-only.webp" fetchpriority="high" />
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,800;0,900;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Noto+Sans+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+        <!-- Organization JSON-LD -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Redcat Eyewear",
+          "alternateName": "Redcat® Eyewear",
+          "url": "https://redcateyewear.com",
+          "logo": "https://customer-assets-v7afamib.emergentagent.net/job_redcat-astro-build/artifacts/g47ddfql_redcat-silhouette-logo.webp",
+          "description": "Performance sport sunglasses with color-tuned lens technology. Crafted in Italy.",
+          "foundingDate": "2020",
+          "areaServed": "Worldwide",
+          "sameAs": [
+            "https://www.instagram.com/redcateyewear",
+            "https://www.facebook.com/redcateyewear"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "url": "https://redcateyewear.com/pages/contact"
+          }
+        }
+        </script>
+
+        <!-- WebSite schema (enables sitelinks search) -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Redcat® Eyewear",
+          "url": "https://redcateyewear.com",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://redcateyewear.com/collections?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+        </script>
+
         <script>window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);</script>
         <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root"></div>
-        <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
         <script>
             !(function (t, e) {
                 var o, n, p, r;
@@ -102,7 +156,7 @@
             })(document, window.posthog || []);
             posthog.init("phc_DbsPb39SRc8z3EiQ6Dhj6ikv4H4rTKcht9d4sZSesceP", {
                 api_host: "https://ap.emergent.sh",
-                person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well,
+                person_profiles: "identified_only",
                 session_recording: {
                     recordCrossOriginIframes: true,
                     capturePerformance: false,

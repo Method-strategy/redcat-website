@@ -83,9 +83,14 @@ Sports-active consumers (pickleball, MTB, cycling, tennis, golf) seeking premium
 - **Variant image enrichment**: Live variants merged with curated multi-angle variantImages
 - **Cart GID fix**: `getCheckoutUrl` strips Shopify GID prefix to numeric ID
 
----
+### Phase 5 (Session 5 — Logo, Quiz, SEO) — Feb 2026
+- **Real logo lockup**: Cat silhouette (PNG, transparent bg) + "redcat" CSS text in brand red, Logo.jsx component used in Navbar + Footer
+- **Activity Lens Quiz** (`/quiz`): 3-step quiz (Sport → Environment → Goal), recommendation engine returns lens + frame model + CTA; FIND YOUR LENS in nav + footer
+- **Full SEO overhaul**: index.html updated with title/meta/OG/Twitter/schema (Organization + WebSite JSON-LD); `useSEO` hook for per-page meta + canonical + JSON-LD; Product pages get full Product schema with variants; Activity pages get per-page SEO
+- **Fonts preconnect + cat icon preload** added to index.html for LCP
+- **Footer lede updated**: "Performance sport sunglasses engineered with color-tuned lens technology."
 
-## Key API Endpoints
+---
 - `GET /api/products` — Returns 4 products with full variant data (real Shopify IDs)
 - `GET /api/products/{handle}` — Single product with variantImages per variant
 - `POST /api/cart` — Backend endpoint exists but cart is now handled client-side
