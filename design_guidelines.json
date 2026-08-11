@@ -1,0 +1,126 @@
+{
+  "theme": "dark",
+  "typography": {
+    "headings": {
+      "font_family": "Barlow Condensed, Anton, or Oswald",
+      "weights": ["bold", "black"],
+      "classes": "font-sans uppercase tracking-tighter",
+      "description": "High-impact, condensed athletic typography for headings to convey elite performance and speed. Never use generic fonts for headings."
+    },
+    "body": {
+      "font_family": "DM Sans, Inter, or Manrope",
+      "weights": ["regular", "medium", "semibold"],
+      "classes": "font-sans tracking-tight",
+      "description": "Clean, highly readable geometric sans for body text and UI elements."
+    }
+  },
+  "colors": {
+    "primary": "#D90012",
+    "secondary": "#00C9D4",
+    "background": "#0A0A0A",
+    "surface": "#141414",
+    "surface_glass": "rgba(10, 10, 10, 0.75)",
+    "text_primary": "#FFFFFF",
+    "text_secondary": "#A1A1AA",
+    "border": "rgba(255, 255, 255, 0.1)",
+    "description": "Archetype 2: The Performance Pro. Obsidian dark anchor paired with stark white text, interrupted by high-kinetic Red and Cyan triggers."
+  },
+  "visual_enhancers": {
+    "textures": "Use subtle noise/grain overlay (opacity 2-3%) across the entire site to remove digital flatness.",
+    "borders": "1px solid borders in rgba(255,255,255,0.1) for grid elements. No soft shadows. Use sharp, flat, brutalist structural lines.",
+    "glassmorphism": "Used only for the sticky navigation and cart drawer backdrop. Must include backdrop-blur-xl and a subtle 1px bottom/left border.",
+    "hover_states": "High-contrast flips. Black background elements flip to Primary Red with White text on hover."
+  },
+  "grids_and_layouts": {
+    "marketing_sections": "Mode A: The Tetris Grid. Asymmetrical layouts with varying column spans. Overlapping product images and typography.",
+    "product_grid": "Dense but large imagery. Use grid-cols-1 md:grid-cols-2 lg:grid-cols-4. Products should break out of their standard bounding boxes if possible.",
+    "spacing": "Generous Spacing: p-8, p-12, p-24. Do not cramp content. Tension is created by empty space and negative space."
+  },
+  "motion_and_interactions": {
+    "scroll": "Lenis for smooth, momentum-based scrolling. Essential for the premium Awwwards feel.",
+    "hero_reveal": "Framer Motion line-by-line masked text reveal. Staggered children with cubic-bezier easing.",
+    "parallax": "Framer Motion useScroll for subtle Y-axis translation on large imagery and background text.",
+    "marquee": "Slow, constant 'editorial ribbon' marquee across the screen, possibly with an outline font style (Kinetic Texture)."
+  },
+  "accessibility": {
+    "contrast": "Ensure white text on #0A0A0A meets >4.5:1 ratio. Darken images beneath text to max bg-black/50.",
+    "focus": "High visibility focus rings: focus:ring-2 focus:ring-[#00C9D4].",
+    "reduced_motion": "Respect prefers-reduced-motion for all Framer Motion and Lenis animations.",
+    "testing": "All interactive and key informational elements MUST include a data-testid attribute."
+  },
+  "components": {
+    "header": {
+      "style": "Crystal Glass, fixed top-0, z-50. Must not be fully transparent.",
+      "classes": "fixed w-full z-50 bg-[#0A0A0A]/70 backdrop-blur-xl border-b border-white/10"
+    },
+    "buttons": {
+      "style": "Sharp, brutalist rectangles. Kinetic hover (e.g., color inversion).",
+      "classes": "px-8 py-4 rounded-none uppercase tracking-widest font-bold bg-[#D90012] text-white hover:bg-white hover:text-[#D90012] transition-colors"
+    },
+    "cart_drawer": {
+      "style": "Slide-out from right. High density. Dark surface #141414.",
+      "behavior": "Framer Motion slide in. Must include a 'close' button and subtle dark overlay behind it."
+    }
+  },
+  "instructions_to_main_agent": [
+    "Strictly follow the Dark Theme. Set body background to #0A0A0A and text to #FFFFFF.",
+    "Install and setup @studio-freight/react-lenis for smooth scrolling.",
+    "Use Framer Motion (already installed) extensively for page load text-reveals (staggered characters/lines) and scroll-triggered element reveals.",
+    "For the hero section, use a large typography lockup. 'BEAST. ROAR. LEAP. STRIKE.' Use line-by-line reveal.",
+    "Implement a fast-marquee using framer-motion or react-fast-marquee. Text should be large outline text (text-transparent stroke-white).",
+    "Product grid must look premium. Real images with high contrast. Use subtle scale on hover.",
+    "Do not use generic Shadcn cards for marketing sections. Use custom Tailwind divs with border-white/10 to create a technical/athletic bento grid.",
+    "Images MUST NOT exceed 80vh on mobile to prevent blocking content.",
+    "All interactive elements must have data-testid attributes.",
+    "Ensure 'Made in Italy' and 'Hue ColorBoost lens' are highlighted as premium tech specs in the Brand story/manifesto section.",
+    "Write code for .js and .jsx files, not .tsx.",
+    "Add GENERAL UI UX DESIGN GUIDELINES constraints to avoid generic designs."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Do not make generic centered layouts. Use asymmetry and structural grids.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Never apply universal transition (transition: all). Target specific properties.",
+    "Do not center align the app container. Left-align text naturally.",
+    "No AI emojis in the UI.",
+    "Every interaction needs micro-animations - hover states, transitions.",
+    "Use 2-3x more spacing than feels comfortable."
+  ],
+  "image_urls": {
+    "hero_lifestyle": {
+      "url": "https://images.unsplash.com/photo-1777573011010-0c2398fe10c2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzF8MHwxfHNlYXJjaHwyfHxzcG9ydHMlMjBleWV3ZWFyJTIwbGlmZXN0eWxlfGVufDB8fHx8MTc4NjQ1NDA0MXww&ixlib=rb-4.1.0&q=85",
+      "description": "Close-up of a person wearing yellow mirrored performance sunglasses. Use in the Hero section."
+    },
+    "tech_showcase": {
+      "url": "https://images.unsplash.com/photo-1778844699006-cded6a38d898?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzF8MHwxfHNlYXJjaHwxfHxzcG9ydHMlMjBleWV3ZWFyJTIwbGlmZXN0eWxlfGVufDB8fHx8MTc4NjQ1NDA0MXww&ixlib=rb-4.1.0&q=85",
+      "description": "Profile of athlete with mirrored lenses. Use in the Hue ColorBoost technology breakdown section."
+    },
+    "activity_cycling": {
+      "url": "https://images.unsplash.com/photo-1523815378073-a43ae3fbf36a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwyfHxjeWNsaXN0JTIwYWN0aW9uJTIwZGFya3xlbnwwfHx8fDE3ODY0NTQwNDF8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Cyclist in motion blur. Use in the Activity section for Cycling."
+    },
+    "activity_tennis": {
+      "url": "https://images.unsplash.com/photo-1714840961998-8d6c02ace00b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODF8MHwxfHNlYXJjaHw0fHx0ZW5uaXMlMjBwbGF5ZXIlMjBhY3Rpb258ZW58MHx8fHwxNzg2NDU0MDQxfDA&ixlib=rb-4.1.0&q=85",
+      "description": "Tennis player swinging racquet. Use in the Activity section for Tennis."
+    },
+    "activity_pickleball": {
+      "url": "https://images.unsplash.com/photo-1618551763300-dc7eb8ce3560?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwyfHxwaWNrbGViYWxsJTIwcGxheWVyfGVufDB8fHx8MTc4NjQ1NDA0Mnww&ixlib=rb-4.1.0&q=85",
+      "description": "Pickleball player in action. Use in the Activity section for Pickleball."
+    },
+    "product_1": {
+      "url": "https://images.unsplash.com/photo-1610136649349-0f646f318053?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHwyfHxzdW5nbGFzc2VzJTIwcHJvZHVjdCUyMHNob3R8ZW58MHx8fHwxNzg2NDU0MDQxfDA&ixlib=rb-4.1.0&q=85",
+      "description": "BEAST model. Black frames."
+    },
+    "product_2": {
+      "url": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHwxfHxzdW5nbGFzc2VzJTIwcHJvZHVjdCUyMHNob3R8ZW58MHx8fHwxNzg2NDU0MDQxfDA&ixlib=rb-4.1.0&q=85",
+      "description": "ROAR model. Performance frames."
+    },
+    "product_3": {
+      "url": "https://images.unsplash.com/photo-1567473810954-507d59716c25?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHw0fHxzdW5nbGFzc2VzJTIwcHJvZHVjdCUyMHNob3R8ZW58MHx8fHwxNzg2NDU0MDQxfDA&ixlib=rb-4.1.0&q=85",
+      "description": "LEAP model. Aviator/Performance hybrid."
+    },
+    "product_4": {
+      "url": "https://images.unsplash.com/photo-1618677366787-9727aacca7ea?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHwzfHxzdW5nbGFzc2VzJTIwcHJvZHVjdCUyMHNob3R8ZW58MHx8fHwxNzg2NDU0MDQxfDA&ixlib=rb-4.1.0&q=85",
+      "description": "STRIKE model. Sleek frames."
+    }
+  }
+}
