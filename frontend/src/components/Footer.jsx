@@ -36,7 +36,7 @@ export default function Footer() {
               REDCAT<span className="text-rc-red">®</span>
             </Link>
             <p className="mt-4 text-sm text-white/50 leading-relaxed max-w-xs">
-              Elite performance eyewear with Hue ColorBoost lens technology. See faster. Be faster. Made in Italy.
+              Elite performance eyewear with color-tuned lens technology. See faster. Be faster. Made in Italy.
             </p>
             <div className="mt-6 flex gap-3">
               <a

@@ -1,74 +1,109 @@
-# Redcat Eyewear — Full Site Rebuild PRD
+# Redcat Eyewear — PRD
 
 ## Original Problem Statement
-Complete website rebuild for redcateyewear.com, originally a Shopify site. Intent is to ultimately migrate to Astro SSG + Shopify Headless for optimal SEO, AI search, and performance.
+Build a landing page and complete website rebuild for Redcat Eyewear (originally a Shopify site). The ultimate goal is an Astro migration to an SSG site connected to the Shopify cart. Requires high-end Awwwards-level design, smooth scrolling, kinetic hero, Framer Motion, and real product data. Pages include Homepage, Brand page, Product pages, and Activity pages.
+
+## Core Requirements
+- Awwwards Site-of-the-Day level design with bold art direction
+- Framer Motion for animations, Lenis for smooth scrolling
+- Pages: Homepage, Brand, Individual Products, Activity/Collections
+- Shopify Storefront API integration for live products and cart (Currently MOCKED)
+- White background (light default) with dark mode toggle
+- Dynamic variant image switching (3 views + accessories per variant)
+
+## User Personas
+Sports-active consumers (pickleball, MTB, cycling, tennis, golf) seeking premium performance eyewear with specific lens technology for their sport.
+
+---
 
 ## Architecture
-- **Frontend**: React 19 + Tailwind CSS + Framer Motion (animations) + Lenis (smooth scroll)
-- **Backend**: FastAPI + MongoDB (newsletter subscribers, proxy for Shopify API)
-- **Shopify**: Storefront API proxy — static fallback active (token needs upgrading)
-- **Font**: Barlow Condensed (display) + DM Sans (body) — Google Fonts
-- **Design**: Near-black bg (#0A0A0A), brand red (#D90012), cyan (#00C9D4)
+```
+/app/
+├── backend/
+│   ├── requirements.txt
+│   ├── .env
+│   └── server.py (FastAPI + STATIC_PRODUCTS mock with variantImages)
+├── frontend/
+│   ├── package.json
+│   ├── tailwind.config.js  (darkMode: ["class"])
+│   ├── .env
+│   └── src/
+│       ├── App.js (ThemeProvider + CartProvider + BrowserRouter)
+│       ├── index.css (light mode default, .dark overrides)
+│       ├── context/
+│       │   ├── CartContext.jsx
+│       │   └── ThemeContext.jsx (NEW - localStorage persistence)
+│       ├── components/
+│       │   ├── Navbar.jsx (always dark, has Sun/Moon toggle)
+│       │   ├── Footer.jsx (always dark)
+│       │   └── CartDrawer.jsx
+│       ├── hooks/
+│       │   ├── useShopify.js
+│       │   └── useLenis.js
+│       └── pages/
+│           ├── Home.jsx
+│           ├── Brand.jsx
+│           ├── Product.jsx
+│           ├── Activity.jsx
+│           └── Collections.jsx
+```
 
-## Pages Implemented
-- `/` — Homepage (hero, marquee, ColorBoost feature, products grid, manifesto, activities, Italy section, newsletter)
-- `/brand` — Brand story (hero, pillars, tech feature, lens guide, Italy split)
-- `/products/:handle` — Product detail (gallery, variant selectors, Add to Cart, specs tabs)
-- `/activities/:activity` — Activity pages (pickleball, tennis, cycling, mountain-biking, golf)
-- `/collections` — All products with activity filter tabs
+---
 
-## Components
-- Navbar (glass, sticky, dropdowns, mobile menu)
-- CartDrawer (Framer Motion slide-in, quantity controls)
-- CartContext (Shopify cart state, localStorage persistence)
-- Footer (links grid, brand certifications)
+## What's Been Implemented
 
-## Shopify Integration Status
-- **Products API**: Static fallback active (BEAST, ROAR, LEAP, STRIKE)
-- **Cart API**: Requires valid Storefront API public access token
-- **Store domain**: abf950-4.myshopify.com (found via page source)
-- **Current token**: 303a91a885eb4c3811b4b8ae068c7234 → returns UNAUTHORIZED
-- **Fix needed**: In Shopify Admin → Apps → Headless → generate Storefront API public access token
+### Phase 1 (Session 1 — Initial Build)
+- Full scaffolding: React + FastAPI + Tailwind + Framer Motion + Lenis
+- Navbar, Footer, CartDrawer, CartContext
+- All 5 pages: Home, Brand, Product, Activity, Collections
+- Backend mocked product API (Shopify API token was unauthorized)
+- Custom Lenis hook replacing @lenis/react (package conflict fix)
 
-## Astro Migration Path (Optimal for SEO/AI Search)
-- Astro SSG generates static HTML read by GPT, Perplexity, Gemini crawlers
-- Product JSON-LD schema injected server-side (name, price, availability, reviews)
-- 0KB JS by default, interactive islands for cart/filters
-- Shopify Storefront API data fetched at build time via getStaticPaths()
-- Deploy to Cloudflare Pages / Vercel Edge for < 100ms global loads
-- Component migration: React → Astro components (1:1 mapping)
-- Cart, Navbar = Astro islands with client:load directive
+### Phase 2 (Session 2 — User Feedback Overhaul) — Feb 2026
+- **Light/Dark Mode**: Default light, dark mode toggle (Sun/Moon) in Navbar. ThemeContext with localStorage persistence. `dark` class on `<html>`. All pages use `dark:` Tailwind variants.
+- **Image Fix**: Changed all product card/gallery images from `object-cover` to `object-contain` with `bg-white dark:bg-rc-surface` containers. Product photography on white backgrounds now shown in full without cropping.
+- **Marquee Removed**: Scrolling marquee section deleted from Homepage
+- **Hero Text**: Updated to exact user-specified copy about "color-tuned lens technology"
+- **ColorBoost renamed**: All instances of "ColorBoost" in UI copy changed to "color-tuned technology". Footer, stats, section headings updated.
+- **Dynamic Variant Images**: Backend `server.py` STATIC_PRODUCTS updated with `variantImages` per variant (3 angles + accessories image). Product.jsx gallery uses `currentVariant.variantImages` and resets on variant change. Smart `handleOptionChange` auto-selects compatible lens when frame color changes.
+- Navbar/Footer explicitly stay dark in both themes.
 
-## What Was Implemented (Feb 2026)
-- [x] Full site rebuild with all pages
-- [x] Awwwards-level hero with Framer Motion kinetic text reveal
-- [x] Editorial marquee with CSS animation
-- [x] Real Shopify CDN product photography
-- [x] Numbered technology manifesto sections
-- [x] Activity-based product filtering
-- [x] Cart drawer with Framer Motion
-- [x] Newsletter subscription (MongoDB storage)
-- [x] Static product data fallback
-- [x] Lenis smooth scrolling
-- [x] Parallax hero via useScroll + useTransform
-- [x] Responsive design (mobile menu, responsive grid)
+---
 
-## Backlog
-### P0 (Blocking for Production)
-- Get proper Shopify Storefront API public access token
-- Wire up live cart/checkout flow
-- Add Shopify product images as variants change
+## Key API Endpoints
+- `GET /api/products` — Returns 4 products with full variant data
+- `GET /api/products/{handle}` — Single product with variantImages per variant
+- `POST /api/cart` — Mocked (redirects to live Shopify URL)
+- `POST /api/newsletter` — Newsletter signup
 
-### P1 (High Value)
-- Astro SSG migration
-- Product JSON-LD schema (SEO)
-- Page transition animations between routes
-- Product image zoom on hover/click
-- Lens selector visual guide on product page
+## Key Technical Notes
+- **Shopify Storefront API**: MOCKED (token `303a91a885eb4c3811b4b8ae068c7234` on `abf950-4.myshopify.com` returned 404/UNAUTHORIZED)
+- **Dark mode**: Tailwind `darkMode: ["class"]`, class added to `document.documentElement`
+- **CDN**: Images served directly from `https://cdn.shopify.com/s/files/1/0774/1784/0936/files/`
+- **Variant images**: BEAST + ROAR have confirmed 3-angle images. LEAP + STRIKE have 1-angle + accessories.
 
-### P2 (Nice to Have)
-- Wishlist/favorites
-- Product comparison
-- Reviews integration
-- Blog/edge content pages
-- Search functionality
+---
+
+## Prioritized Backlog
+
+### P0 (Complete)
+- [x] Light theme with white background
+- [x] Dark/light mode toggle
+- [x] Product image cropping fix
+- [x] Remove marquee
+- [x] Update hero copy
+- [x] Rename ColorBoost → color-tuned technology
+- [x] Dynamic variant images
+
+### P1
+- [ ] Restore live Shopify Storefront API (needs valid token from user)
+- [ ] Live cart checkout flow
+
+### P2
+- [ ] Activity Quiz ("Which lens is right for my sport?")
+- [ ] Astro/SSG migration (original long-term goal)
+
+### P3 / Backlog
+- [ ] Accessibility (ARIA labels, keyboard nav)
+- [ ] SEO meta tags per page
+- [ ] Analytics integration

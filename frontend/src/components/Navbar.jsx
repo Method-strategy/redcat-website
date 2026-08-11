@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, X, ChevronDown, Menu } from "lucide-react";
+import { ShoppingBag, X, ChevronDown, Menu, Sun, Moon } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useTheme } from "@/context/ThemeContext";
 
 const navLinks = [
   {
@@ -32,6 +33,7 @@ const navLinks = [
 
 export default function Navbar() {
   const { totalItems, openCart } = useCart();
+  const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -106,6 +108,14 @@ export default function Navbar() {
 
         {/* Right actions */}
         <div className="flex items-center gap-4">
+          <button
+            onClick={toggleTheme}
+            data-testid="theme-toggle"
+            className="text-white/60 hover:text-white transition-colors duration-200"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
           <button
             data-testid="cart-button"
             onClick={openCart}

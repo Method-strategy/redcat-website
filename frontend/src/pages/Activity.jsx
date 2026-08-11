@@ -65,11 +65,12 @@ const fadeUp = (delay = 0) => ({
   visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1], delay } },
 });
 
+const CDN = "https://cdn.shopify.com/s/files/1/0774/1784/0936/files";
 const STATIC_PRODUCTS = [
-  { id: "1", handle: "beast", title: "BEAST™", priceRange: { minVariantPrice: { amount: "204.99" } }, images: [{ url: "https://redcateyewear.com/cdn/shop/files/beast_red_frame_brown_with_red_mirror_lenses_1.jpg?crop=center&height=480&v=1740676455&width=600" }] },
-  { id: "2", handle: "roar", title: "ROAR™", priceRange: { minVariantPrice: { amount: "184.99" } }, images: [{ url: "https://redcateyewear.com/cdn/shop/files/roar_matte_met_cyan_gray_green_oil_slick_mirror_1.jpg?crop=center&height=480&v=1740665868&width=600" }] },
-  { id: "3", handle: "leap", title: "LEAP™", priceRange: { minVariantPrice: { amount: "144.99" } }, images: [{ url: "https://redcateyewear.com/cdn/shop/files/leap_matte_metallic_red_gray_polar_blue_mirror_1.jpg?crop=center&height=480&v=1740770157&width=600" }] },
-  { id: "4", handle: "strike", title: "STRIKE™", priceRange: { minVariantPrice: { amount: "119.99" } }, images: [{ url: "https://redcateyewear.com/cdn/shop/files/strike_matte_tortoise_gray_polar_green_mirror_1.jpg?crop=center&height=480&v=1740770168&width=600" }] },
+  { id: "1", handle: "beast", title: "BEAST™", priceRange: { minVariantPrice: { amount: "204.99" } }, images: [{ url: `${CDN}/beast_red_frame_brown_with_red_mirror_lenses_1.jpg` }] },
+  { id: "2", handle: "roar", title: "ROAR™", priceRange: { minVariantPrice: { amount: "184.99" } }, images: [{ url: `${CDN}/roar_matte_met_cyan_gray_green_oil_slick_mirror_1.jpg` }] },
+  { id: "3", handle: "leap", title: "LEAP™", priceRange: { minVariantPrice: { amount: "144.99" } }, images: [{ url: `${CDN}/leap_matte_metallic_red_gray_polar_blue_mirror_1.jpg` }] },
+  { id: "4", handle: "strike", title: "STRIKE™", priceRange: { minVariantPrice: { amount: "119.99" } }, images: [{ url: `${CDN}/strike_matte_tortoise_gray_polar_green_mirror_1.jpg` }] },
 ];
 
 export default function Activity() {
@@ -79,11 +80,11 @@ export default function Activity() {
   const displayProducts = !isLoading && liveProducts.length > 0 ? liveProducts : STATIC_PRODUCTS;
 
   return (
-    <div className="bg-rc-dark" data-testid="activity-page">
+    <div className="bg-white dark:bg-rc-dark" data-testid="activity-page">
       {/* Hero */}
       <section className="relative h-[75vh] min-h-[520px] flex items-end overflow-hidden pt-[var(--navbar-h)]">
         <img src={config.heroImage} alt={config.name} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-rc-dark via-rc-dark/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
         <div className="relative z-10 max-w-screen-xl mx-auto px-6 pb-14 w-full">
           <motion.div
             initial={{ opacity: 0, x: -16 }}
@@ -117,13 +118,13 @@ export default function Activity() {
       </section>
 
       {/* Recommended lenses */}
-      <div className="bg-rc-surface border-y border-white/10 py-5 px-6">
+      <div className="bg-gray-50 dark:bg-rc-surface border-y border-black/10 dark:border-white/10 py-5 px-6">
         <div className="max-w-screen-xl mx-auto flex flex-wrap items-center gap-4">
-          <span className="text-xs font-bold tracking-widest uppercase text-white/30">Recommended Lenses:</span>
+          <span className="text-xs font-bold tracking-widest uppercase text-gray-400 dark:text-white/30">Recommended Lenses:</span>
           {config.lenses.map((lens) => (
             <span
               key={lens}
-              className="text-xs font-bold tracking-widest uppercase px-3 py-1.5 border border-white/15 text-white/70"
+              className="text-xs font-bold tracking-widest uppercase px-3 py-1.5 border border-black/10 dark:border-white/15 text-gray-600 dark:text-white/70"
             >
               {lens}
             </span>
@@ -141,14 +142,14 @@ export default function Activity() {
           className="mb-10"
         >
           <h2
-            className="font-display font-black uppercase leading-tight text-white"
+            className="font-display font-black uppercase leading-tight text-gray-900 dark:text-white"
             style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
           >
             Models for {config.name}
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-black/5 dark:bg-white/8">
           {displayProducts.map((product, i) => (
             <motion.div
               key={product.id || product.handle}
@@ -156,26 +157,26 @@ export default function Activity() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
-              className="bg-rc-dark group"
+              className="bg-white dark:bg-rc-dark group"
             >
               <Link
                 to={`/products/${product.handle}`}
                 data-testid={`activity-product-${product.handle}`}
               >
-                <div className="product-img-wrap aspect-square overflow-hidden bg-rc-surface">
+                <div className="product-img-wrap aspect-square overflow-hidden bg-white dark:bg-rc-surface flex items-center justify-center p-4">
                   <img
                     src={product.images?.[0]?.url || ""}
                     alt={product.images?.[0]?.altText || product.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
                 </div>
-                <div className="p-5 border-t border-white/8">
-                  <h3 className="font-display text-2xl font-black uppercase tracking-wider text-white group-hover:text-rc-red transition-colors duration-200">
+                <div className="p-5 border-t border-black/5 dark:border-white/8">
+                  <h3 className="font-display text-2xl font-black uppercase tracking-wider text-gray-900 dark:text-white group-hover:text-rc-red transition-colors duration-200">
                     {product.title}
                   </h3>
                   <div className="flex items-center justify-between mt-2">
-                    <p className="text-sm text-white/50">
+                    <p className="text-sm text-gray-500 dark:text-white/50">
                       From ${parseFloat(product.priceRange?.minVariantPrice?.amount || 0).toFixed(2)}
                     </p>
                     <ArrowRight size={14} className="text-rc-cyan opacity-0 group-hover:opacity-100 transition-opacity" />

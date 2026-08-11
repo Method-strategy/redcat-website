@@ -2,6 +2,7 @@ import "@/App.css";
 import "@/index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/context/CartContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
@@ -15,7 +16,7 @@ import { useLenis } from "@/hooks/useLenis";
 function AppInner() {
   useLenis();
   return (
-    <div className="App bg-rc-dark text-white min-h-screen font-body">
+    <div className="App min-h-screen font-body bg-white dark:bg-rc-dark text-gray-900 dark:text-white">
       <Navbar />
       <CartDrawer />
       <Routes>
@@ -33,11 +34,13 @@ function AppInner() {
 
 function App() {
   return (
-    <CartProvider>
-      <BrowserRouter>
-        <AppInner />
-      </BrowserRouter>
-    </CartProvider>
+    <ThemeProvider>
+      <CartProvider>
+        <BrowserRouter>
+          <AppInner />
+        </BrowserRouter>
+      </CartProvider>
+    </ThemeProvider>
   );
 }
 
