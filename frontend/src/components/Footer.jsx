@@ -18,7 +18,7 @@ const footerLinks = {
   ],
   SUPPORT: [
     { label: "Brand Story", href: "/brand" },
-    { label: "Find Your Lens", href: "/quiz" },
+    { label: "Find Your Redcats", href: "/quiz" },
     { label: "FAQ", href: "https://redcateyewear.com/pages/faq" },
     { label: "Warranty & Returns", href: "https://redcateyewear.com/pages/warranty-and-returns" },
     { label: "Customer Support", href: "https://redcateyewear.com/pages/contact" },

@@ -30,7 +30,7 @@ const navLinks = [
       { label: "Golf", href: "/activities/golf" },
     ],
   },
-  { label: "FIND YOUR LENS", href: "/quiz", accent: true },
+  { label: "FIND YOUR REDCATS", href: "/quiz", accent: true },
 ];
 
 export default function Navbar() {
