@@ -44,7 +44,7 @@ function ProductSkeleton() {
 export default function Product() {
   const { handle } = useParams();
   const { product, isLoading, error } = useProduct(handle);
-  const { addToCart, isLoading: cartLoading } = useCart();
+  const { addToCart } = useCart();
 
   const [selectedOptions, setSelectedOptions] = useState({});
   const [mainImageIndex, setMainImageIndex] = useState(0);
@@ -104,9 +104,15 @@ export default function Product() {
   const price = currentVariant?.price?.amount || product?.priceRange?.minVariantPrice?.amount;
   const specs = PRODUCT_SPECS[handle] || {};
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = () => {
     if (!currentVariant?.id) return;
-    await addToCart(currentVariant.id, 1);
+    addToCart(currentVariant.id, 1, {
+      productTitle: product.title,
+      variantTitle: currentVariant.title,
+      price: parseFloat(currentVariant.price?.amount || 0),
+      image: galleryImages[0] || null,
+      handle,
+    });
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 2500);
   };
@@ -271,7 +277,7 @@ export default function Product() {
           {/* Add to Cart */}
           <button
             onClick={handleAddToCart}
-            disabled={!currentVariant?.availableForSale || cartLoading}
+            disabled={!currentVariant?.availableForSale}
             data-testid="add-to-cart-button"
             className={`w-full py-4 text-xs font-bold tracking-widest uppercase transition-all duration-200 flex items-center justify-center gap-2 ${
               addedToCart
@@ -279,9 +285,7 @@ export default function Product() {
                 : "bg-rc-red text-white hover:bg-gray-900 dark:hover:bg-white dark:hover:text-rc-red disabled:opacity-40 disabled:cursor-not-allowed"
             }`}
           >
-            {cartLoading ? (
-              "Adding..."
-            ) : addedToCart ? (
+            {addedToCart ? (
               <><Check size={14} /> Added to Cart</>
             ) : currentVariant?.availableForSale ? (
               "Add to Cart"

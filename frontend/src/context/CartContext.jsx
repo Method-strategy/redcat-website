@@ -1,88 +1,65 @@
 import { createContext, useContext, useState, useCallback, useEffect } from "react";
-import axios from "axios";
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const CartContext = createContext({});
+const STORE_URL = "https://redcateyewear.com";
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState(null);
+  const [items, setItems] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("rc_cart_items") || "[]"); }
+    catch { return []; }
+  });
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const cartId = localStorage.getItem("rc_cart_id");
-    if (cartId) {
-      axios.get(`${API}/cart/${encodeURIComponent(cartId)}`)
-        .then(r => setCart(r.data))
-        .catch(() => localStorage.removeItem("rc_cart_id"));
+    localStorage.setItem("rc_cart_items", JSON.stringify(items));
+  }, [items]);
+
+  const addToCart = useCallback((variantId, quantity = 1, meta = {}) => {
+    const id = String(variantId);
+    setItems(prev => {
+      const existing = prev.find(i => i.variantId === id);
+      if (existing) {
+        return prev.map(i => i.variantId === id ? { ...i, quantity: i.quantity + quantity } : i);
+      }
+      return [...prev, { id: `${id}_${Date.now()}`, variantId: id, quantity, ...meta }];
+    });
+    setIsOpen(true);
+  }, []);
+
+  const removeFromCart = useCallback((itemId) => {
+    setItems(prev => prev.filter(i => i.id !== itemId));
+  }, []);
+
+  const updateQuantity = useCallback((itemId, quantity) => {
+    if (quantity <= 0) {
+      setItems(prev => prev.filter(i => i.id !== itemId));
+    } else {
+      setItems(prev => prev.map(i => i.id === itemId ? { ...i, quantity } : i));
     }
   }, []);
 
-  const addToCart = useCallback(async (variantId, quantity = 1) => {
-    setIsLoading(true);
-    try {
-      const cartId = cart?.id || localStorage.getItem("rc_cart_id");
-      let newCart;
-      if (cartId) {
-        const r = await axios.post(`${API}/cart/add`, { cartId, lines: [{ merchandiseId: variantId, quantity }] });
-        newCart = r.data;
-      } else {
-        const r = await axios.post(`${API}/cart`, { lines: [{ merchandiseId: variantId, quantity }] });
-        newCart = r.data;
-        localStorage.setItem("rc_cart_id", newCart.id);
-      }
-      setCart(newCart);
-      setIsOpen(true);
-    } catch (e) {
-      if (e?.response?.status === 503) {
-        // Shopify Storefront API unavailable — redirect to store
-        window.open("https://redcateyewear.com/collections/all", "_blank");
-      } else {
-        console.error("Add to cart error:", e);
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }, [cart]);
+  const getCheckoutUrl = useCallback(() => {
+    if (!items.length) return STORE_URL;
+    const params = items.map(i => `${i.variantId}:${i.quantity}`).join(",");
+    return `${STORE_URL}/cart/${params}`;
+  }, [items]);
 
-  const removeFromCart = useCallback(async (lineId) => {
-    if (!cart) return;
-    setIsLoading(true);
-    try {
-      const r = await axios.post(`${API}/cart/remove`, { cartId: cart.id, lineIds: [lineId] });
-      setCart(r.data);
-    } catch (e) {
-      console.error("Remove from cart error:", e);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [cart]);
-
-  const updateQuantity = useCallback(async (lineId, quantity) => {
-    if (!cart) return;
-    if (quantity <= 0) return removeFromCart(lineId);
-    setIsLoading(true);
-    try {
-      const r = await axios.post(`${API}/cart/update`, { cartId: cart.id, lines: [{ id: lineId, quantity }] });
-      setCart(r.data);
-    } catch (e) {
-      console.error("Update quantity error:", e);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [cart, removeFromCart]);
+  const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
+  const subtotal = items.reduce((sum, i) => sum + (i.price || 0) * i.quantity, 0);
 
   return (
     <CartContext.Provider value={{
-      cart,
+      items,
       isOpen,
-      isLoading,
-      totalItems: cart?.totalQuantity || 0,
+      isLoading: false,
+      totalItems,
+      subtotal,
       openCart: () => setIsOpen(true),
       closeCart: () => setIsOpen(false),
       addToCart,
       removeFromCart,
       updateQuantity,
+      getCheckoutUrl,
     }}>
       {children}
     </CartContext.Provider>

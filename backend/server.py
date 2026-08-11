@@ -254,111 +254,161 @@ CDN = "https://cdn.shopify.com/s/files/1/0774/1784/0936/files"
 POUCH = f"{CDN}/redcat-eyewear-case-cloth-pouch.png"
 
 def vi(base, alt="", angles=3):
-    """Build variantImages: up to `angles` product views + accessories."""
     imgs = [{"url": f"{CDN}/{base}_{n}.jpg", "altText": f"{alt} — View {n}"} for n in range(1, angles + 1)]
     imgs.append({"url": POUCH, "altText": "Included: case and microfiber cloth"})
     return imgs
+
+# variant images keyed by frame color (shared across lens types for same frame)
+BEAST_VI = {
+    "Black Matte": vi("Beast_Black_Frame_Brown_with_Red_Mirror_Lenses", "BEAST Black"),
+    "Pink Matte Metallic": vi("beast_pink_frame_brown_with_red_mirror_lenses", "BEAST Pink"),
+    "Orange Matte Metallic": vi("beast_orange_frame_brown_with_red_mirror_lenses", "BEAST Orange"),
+    "Redcat™ Red Matte Metallic": vi("beast_red_frame_brown_with_red_mirror_lenses", "BEAST Red"),
+    "Cyan Matte Metallic": vi("beast_cyan_frame_gray_with_green_oil_slick_mirror_lenses", "BEAST Cyan"),
+}
+ROAR_VI = {
+    "Black Matte": vi("roar_matte_blk_brown_red_2_mirror", "ROAR Black"),
+    "Crystal Matte": vi("roar_matte_crystal_gray_green_oil_slick_mirror_mirror", "ROAR Crystal"),
+    "Smoke Matte": vi("roar_matte_blk_brown_red_2_mirror", "ROAR Smoke"),  # fallback to black
+    "Cyan Matte Metallic": vi("roar_matte_met_cyan_gray_green_oil_slick_mirror", "ROAR Cyan"),
+    "Redcat™ Red Matte Metallic": vi("roar_matt_met_red_brown_red_mirror", "ROAR Red"),
+}
+LEAP_POUCH = f"{CDN}/redcat-eyewear-case-cloth-pouch_9bb7c203-447d-4bae-8948-3cf49bffb6fe.png"
+LEAP_VI = {
+    "Black Matte": [{"url": f"{CDN}/leap_matte_black_lumiglo_outdoor_1.jpg", "altText": "LEAP Black"}, {"url": LEAP_POUCH, "altText": "Accessories"}],
+    "Crystal Matte": [{"url": f"{CDN}/leap_matte_crystal_fireglo_oudoor_1.jpg", "altText": "LEAP Crystal"}, {"url": LEAP_POUCH, "altText": "Accessories"}],
+    "Pink Matte Metallic": [{"url": f"{CDN}/leap_matte_metallic_pink_fireglo_outdoor_1.jpg", "altText": "LEAP Pink"}, {"url": LEAP_POUCH, "altText": "Accessories"}],
+    "Red Matte Metallic": [{"url": f"{CDN}/leap_matte_metallic_red_gray_polar_blue_mirror_1.jpg", "altText": "LEAP Red"}, {"url": LEAP_POUCH, "altText": "Accessories"}],
+}
+STRIKE_POUCH = f"{CDN}/redcat-eyewear-case-cloth-pouch_2522e8ab-d458-4cfb-9c25-024080f4d084.png"
+STRIKE_VI = {
+    "Matte Black": [{"url": f"{CDN}/strike_matte_black_gray_polar_green_mirror_1.jpg", "altText": "STRIKE Black"}, {"url": STRIKE_POUCH, "altText": "Accessories"}],
+    "Tortoise Matte": [{"url": f"{CDN}/strike_matte_tortoise_gray_polar_green_mirror_1.jpg", "altText": "STRIKE Tortoise"}, {"url": STRIKE_POUCH, "altText": "Accessories"}],
+    "Smoke Matte": [{"url": f"{CDN}/strike_matte_smoke_translucent_lumiglo_outdoor_1.jpg", "altText": "STRIKE Smoke"}, {"url": STRIKE_POUCH, "altText": "Accessories"}],
+    "Pink Matte Metallic": [{"url": f"{CDN}/strike_matte_smoke_translucent_lumiglo_outdoor_1.jpg", "altText": "STRIKE Pink"}, {"url": STRIKE_POUCH, "altText": "Accessories"}],
+    "Crystal Matte": [{"url": f"{CDN}/strike_matte_smoke_translucent_lumiglo_outdoor_1.jpg", "altText": "STRIKE Crystal"}, {"url": STRIKE_POUCH, "altText": "Accessories"}],
+}
+
+def v(id_, frame, lens, price, avail=True, qty=20, vi_map=None):
+    img = (vi_map or {}).get(frame, [])
+    return {"id": str(id_), "title": f"{frame} / {lens}", "availableForSale": avail, "quantityAvailable": qty, "price": {"amount": str(price), "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": frame}, {"name": "Lens Type", "value": lens}], "variantImages": img}
 
 STATIC_PRODUCTS = [
     {
         "id": "gid://shopify/Product/9596029141261",
         "handle": "beast",
-        "title": "Redcat® BEAST™ Performance Sunglasses",
+        "title": "Redcat® BEAST™",
         "description": "The BEAST™ is our flagship shield-style performance sunglass — designed for mountain biking, cycling, and high-adrenaline outdoor sports. Ultra-lightweight TR-90 thermoplastic frame with shatterproof polycarbonate color-tuned lenses. Made in Italy.",
         "tags": ["cycling", "mountain biking", "outdoors", "shield"],
         "productType": "Sunglasses",
         "priceRange": {"minVariantPrice": {"amount": "204.99", "currencyCode": "USD"}, "maxVariantPrice": {"amount": "224.99", "currencyCode": "USD"}},
         "images": [
-            {"url": f"{CDN}/beast_red_frame_brown_with_red_mirror_lenses_1.jpg", "altText": "BEAST Red Frame"},
-            {"url": f"{CDN}/beast_cyan_frame_gray_with_green_oil_slick_mirror_lenses_1.jpg", "altText": "BEAST Cyan Frame"},
-            {"url": f"{CDN}/Beast_Black_Frame_Brown_with_Red_Mirror_Lenses_1.jpg", "altText": "BEAST Black Frame"},
-            {"url": f"{CDN}/beast_orange_frame_brown_with_red_mirror_lenses_1.jpg", "altText": "BEAST Orange Frame"},
-        ],
-        "variants": [
-            {"id": "gid://shopify/ProductVariant/49999041921293", "title": "Black Matte / BronzeGlo™ Red Mirror", "availableForSale": True, "quantityAvailable": 20, "price": {"amount": "204.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Black Matte"}, {"name": "Lens Type", "value": "BronzeGlo™ Red Mirror"}], "variantImages": vi("Beast_Black_Frame_Brown_with_Red_Mirror_Lenses", "BEAST Black / Red Mirror")},
-            {"id": "gid://shopify/ProductVariant/49999041954061", "title": "Redcat Red / BronzeGlo™ Red Mirror", "availableForSale": True, "quantityAvailable": 15, "price": {"amount": "204.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Redcat Red Matte Metallic"}, {"name": "Lens Type", "value": "BronzeGlo™ Red Mirror"}], "variantImages": vi("beast_red_frame_brown_with_red_mirror_lenses", "BEAST Red / Red Mirror")},
-            {"id": "gid://shopify/ProductVariant/49999041986829", "title": "Cyan / CarbonGlo™ Oil Slick Mirror", "availableForSale": True, "quantityAvailable": 12, "price": {"amount": "204.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Cyan Matte Metallic"}, {"name": "Lens Type", "value": "CarbonGlo™ Oil Slick Mirror"}], "variantImages": vi("beast_cyan_frame_gray_with_green_oil_slick_mirror_lenses", "BEAST Cyan / Oil Slick")},
-            {"id": "gid://shopify/ProductVariant/49999042019597", "title": "Orange / BronzeGlo™ Red Mirror", "availableForSale": True, "quantityAvailable": 10, "price": {"amount": "204.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Orange Matte Metallic"}, {"name": "Lens Type", "value": "BronzeGlo™ Red Mirror"}], "variantImages": vi("beast_orange_frame_brown_with_red_mirror_lenses", "BEAST Orange / Red Mirror")},
-            {"id": "gid://shopify/ProductVariant/49999042052365", "title": "Pink / BronzeGlo™ Red Mirror", "availableForSale": True, "quantityAvailable": 8, "price": {"amount": "204.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Pink Matte Metallic"}, {"name": "Lens Type", "value": "BronzeGlo™ Red Mirror"}], "variantImages": vi("beast_pink_frame_brown_with_red_mirror_lenses", "BEAST Pink / Red Mirror")},
+            {"url": f"{CDN}/beast_red_frame_brown_with_red_mirror_lenses_1.jpg", "altText": "BEAST"},
+            {"url": f"{CDN}/beast_cyan_frame_gray_with_green_oil_slick_mirror_lenses_1.jpg", "altText": "BEAST Cyan"},
+            {"url": f"{CDN}/Beast_Black_Frame_Brown_with_Red_Mirror_Lenses_1.jpg", "altText": "BEAST Black"},
         ],
         "options": [
-            {"name": "Frame Color", "values": ["Black Matte", "Pink Matte Metallic", "Orange Matte Metallic", "Redcat Red Matte Metallic", "Cyan Matte Metallic"]},
-            {"name": "Lens Type", "values": ["BronzeGlo™ Red Mirror", "CarbonGlo™ Oil Slick Mirror", "LumiGlo™ Outdoor", "FireGlo™ Outdoor"]},
+            {"name": "Frame Color", "values": ["Black Matte", "Pink Matte Metallic", "Orange Matte Metallic", "Redcat™ Red Matte Metallic", "Cyan Matte Metallic"]},
+            {"name": "Lens Type", "values": ["BronzeGlo™ Red Mirror", "CarbonGlo™ Oil Slick Mirror", "BronzeGlo™ Silver Mirror", "CarbonGlo™ No Mirror"]},
+        ],
+        "variants": [
+            v(48760812339496, "Black Matte", "BronzeGlo™ Red Mirror", "204.99", vi_map=BEAST_VI),
+            v(48760812503336, "Black Matte", "CarbonGlo™ Oil Slick Mirror", "204.99", vi_map=BEAST_VI),
+            v(48760812568872, "Pink Matte Metallic", "BronzeGlo™ Red Mirror", "204.99", vi_map=BEAST_VI),
+            v(48760812798248, "Orange Matte Metallic", "BronzeGlo™ Red Mirror", "204.99", vi_map=BEAST_VI),
+            v(48760866668840, "Redcat™ Red Matte Metallic", "BronzeGlo™ Red Mirror", "204.99", vi_map=BEAST_VI),
+            v(48760838029608, "Cyan Matte Metallic", "CarbonGlo™ Oil Slick Mirror", "204.99", vi_map=BEAST_VI),
+            v(48760837898536, "Cyan Matte Metallic", "BronzeGlo™ Red Mirror", "204.99", vi_map=BEAST_VI),
         ],
     },
     {
         "id": "gid://shopify/Product/9596029108493",
         "handle": "roar",
-        "title": "Redcat® ROAR™ Performance Sunglasses",
-        "description": "The ROAR™ is a wrap-shield performance sunglass perfect for pickleball, tennis, cycling, and running. Lightweight TR-90 frame, color-tuned polycarbonate lenses. Available in outdoor, indoor, and polarized options. Made in Italy.",
+        "title": "Redcat® ROAR™",
+        "description": "The ROAR™ is a wrap-shield performance sunglass perfect for pickleball, tennis, cycling, and running. Lightweight TR-90 frame, color-tuned polycarbonate lenses. Made in Italy.",
         "tags": ["pickleball", "tennis", "cycling", "running", "wrap"],
         "productType": "Sunglasses",
         "priceRange": {"minVariantPrice": {"amount": "184.99", "currencyCode": "USD"}, "maxVariantPrice": {"amount": "204.99", "currencyCode": "USD"}},
         "images": [
-            {"url": f"{CDN}/roar_matte_met_cyan_gray_green_oil_slick_mirror_1.jpg", "altText": "ROAR Cyan Frame"},
-            {"url": f"{CDN}/roar_matte_blk_brown_red_2_mirror_1.jpg", "altText": "ROAR Black Frame"},
-            {"url": f"{CDN}/roar_matt_met_red_brown_red_mirror_1.jpg", "altText": "ROAR Red Frame"},
-            {"url": f"{CDN}/roar_matte_crystal_gray_green_oil_slick_mirror_mirror_1.jpg", "altText": "ROAR Crystal Frame"},
-        ],
-        "variants": [
-            {"id": "gid://shopify/ProductVariant/50000000000001", "title": "Black Matte / BronzeGlo™ Red Mirror", "availableForSale": True, "quantityAvailable": 18, "price": {"amount": "184.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Black Matte"}, {"name": "Lens Type", "value": "BronzeGlo™ Red Mirror"}], "variantImages": vi("roar_matte_blk_brown_red_2_mirror", "ROAR Black / Red Mirror")},
-            {"id": "gid://shopify/ProductVariant/50000000000002", "title": "Cyan / CarbonGlo™ Oil Slick Mirror", "availableForSale": True, "quantityAvailable": 14, "price": {"amount": "184.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Cyan Matte Metallic"}, {"name": "Lens Type", "value": "CarbonGlo™ Oil Slick Mirror"}], "variantImages": vi("roar_matte_met_cyan_gray_green_oil_slick_mirror", "ROAR Cyan / Oil Slick")},
-            {"id": "gid://shopify/ProductVariant/50000000000007", "title": "Redcat Red / BronzeGlo™ Red Mirror", "availableForSale": True, "quantityAvailable": 12, "price": {"amount": "184.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Redcat Red Matte Metallic"}, {"name": "Lens Type", "value": "BronzeGlo™ Red Mirror"}], "variantImages": vi("roar_matt_met_red_brown_red_mirror", "ROAR Red / Red Mirror")},
-            {"id": "gid://shopify/ProductVariant/50000000000008", "title": "Matte Crystal / CarbonGlo™ Oil Slick Mirror", "availableForSale": True, "quantityAvailable": 9, "price": {"amount": "184.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Matte Crystal"}, {"name": "Lens Type", "value": "CarbonGlo™ Oil Slick Mirror"}], "variantImages": vi("roar_matte_crystal_gray_green_oil_slick_mirror_mirror", "ROAR Crystal / Oil Slick")},
+            {"url": f"{CDN}/roar_matte_met_cyan_gray_green_oil_slick_mirror_1.jpg", "altText": "ROAR Cyan"},
+            {"url": f"{CDN}/roar_matte_blk_brown_red_2_mirror_1.jpg", "altText": "ROAR Black"},
+            {"url": f"{CDN}/roar_matt_met_red_brown_red_mirror_1.jpg", "altText": "ROAR Red"},
         ],
         "options": [
-            {"name": "Frame Color", "values": ["Black Matte", "Redcat Red Matte Metallic", "Cyan Matte Metallic", "Matte Crystal"]},
-            {"name": "Lens Type", "values": ["BronzeGlo™ Red Mirror", "CarbonGlo™ Oil Slick Mirror", "LumiGlo™ Outdoor", "LumiGlo™ Indoor", "FireGlo™ Outdoor"]},
+            {"name": "Frame Color", "values": ["Black Matte", "Crystal Matte", "Smoke Matte", "Cyan Matte Metallic", "Redcat™ Red Matte Metallic"]},
+            {"name": "Lens Type", "values": ["BronzeGlo™ Red Mirror", "CarbonGlo™ Oil Slick Mirror", "BronzeGlo™ Silver Mirror", "CarbonGlo™ No Mirror"]},
+        ],
+        "variants": [
+            v(48772751753512, "Black Matte", "BronzeGlo™ Red Mirror", "184.99", vi_map=ROAR_VI),
+            v(48772751917352, "Black Matte", "CarbonGlo™ Oil Slick Mirror", "184.99", vi_map=ROAR_VI),
+            v(48772751950120, "Crystal Matte", "BronzeGlo™ Red Mirror", "184.99", vi_map=ROAR_VI),
+            v(48772752081192, "Crystal Matte", "CarbonGlo™ Oil Slick Mirror", "184.99", vi_map=ROAR_VI),
+            v(48772752113960, "Smoke Matte", "BronzeGlo™ Red Mirror", "184.99", vi_map=ROAR_VI),
+            v(48772752638248, "Cyan Matte Metallic", "CarbonGlo™ Oil Slick Mirror", "184.99", vi_map=ROAR_VI),
+            v(48772752507176, "Cyan Matte Metallic", "BronzeGlo™ Red Mirror", "184.99", vi_map=ROAR_VI),
+            v(48772752867624, "Redcat™ Red Matte Metallic", "BronzeGlo™ Red Mirror", "184.99", vi_map=ROAR_VI),
         ],
     },
     {
         "id": "gid://shopify/Product/9596029075725",
         "handle": "leap",
-        "title": "Redcat® LEAP™ Performance Sunglasses",
-        "description": "The LEAP™ delivers versatile wrap-frame performance for pickleball, tennis, golf, and general sports. Color-tuned lenses. Lightweight TR-90 frame. Made in Italy.",
+        "title": "Redcat® LEAP™",
+        "description": "The LEAP™ delivers versatile wrap-frame performance for pickleball, tennis, golf, and general sports. Color-tuned lenses, lightweight TR-90 frame. Made in Italy.",
         "tags": ["pickleball", "tennis", "golf", "general sports"],
         "productType": "Sunglasses",
         "priceRange": {"minVariantPrice": {"amount": "144.99", "currencyCode": "USD"}, "maxVariantPrice": {"amount": "164.99", "currencyCode": "USD"}},
         "images": [
-            {"url": f"{CDN}/leap_matte_metallic_red_gray_polar_blue_mirror_1.jpg", "altText": "LEAP Red Frame"},
-            {"url": f"{CDN}/leap_matte_black_lumiglo_outdoor_1.jpg", "altText": "LEAP Black Frame"},
-            {"url": f"{CDN}/leap_matte_crystal_fireglo_oudoor_1.jpg", "altText": "LEAP Crystal Frame"},
-        ],
-        "variants": [
-            {"id": "gid://shopify/ProductVariant/50000000000003", "title": "Redcat Red / PolarGlo™ Blue Mirror", "availableForSale": True, "quantityAvailable": 20, "price": {"amount": "144.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Redcat Red Matte Metallic"}, {"name": "Lens Type", "value": "PolarGlo™ Blue Mirror"}], "variantImages": vi("leap_matte_metallic_red_gray_polar_blue_mirror", "LEAP Red / Polar Blue", angles=1)},
-            {"id": "gid://shopify/ProductVariant/50000000000004", "title": "Black Matte / LumiGlo™ Outdoor", "availableForSale": True, "quantityAvailable": 22, "price": {"amount": "144.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Black Matte"}, {"name": "Lens Type", "value": "LumiGlo™ Outdoor"}], "variantImages": vi("leap_matte_black_lumiglo_outdoor", "LEAP Black / LumiGlo Outdoor", angles=1)},
-            {"id": "gid://shopify/ProductVariant/50000000000009", "title": "Matte Crystal / FireGlo™ Outdoor", "availableForSale": True, "quantityAvailable": 16, "price": {"amount": "144.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Matte Crystal"}, {"name": "Lens Type", "value": "FireGlo™ Outdoor"}], "variantImages": vi("leap_matte_crystal_fireglo_oudoor", "LEAP Crystal / FireGlo Outdoor", angles=1)},
+            {"url": f"{CDN}/leap_matte_metallic_red_gray_polar_blue_mirror_1.jpg", "altText": "LEAP Red"},
+            {"url": f"{CDN}/leap_matte_black_lumiglo_outdoor_1.jpg", "altText": "LEAP Black"},
+            {"url": f"{CDN}/leap_matte_crystal_fireglo_oudoor_1.jpg", "altText": "LEAP Crystal"},
         ],
         "options": [
-            {"name": "Frame Color", "values": ["Black Matte", "Pink Matte Metallic", "Redcat Red Matte Metallic", "Matte Crystal"]},
-            {"name": "Lens Type", "values": ["LumiGlo™ Outdoor", "LumiGlo™ Indoor", "FireGlo™ Outdoor", "PolarGlo™ Blue Mirror", "PolarGlo™ Silver Mirror"]},
+            {"name": "Frame Color", "values": ["Black Matte", "Crystal Matte", "Pink Matte Metallic", "Red Matte Metallic"]},
+            {"name": "Lens Type", "values": ["LumiGlo™ Outdoor", "LumiGlo™ Indoor", "FireGlo™ Outdoor", "FireGlo™ Indoor", "PolarGlo™ Blue Mirror", "PolarGlo™ Green Mirror"]},
+        ],
+        "variants": [
+            v(48772808933672, "Black Matte", "LumiGlo™ Outdoor", "144.99", vi_map=LEAP_VI),
+            v(48772808835368, "Black Matte", "FireGlo™ Indoor", "144.99", vi_map=LEAP_VI),
+            v(48772808966440, "Black Matte", "PolarGlo™ Blue Mirror", "144.99", vi_map=LEAP_VI),
+            v(48772809064744, "Crystal Matte", "FireGlo™ Outdoor", "144.99", vi_map=LEAP_VI),
+            v(48772809130280, "Crystal Matte", "LumiGlo™ Outdoor", "144.99", vi_map=LEAP_VI),
+            v(48772809457960, "Pink Matte Metallic", "FireGlo™ Outdoor", "144.99", vi_map=LEAP_VI),
+            v(48772809490728, "Pink Matte Metallic", "PolarGlo™ Blue Mirror", "144.99", vi_map=LEAP_VI),
+            v(48772809752872, "Red Matte Metallic", "PolarGlo™ Blue Mirror", "144.99", vi_map=LEAP_VI),
+            v(48772809720104, "Red Matte Metallic", "FireGlo™ Indoor", "144.99", vi_map=LEAP_VI),
         ],
     },
     {
         "id": "gid://shopify/Product/9596029042957",
         "handle": "strike",
-        "title": "Redcat® STRIKE™ Performance Sunglasses",
-        "description": "The STRIKE™ is our most classic-feeling performance wrap sunglass — ideal for pickleball, tennis, running, and everyday sports. Lightweight, versatile, and available in the full color-tuned lens lineup. Made in Italy.",
+        "title": "Redcat® STRIKE™",
+        "description": "The STRIKE™ is our most versatile performance wrap sunglass — ideal for pickleball, tennis, running, and everyday sports. Lightweight, available in the full color-tuned lens lineup. Made in Italy.",
         "tags": ["pickleball", "tennis", "running", "general sports"],
         "productType": "Sunglasses",
         "priceRange": {"minVariantPrice": {"amount": "119.99", "currencyCode": "USD"}, "maxVariantPrice": {"amount": "139.99", "currencyCode": "USD"}},
         "images": [
-            {"url": f"{CDN}/strike_matte_tortoise_gray_polar_green_mirror_1.jpg", "altText": "STRIKE Tortoise Frame"},
-            {"url": f"{CDN}/strike_matte_smoke_translucent_lumiglo_outdoor_1.jpg", "altText": "STRIKE Smoke Frame"},
-            {"url": f"{CDN}/strike_matte_black_gray_polar_green_mirror_1.jpg", "altText": "STRIKE Black Frame"},
-        ],
-        "variants": [
-            {"id": "gid://shopify/ProductVariant/50000000000005", "title": "Matte Tortoise / PolarGlo™ Green Mirror", "availableForSale": True, "quantityAvailable": 25, "price": {"amount": "119.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Matte Tortoise"}, {"name": "Lens Type", "value": "PolarGlo™ Green Mirror"}], "variantImages": vi("strike_matte_tortoise_gray_polar_green_mirror", "STRIKE Tortoise / Polar Green", angles=1)},
-            {"id": "gid://shopify/ProductVariant/50000000000006", "title": "Black Matte / PolarGlo™ Green Mirror", "availableForSale": True, "quantityAvailable": 30, "price": {"amount": "119.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Black Matte"}, {"name": "Lens Type", "value": "PolarGlo™ Green Mirror"}], "variantImages": vi("strike_matte_black_gray_polar_green_mirror", "STRIKE Black / Polar Green", angles=1)},
-            {"id": "gid://shopify/ProductVariant/50000000000010", "title": "Smoke Matte / LumiGlo™ Outdoor", "availableForSale": True, "quantityAvailable": 18, "price": {"amount": "119.99", "currencyCode": "USD"}, "selectedOptions": [{"name": "Frame Color", "value": "Smoke Matte"}, {"name": "Lens Type", "value": "LumiGlo™ Outdoor"}], "variantImages": vi("strike_matte_smoke_translucent_lumiglo_outdoor", "STRIKE Smoke / LumiGlo Outdoor", angles=1)},
+            {"url": f"{CDN}/strike_matte_tortoise_gray_polar_green_mirror_1.jpg", "altText": "STRIKE Tortoise"},
+            {"url": f"{CDN}/strike_matte_smoke_translucent_lumiglo_outdoor_1.jpg", "altText": "STRIKE Smoke"},
+            {"url": f"{CDN}/strike_matte_black_gray_polar_green_mirror_1.jpg", "altText": "STRIKE Black"},
         ],
         "options": [
-            {"name": "Frame Color", "values": ["Black Matte", "Pink Matte Metallic", "Matte Tortoise", "Smoke Matte"]},
-            {"name": "Lens Type", "values": ["LumiGlo™ Outdoor", "LumiGlo™ Indoor", "FireGlo™ Outdoor", "PolarGlo™ Silver Mirror", "PolarGlo™ Green Mirror"]},
+            {"name": "Frame Color", "values": ["Matte Black", "Tortoise Matte", "Smoke Matte", "Pink Matte Metallic", "Crystal Matte"]},
+            {"name": "Lens Type", "values": ["PolarGlo™ Green Mirror", "PolarGlo™ Blue Mirror", "LumiGlo™ Outdoor", "LumiGlo™ Indoor", "FireGlo™ Outdoor", "FireGlo™ Indoor"]},
+        ],
+        "variants": [
+            v(48767581258024, "Matte Black", "PolarGlo™ Green Mirror", "119.99", vi_map=STRIKE_VI),
+            v(48767581094184, "Matte Black", "PolarGlo™ Blue Mirror", "119.99", vi_map=STRIKE_VI),
+            v(48767581323560, "Tortoise Matte", "PolarGlo™ Green Mirror", "119.99", vi_map=STRIKE_VI),
+            v(48767580995880, "Tortoise Matte", "CarbonGlo™ No Mirror", "119.99", vi_map=STRIKE_VI),
+            v(48767582011688, "Smoke Matte", "LumiGlo™ Outdoor", "119.99", vi_map=STRIKE_VI),
+            v(48767581192488, "Smoke Matte", "PolarGlo™ Blue Mirror", "119.99", vi_map=STRIKE_VI),
+            v(48767581684008, "Pink Matte Metallic", "FireGlo™ Outdoor", "119.99", vi_map=STRIKE_VI),
+            v(48767581225256, "Pink Matte Metallic", "PolarGlo™ Blue Mirror", "119.99", vi_map=STRIKE_VI),
+            v(48767581946152, "Crystal Matte", "LumiGlo™ Outdoor", "119.99", vi_map=STRIKE_VI),
+            v(48767581290792, "Crystal Matte", "PolarGlo™ Green Mirror", "119.99", vi_map=STRIKE_VI),
         ],
     },
 ]
-
 
 def fmt_cart(cart: dict) -> dict:
     if not cart:
