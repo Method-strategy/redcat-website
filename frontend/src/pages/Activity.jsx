@@ -81,7 +81,7 @@ export default function Activity() {
   const displayProducts = !isLoading && liveProducts.length > 0 ? liveProducts : STATIC_PRODUCTS;
 
   useSEO({
-    title: `${config.name} Sunglasses | Redcat® ${config.lens.split("&")[0].trim()} Lenses`,
+    title: `${config.name} Sunglasses | Redcat® ${config.lenses[0]} Lenses`,
     description: config.description,
     keywords: `${config.name.toLowerCase()} sunglasses, ${config.name.toLowerCase()} eyewear, ${config.lenses.join(", ").toLowerCase()}, sport sunglasses`,
     image: config.heroImage,

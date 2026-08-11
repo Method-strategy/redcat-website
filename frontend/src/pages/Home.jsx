@@ -21,7 +21,7 @@ const ACTIVITIES = [
   { name: "PICKLEBALL", href: "/activities/pickleball", image: "https://redcateyewear.com/cdn/shop/files/LEAP_Pickleball_-_Dark_Blue_with_Dark_Green_Lenses_3840x2160_12ac36d4-ede4-4785-811b-4ac3d3ec569c.jpg?crop=center&height=800&v=1713192324&width=800", lens: "LumiGlo / FireGlo" },
   { name: "CYCLING", href: "/activities/cycling", image: "https://redcateyewear.com/cdn/shop/files/mountain-bike-cycling-and-fitness.jpg?crop=center&height=800&v=1719939492&width=800", lens: "CarbonGlo / BronzeGlo" },
   { name: "TENNIS", href: "/activities/tennis", image: "https://redcateyewear.com/cdn/shop/files/AdobeStock_321178379.jpg?crop=center&height=800&v=1721052329&width=800", lens: "LumiGlo" },
-  { name: "GOLF & OUTDOORS", href: "/activities/golf", image: BEAST_WILD, lens: "CarbonGlo" },
+  { name: "GOLF & OUTDOORS", href: "/activities/golf", image: "https://images.unsplash.com/photo-1611374243147-44a702c2d44c?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85", lens: "CarbonGlo" },
 ];
 
 const CHAPTERS = [
