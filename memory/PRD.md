@@ -90,7 +90,16 @@ Sports-active consumers (pickleball, MTB, cycling, tennis, golf) seeking premium
 - **Fonts preconnect + cat icon preload** added to index.html for LCP
 - **Footer lede updated**: "Performance sport sunglasses engineered with color-tuned lens technology."
 
-### Phase 6 (Session 6 — Lighthouse Optimizations + Driving Page) — Feb 2026
+### Phase 7 (Session 7 — Meta.docx Integration + Activity Page Corrections) — Feb 2026
+- **Mountain Biking page corrected**: Lens recommendations updated to BronzeGlo Outdoor & FireGlo Outdoor (full sun) + FireGlo Indoor (shaded trails). Added 4-feature dark section (same pattern as Driving page). Description rewritten with accurate light-condition guidance.
+- **Cycling page corrected**: Primary lens changed to CarbonGlo only (removed BronzeGlo from recommended list). Description updated to emphasize road-surface clarity.
+- **Per-variant image system**: Rewrote `v()` helper + all VI maps (BEAST_VI, ROAR_VI, LEAP_VI, STRIKE_VI) with `{frame}/{lens}` keys — selecting a lens now shows the exact product image (e.g. CarbonGlo Black Matte shows gray lens, not BronzeGlo amber).
+- **Full variant catalog**: STATIC_PRODUCTS expanded from ~7 variants/product to 23–34 variants per product, matching all meta.docx SKUs with correct images and accurate pricing ($119–$234.99).
+- **Updated product descriptions**: All 4 products now use the authoritative meta.docx description copy instead of generic placeholder text.
+- **`get_product()` enrichment**: Updated to build `static_vi_map` with both `{frame}/{lens}` exact keys and `{frame}` fallback keys — live Shopify API variants also get per-lens correct images.
+- **Added `vi1()` helper**: Single-angle image helper for LEAP variants that only have 1 photo.
+
+---
 - **robots.txt created**: `/public/robots.txt` with `User-agent: *` / `Allow: /` / Sitemap ref (SEO score fix)
 - **Footer contrast fixed**: `text-white/30` → `text-white/55`, `text-white/40` → `text-white/60`, `text-white/18` → `text-white/40` (Accessibility fix)
 - **Hero image LCP fix**: Added `fetchpriority="high"` + `decoding="async"` to hero img in Home.jsx
