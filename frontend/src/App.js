@@ -18,6 +18,11 @@ const Quiz = lazy(() => import("@/pages/Quiz"));
 const Technology = lazy(() => import("@/pages/Technology"));
 const Frames = lazy(() => import("@/pages/Frames"));
 const LensGallery = lazy(() => import("@/pages/LensGallery"));
+const Blog = lazy(() => import("@/pages/Blog"));
+const BlogPost = lazy(() => import("@/pages/BlogPost"));
+const FAQ = lazy(() => import("@/pages/FAQ"));
+const Contact = lazy(() => import("@/pages/Contact"));
+const WarrantyReturns = lazy(() => import("@/pages/WarrantyReturns"));
 
 function AppInner() {
   useLenis();
@@ -37,6 +42,11 @@ function AppInner() {
           <Route path="/technology" element={<Technology />} />
           <Route path="/frames" element={<Frames />} />
           <Route path="/lenses" element={<LensGallery />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/warranty-and-returns" element={<WarrantyReturns />} />
         </Routes>
       </Suspense>
       <Footer />

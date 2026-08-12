@@ -39,6 +39,16 @@ const navLinks = [
       { label: "Driving", href: "/activities/driving" },
     ],
   },
+  {
+    label: "SUPPORT",
+    href: "/faq",
+    children: [
+      { label: "Blog", href: "/blog" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Contact Us", href: "/contact" },
+      { label: "Warranty & Returns", href: "/warranty-and-returns" },
+    ],
+  },
   { label: "FIND YOUR REDCATS", href: "/quiz", accent: true },
 ];
 

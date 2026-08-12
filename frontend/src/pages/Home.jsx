@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Shield, Zap, Sun, Star } from "lucide-react";
 import axios from "axios";
 import { useProducts } from "@/hooks/useShopify";
 import { useSEO } from "@/hooks/useSEO";
@@ -26,6 +26,29 @@ const ACTIVITIES = [
   { name: "GOLF & OUTDOORS", href: "/activities/golf", image: "https://images.unsplash.com/photo-1611374243147-44a702c2d44c?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85", lens: "Read every green" },
   { name: "DRIVING", href: "/activities/driving", image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800", lens: "Own the low-angle sun" },
 ];
+
+const TRUST_ITEMS = [
+  { icon: Shield, stat: "Lifetime Warranty", body: "Against manufacturer's defects, to the original owner." },
+  { icon: Zap, stat: "Made in Italy", body: "CE-certified. TR-90 frames. Hand-finished." },
+  { icon: Sun, stat: "UV400 Protection", body: "100% UVA + UVB on every lens. No exceptions." },
+];
+
+const REVIEWS = [
+  {
+    name: "Joshua Briseno",
+    rating: 5,
+    model: "Strike — Matte Black",
+    text: "Love my Redcats. Great quality. I have the Strikes in matte black. Customer service was top notch and shipping was quick. Highly recommend and will be ordering more for sports activities.",
+  },
+  {
+    name: "John B.",
+    tag: "Local Guide",
+    rating: 5,
+    model: "Beast — Cyan / CarbonGlo",
+    text: "Purchased a pair of Redcat \"Beast\" glasses with the cyan frame and Carbonglo blue mirror lenses. Love 'em! High visibility, plus high definition leads to fast tracking on my trail rides. Bought these for mountain biking and they are super comfortable even after a hot morning ride in Georgia. Bonus is they look pretty darn good too! Highly recommend.",
+  },
+];
+
 
 const CHAPTERS = [
   { num: "01", title: "COLOR-TUNED TECHNOLOGY", body: "Advanced color-tuned lenses amplify specific wavelengths beyond normal human perception — up to 37% — delivering sharper acuity, heightened contrast, and a true competitive edge." },
@@ -158,6 +181,23 @@ export default function Home() {
             className="w-px h-8 bg-gradient-to-b from-black/20 to-transparent"
           />
         </motion.div>
+      </section>
+
+      {/* ─── TRUST STRIP ─────────────────────────────── */}
+      <section data-testid="trust-strip" className="border-y border-black/5 bg-white">
+        <div className="max-w-screen-xl mx-auto px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-black/5">
+            {TRUST_ITEMS.map(({ icon: Icon, stat, body }) => (
+              <div key={stat} className="flex items-center gap-4 py-5 px-0 sm:px-8 first:pl-0 last:pr-0">
+                <Icon size={18} className="text-rc-red flex-shrink-0" />
+                <div>
+                  <p className="text-xs font-bold tracking-widest uppercase text-gray-900">{stat}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ─── COLOR-TUNED FEATURE ──────────────────── */}
@@ -394,6 +434,78 @@ export default function Home() {
             Our Brand <ArrowRight size={12} />
           </Link>
         </motion.div>
+      </section>
+
+      {/* ─── GOOGLE REVIEWS ───────────────────────── */}
+      <section data-testid="reviews-section" className="py-24 px-6 bg-white border-y border-black/5">
+        <div className="max-w-screen-xl mx-auto">
+          <motion.div
+            variants={fadeUp()}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4"
+          >
+            <div>
+              <span className="text-xs font-bold tracking-[0.3em] uppercase text-rc-red">Google Reviews</span>
+              <h2
+                className="font-display font-black uppercase leading-tight text-gray-900 mt-1"
+                style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)" }}
+              >
+                Heard on the Court
+              </h2>
+              <div className="flex items-center gap-2 mt-3">
+                <div className="flex gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={14} className="text-yellow-400 fill-yellow-400" />
+                  ))}
+                </div>
+                <span className="text-sm font-bold text-gray-900">5.0</span>
+                <span className="text-sm text-gray-400">· Rated on Google</span>
+              </div>
+            </div>
+            <a
+              href="https://www.google.com/search?q=Redcat+Eyewear+reviews"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-gray-400 hover:text-gray-900 transition-colors"
+            >
+              See All Reviews <ArrowRight size={12} />
+            </a>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-px bg-black/5">
+            {REVIEWS.map((review, i) => (
+              <motion.div
+                key={review.name}
+                variants={fadeUp(i * 0.1)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+                className="bg-white p-8 md:p-10"
+                data-testid={`review-card-${i}`}
+              >
+                <div className="flex gap-0.5 mb-5">
+                  {[...Array(review.rating)].map((_, si) => (
+                    <Star key={si} size={13} className="text-yellow-400 fill-yellow-400" />
+                  ))}
+                </div>
+                <blockquote className="text-sm md:text-base text-gray-700 leading-relaxed mb-6">
+                  &ldquo;{review.text}&rdquo;
+                </blockquote>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs font-bold tracking-widest uppercase text-gray-900">{review.name}</p>
+                    {review.tag && <p className="text-[10px] text-gray-400 mt-0.5">{review.tag}</p>}
+                  </div>
+                  <span className="text-[10px] text-rc-red font-semibold tracking-widest uppercase border border-rc-red/20 px-2.5 py-1">
+                    {review.model}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ─── NEWSLETTER ───────────────────────────── */}

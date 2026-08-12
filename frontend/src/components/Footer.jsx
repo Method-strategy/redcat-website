@@ -20,10 +20,10 @@ const footerLinks = {
   SUPPORT: [
     { label: "Brand Story", href: "/brand" },
     { label: "Find Your Redcats", href: "/quiz" },
-    { label: "FAQ", href: "https://redcateyewear.com/pages/faq" },
-    { label: "Warranty & Returns", href: "https://redcateyewear.com/pages/warranty-and-returns" },
-    { label: "Customer Support", href: "https://redcateyewear.com/pages/contact" },
-    { label: "Blog", href: "https://redcateyewear.com/blogs/redcat-edge" },
+    { label: "Blog", href: "/blog" },
+    { label: "FAQ", href: "/faq" },
+    { label: "Warranty & Returns", href: "/warranty-and-returns" },
+    { label: "Contact Us", href: "/contact" },
   ],
 };
 

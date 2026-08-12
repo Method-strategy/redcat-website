@@ -278,6 +278,125 @@ export default function Technology() {
         </div>
       </section>
 
+      {/* ── CRF / CAF — The Science Behind the Claim ─────── */}
+      <section className="py-24 px-6 bg-[#0A0A0A]">
+        <div className="max-w-screen-xl mx-auto">
+          <motion.div variants={fadeUp()} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12">
+            <span className="text-xs font-bold tracking-[0.3em] uppercase text-rc-red">Hue.Ai White Paper</span>
+            <h2
+              className="font-display font-black uppercase leading-tight text-white mt-1"
+              style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
+            >
+              The Number Nobody<br />Else Publishes.
+            </h2>
+            <p className="text-white/55 text-sm mt-5 max-w-2xl leading-relaxed">
+              Almost every eyewear brand claims &ldquo;enhanced color.&rdquo; Almost none publish a figure you can verify. Hue.Ai's CTO Keenan Valentine, PhD, and Paul M. Karpecki, OD, FAAO, Chief Clinical Editor of <em>Review of Optometry</em>, published a white paper proposing two measurable metrics for any lens. We publish ours.
+            </p>
+          </motion.div>
+
+          {/* CRF / CAF definition cards */}
+          <div className="grid md:grid-cols-2 gap-px bg-white/5 mb-14">
+            {[
+              {
+                abbr: "CRF",
+                name: "Color Resolution Factor",
+                desc: "How many visually distinguishable colors a lens transmits, compared to a clear lens (100% baseline). A score above 120% means a person can definitively perceive higher color contrast.",
+                stat: ">120%",
+                statLabel: "threshold for demonstrably high contrast",
+              },
+              {
+                abbr: "CAF",
+                name: "Color Accuracy Factor",
+                desc: "How accurately the lens transmits color, compared to a clear lens (100% baseline). A score of 95% or above means color stays true to life. Below 80% means significant distortion.",
+                stat: "≥95%",
+                statLabel: "for true-to-life color accuracy",
+              },
+            ].map((metric, i) => (
+              <motion.div
+                key={metric.abbr}
+                variants={fadeUp(i * 0.1)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="bg-[#141414] p-8 md:p-10"
+              >
+                <p className="font-display font-black text-5xl text-rc-red mb-1">{metric.abbr}</p>
+                <p className="text-xs font-bold tracking-widest uppercase text-white/50 mb-5">{metric.name}</p>
+                <p className="text-sm text-white/60 leading-relaxed mb-7">{metric.desc}</p>
+                <div>
+                  <p className="font-display font-black text-3xl text-white">{metric.stat}</p>
+                  <p className="text-[10px] text-white/35 tracking-widest uppercase mt-1">{metric.statLabel}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Comparison table */}
+          <motion.div variants={fadeUp(0.15)} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <h3 className="font-display font-black uppercase text-lg text-white mb-6">How the Numbers Stack Up</h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="border-b border-white/10">
+                    <th className="text-left py-3 pr-8 text-[10px] tracking-widest uppercase text-white/35 font-semibold w-[200px]">Lens</th>
+                    <th className="text-left py-3 pr-8 text-[10px] tracking-widest uppercase text-white/35 font-semibold">CRF (Color Resolution)</th>
+                    <th className="text-left py-3 text-[10px] tracking-widest uppercase text-white/35 font-semibold">CAF (Color Accuracy)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-white/5">
+                    <td className="py-4 pr-8 text-xs font-bold tracking-widest uppercase text-rc-red align-top">REDCAT® Hue Colorboost</td>
+                    <td className="py-4 pr-8 align-top">
+                      <span className="font-display font-black text-xl text-white">138%</span>
+                      <span className="text-white/40 text-xs ml-2">+38% vs. clear</span>
+                    </td>
+                    <td className="py-4 align-top">
+                      <span className="font-display font-black text-xl text-white">99%</span>
+                      <span className="text-white/40 text-xs ml-2">essentially perfect</span>
+                    </td>
+                  </tr>
+                  <tr className="border-b border-white/5">
+                    <td className="py-4 pr-8 text-xs font-semibold text-white/40 align-top">Common rose-tinted lens</td>
+                    <td className="py-4 pr-8 align-top">
+                      <span className="font-display font-black text-xl text-white/40">96%</span>
+                      <span className="text-white/25 text-xs ml-2">below baseline</span>
+                    </td>
+                    <td className="py-4 align-top">
+                      <span className="font-display font-black text-xl text-white/40">56%</span>
+                      <span className="text-white/25 text-xs ml-2">significant distortion</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="py-4 pr-8 text-xs font-semibold text-white/25 align-top">Clear lens (baseline)</td>
+                    <td className="py-4 pr-8 align-top"><span className="font-display font-black text-xl text-white/25">100%</span></td>
+                    <td className="py-4 align-top"><span className="font-display font-black text-xl text-white/25">100%</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-white/35 text-xs mt-5 leading-relaxed max-w-2xl">
+              Source: Keenan Valentine, PhD &amp; Paul M. Karpecki, OD, FAAO — <em>Color Resolution Factor and Color Accuracy Factor: A Framework for Evaluating Color-Enhancing Lenses</em> (Hue.Ai white paper, 2024).
+            </p>
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div variants={fadeUp(0.25)} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-12 flex flex-col sm:flex-row gap-4">
+            <Link
+              to="/quiz"
+              className="inline-flex items-center gap-2 bg-rc-red text-white font-display font-black uppercase px-8 py-4 text-sm tracking-widest hover:bg-red-700 transition-colors"
+            >
+              Find Your Lens <ChevronRight size={16} />
+            </Link>
+            <Link
+              to="/blog/enhancing-color-vision"
+              className="inline-flex items-center gap-2 border border-white/20 text-white/70 font-display uppercase px-8 py-4 text-sm tracking-widest hover:border-white/40 hover:text-white transition-colors"
+            >
+              Read the Science <ChevronRight size={16} />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
     </div>
   );
 }
