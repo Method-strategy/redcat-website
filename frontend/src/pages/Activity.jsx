@@ -103,7 +103,7 @@ const ACTIVITY_CONFIG = {
     name: "Driving",
     headline: "See Every Hazard. React Faster.",
     sub: "BronzeGlo lenses",
-    description: "BronzeGlo lenses amplify warm amber tones — sharpening contrast on road markings, signage, and hazards in low-angle sun, overcast skies, and dawn/dusk conditions. PolarGlo eliminates windshield glare entirely. See further. React sooner. Drive safer.",
+    description: "BronzeGlo lenses make low-angle sun your problem no more. Amber-tuned to cut through dawn glare, late-afternoon blaze, and flat overcast — sharpening road markings, brake lights, and hazards before you even consciously register them. Add PolarGlo and windshield reflections disappear entirely. See further. React sooner. Drive safer.",
     heroImage: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=1920",
     lenses: ["BronzeGlo", "PolarGlo"],
     color: "#C8812E",
@@ -141,10 +141,16 @@ export default function Activity() {
   const { activity } = useParams();
   const config = ACTIVITY_CONFIG[activity] || ACTIVITY_CONFIG.outdoors;
   const { products: liveProducts, isLoading } = useProductsByActivity(activity);
-  const LUMIGLO_HANDLES = ["strike", "leap"];
+  const ACTIVITY_MODEL_FILTER = {
+    pickleball: ["strike", "leap"],
+    tennis: ["strike", "leap"],
+    cycling: ["beast", "roar"],
+    "mountain-biking": ["beast", "roar", "strike"],
+  };
   const allProducts = !isLoading && liveProducts.length > 0 ? liveProducts : STATIC_PRODUCTS;
-  const displayProducts = (activity === "pickleball" || activity === "tennis")
-    ? allProducts.filter((p) => LUMIGLO_HANDLES.includes(p.handle))
+  const allowedHandles = ACTIVITY_MODEL_FILTER[activity];
+  const displayProducts = allowedHandles
+    ? allProducts.filter((p) => allowedHandles.includes(p.handle))
     : allProducts;
 
   useSEO({

@@ -216,10 +216,20 @@ export default function Quiz() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-rc-dark flex flex-col pt-[var(--navbar-h)]" data-testid="quiz-page">
+    <div className="min-h-screen bg-rc-dark flex flex-col pt-[var(--navbar-h)] relative overflow-hidden" data-testid="quiz-page">
+      {/* Background image */}
+      <div className="absolute inset-0 pointer-events-none select-none z-0">
+        <img
+          src="https://images.unsplash.com/photo-1558546798-1205f968f91c?crop=entropy&cs=srgb&fm=jpg&q=85&w=1920"
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover object-center opacity-[0.12]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70" />
+      </div>
       {/* Progress */}
       {!done && (
-        <div className="w-full px-6 pt-8 pb-0">
+        <div className="relative z-10 w-full px-6 pt-8 pb-0">
           <div className="max-w-2xl mx-auto">
             <div className="flex items-center gap-2 mb-2">
               {Array.from({ length: totalSteps }).map((_, i) => (
@@ -234,7 +244,7 @@ export default function Quiz() {
       )}
 
       {/* Content */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-10">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-10">
         <AnimatePresence mode="wait" custom={direction}>
           {!done ? (
             <motion.div key={step} custom={direction} variants={slideVariants}

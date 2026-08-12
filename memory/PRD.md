@@ -121,6 +121,14 @@ Sports-active consumers (pickleball, MTB, cycling, tennis, golf) seeking premium
 - **Quiz MODEL_DATA copy**: All 4 frame taglines rewritten to be sport-specific and benefit-led.
 - Testing: iteration_15 — 100% pass (9/9 tests)
 
+### Phase 11 (Session 11 — Activity Filters, Driving Copy, Quiz BG) — Feb 2026
+- **Refactored activity model filter**: Replaced per-sport LUMIGLO_HANDLES logic with a single `ACTIVITY_MODEL_FILTER` lookup table in Activity.jsx — clean, extensible.
+- **MTB page filter**: Now shows Beast + Roar + Strike only (Leap removed — not a cycling-specific frame).
+- **Cycling page filter**: Now shows Beast + Roar only (2 curated cycling models).
+- **Driving description rewrite**: "BronzeGlo lenses make low-angle sun your problem no more. Amber-tuned to cut through dawn glare, late-afternoon blaze..." — energetic lede matching pickleball/golf copy style.
+- **Quiz background image**: Added full-bleed Unsplash sport photo (volleyball above clouds, photo-1558546798) at 12% opacity behind quiz cards. Progress bar and content given `relative z-10` to stay legible.
+- Testing: iteration_16 — 100% pass (7/7 tests)
+
 ---
 - **Mountain Biking page corrected**: Lens recommendations updated to BronzeGlo Outdoor & FireGlo Outdoor (full sun) + FireGlo Indoor (shaded trails). Added 4-feature dark section (same pattern as Driving page). Description rewritten with accurate light-condition guidance.
 - **Cycling page corrected**: Primary lens changed to CarbonGlo only (removed BronzeGlo from recommended list). Description updated to emphasize road-surface clarity.
