@@ -15,6 +15,7 @@ const footerLinks = {
     { label: "Cycling", href: "/activities/cycling" },
     { label: "Mountain Biking", href: "/activities/mountain-biking" },
     { label: "Golf", href: "/activities/golf" },
+    { label: "Driving", href: "/activities/driving" },
   ],
   SUPPORT: [
     { label: "Brand Story", href: "/brand" },
@@ -54,7 +55,7 @@ export default function Footer() {
           {/* Link columns */}
           {Object.entries(footerLinks).map(([section, links]) => (
             <div key={section}>
-              <h4 className="text-xs font-bold tracking-widest uppercase text-white/40 mb-4">{section}</h4>
+              <h4 className="text-xs font-bold tracking-widest uppercase text-white/60 mb-4">{section}</h4>
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.label}>
@@ -84,17 +85,17 @@ export default function Footer() {
 
         {/* Divider */}
         <div className="border-t border-white/8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-white/30 tracking-wide">
+          <p className="text-xs text-white/55 tracking-wide">
             &copy; {new Date().getFullYear()} Redcat® Eyewear. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <span className="text-xs text-white/30">CE Certified</span>
-            <span className="text-xs text-white/30">Made in Italy</span>
-            <span className="text-xs text-white/30">Lifetime Warranty</span>
-            <span className="text-xs text-white/30">UV400</span>
+            <span className="text-xs text-white/55">CE Certified</span>
+            <span className="text-xs text-white/55">Made in Italy</span>
+            <span className="text-xs text-white/55">Lifetime Warranty</span>
+            <span className="text-xs text-white/55">UV400</span>
           </div>
         </div>
-        <p className="text-[10px] text-white/18 mt-5 leading-relaxed max-w-2xl">
+        <p className="text-[10px] text-white/40 mt-5 leading-relaxed max-w-2xl">
           LumiGlo, FireGlo, BronzeGlo, CarbonGlo, and PolarGlo are trademarks of Redcat® Eyewear. Beast, Roar, Leap, and Strike are product names of Redcat® Eyewear. All rights reserved.
         </p>
       </div>

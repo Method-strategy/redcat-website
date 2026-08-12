@@ -90,8 +90,20 @@ Sports-active consumers (pickleball, MTB, cycling, tennis, golf) seeking premium
 - **Fonts preconnect + cat icon preload** added to index.html for LCP
 - **Footer lede updated**: "Performance sport sunglasses engineered with color-tuned lens technology."
 
+### Phase 6 (Session 6 — Lighthouse Optimizations + Driving Page) — Feb 2026
+- **robots.txt created**: `/public/robots.txt` with `User-agent: *` / `Allow: /` / Sitemap ref (SEO score fix)
+- **Footer contrast fixed**: `text-white/30` → `text-white/55`, `text-white/40` → `text-white/60`, `text-white/18` → `text-white/40` (Accessibility fix)
+- **Hero image LCP fix**: Added `fetchpriority="high"` + `decoding="async"` to hero img in Home.jsx
+- **Hero image preload**: Added `<link rel="preload">` for hero image in index.html (Lighthouse LCP)
+- **Async font loading**: Converted render-blocking `<link rel="stylesheet">` for Google Fonts to `preload+onload` pattern in index.html
+- **Removed duplicate @import**: Removed `@import` Google Fonts from index.css (was double-loading fonts)
+- **React.lazy() code splitting**: Brand, Product, Activity, Collections, Quiz lazy-loaded in App.js to reduce main bundle size
+- **BronzeGlo Driving Page** (`/activities/driving`): Full activity page with headline "See Every Hazard. React Faster.", BronzeGlo & PolarGlo lens recommendations, unique 4-feature "BronzeGlo Science" dark section, stat strip (30%, UV400, PolarGlo, CE/ISO)
+- **Activity.jsx headline rendering**: `config.headline` now rendered as styled subtitle below the h1 name for all activity pages
+- **Footer**: Added Driving link to Activities column
+- **Homepage**: Added DRIVING card (5th) to activities grid, updated to `grid-cols-2 sm:grid-cols-3 lg:grid-cols-5`
+
 ---
-- `GET /api/products` — Returns 4 products with full variant data (real Shopify IDs)
 - `GET /api/products/{handle}` — Single product with variantImages per variant
 - `POST /api/cart` — Backend endpoint exists but cart is now handled client-side
 - `POST /api/newsletter` — Newsletter signup

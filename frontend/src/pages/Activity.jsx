@@ -1,8 +1,10 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Eye, Shield, Sun, Zap } from "lucide-react";
 import { useProductsByActivity } from "@/hooks/useShopify";
 import { useSEO } from "@/hooks/useSEO";
+
+const FEATURE_ICONS = { eye: Eye, shield: Shield, sun: Sun, zap: Zap };
 
 const ACTIVITY_CONFIG = {
   pickleball: {
@@ -58,6 +60,21 @@ const ACTIVITY_CONFIG = {
     heroImage: "https://redcateyewear.com/cdn/shop/files/Redcat_BEAST_Aron_in_the_Wild.png?crop=center&height=900&v=1764667927&width=1920",
     lenses: ["BronzeGlo", "CarbonGlo", "PolarGlo"],
     color: "#D90012",
+  },
+  driving: {
+    name: "Driving",
+    headline: "See Every Hazard. React Faster.",
+    sub: "BronzeGlo lenses",
+    description: "BronzeGlo lenses amplify warm amber tones — sharpening contrast on road markings, signage, and hazards in low-angle sun, overcast skies, and dawn/dusk conditions. PolarGlo eliminates windshield glare entirely. See further. React sooner. Drive safer.",
+    heroImage: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=1920",
+    lenses: ["BronzeGlo", "PolarGlo"],
+    color: "#C8812E",
+    features: [
+      { icon: "eye", title: "Low-Angle Sun Glare", body: "BronzeGlo cuts through the blinding low-angle sun of early morning and late afternoon driving — the most dangerous light condition on the road." },
+      { icon: "shield", title: "Hazard Contrast Boost", body: "Warm amber tones amplify road markings, orange cones, brake lights, and pedestrian hi-vis vests — making hazards visible up to 30% sooner." },
+      { icon: "sun", title: "All-Conditions Clarity", body: "From overcast highways to high-noon glare, BronzeGlo maintains consistent contrast so your eyes aren't constantly adapting." },
+      { icon: "zap", title: "PolarGlo Glare Elimination", body: "Add PolarGlo polarized lenses to eliminate reflective glare off wet roads, hoods, and windshields — the #1 cause of driver fatigue." },
+    ],
   },
 };
 
@@ -115,6 +132,17 @@ export default function Activity() {
               {config.name}
             </motion.h1>
           </div>
+          {config.headline && (
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.42 }}
+              className="font-display text-xl md:text-2xl font-bold uppercase tracking-wider mt-3"
+              style={{ color: config.color || "#D90012" }}
+            >
+              {config.headline}
+            </motion.p>
+          )}
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -129,7 +157,7 @@ export default function Activity() {
       {/* Recommended lenses */}
       <div className="bg-[#FAFAFA] dark:bg-rc-surface border-y border-black/10 dark:border-white/10 py-5 px-6">
         <div className="max-w-screen-xl mx-auto flex flex-wrap items-center gap-4">
-          <span className="text-xs font-bold tracking-widest uppercase text-gray-400 dark:text-white/30">Recommended Lenses:</span>
+          <span className="text-xs font-bold tracking-widest uppercase text-gray-400 dark:text-white/55">Recommended Lenses:</span>
           {config.lenses.map((lens) => (
             <span
               key={lens}
@@ -140,6 +168,63 @@ export default function Activity() {
           ))}
         </div>
       </div>
+
+      {/* Driving-specific features block */}
+      {config.features && (
+        <section className="py-20 px-6 bg-[#060606]" data-testid="driving-features">
+          <div className="max-w-screen-xl mx-auto">
+            <motion.div
+              variants={fadeUp()}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              className="mb-14"
+            >
+              <span className="text-xs font-bold tracking-[0.3em] uppercase text-[#C8812E] mb-3 block">BronzeGlo Science</span>
+              <h2
+                className="font-display font-black uppercase leading-tight text-white"
+                style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
+              >
+                Why BronzeGlo Wins on the Road
+              </h2>
+            </motion.div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/8">
+              {config.features.map((feat, i) => {
+                const Icon = FEATURE_ICONS[feat.icon] || Eye;
+                return (
+                  <motion.div
+                    key={feat.title}
+                    variants={fadeUp(i * 0.1)}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-60px" }}
+                    className="bg-[#0D0D0D] p-8"
+                  >
+                    <Icon size={22} className="text-[#C8812E] mb-5" />
+                    <h3 className="font-display text-lg font-black uppercase tracking-wider text-white mb-3">{feat.title}</h3>
+                    <p className="text-sm text-white/50 leading-relaxed">{feat.body}</p>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* BronzeGlo vs Road Hazard stat strip */}
+            <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/8">
+              {[
+                ["30%", "Earlier hazard detection"],
+                ["UV400", "Full spectrum protection"],
+                ["PolarGlo", "Glare-free driving"],
+                ["CE / ISO", "Certified performance"],
+              ].map(([val, label]) => (
+                <div key={label} className="bg-[#0D0D0D] px-8 py-7 text-center">
+                  <p className="font-display text-4xl font-black" style={{ color: "#C8812E" }}>{val}</p>
+                  <p className="text-[10px] text-white/45 uppercase tracking-widest mt-2">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Products */}
       <section className="py-20 px-6 max-w-screen-xl mx-auto">

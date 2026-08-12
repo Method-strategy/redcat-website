@@ -22,6 +22,7 @@ const ACTIVITIES = [
   { name: "CYCLING", href: "/activities/cycling", image: "https://redcateyewear.com/cdn/shop/files/mountain-bike-cycling-and-fitness.jpg?crop=center&height=800&v=1719939492&width=800", lens: "CarbonGlo / BronzeGlo" },
   { name: "TENNIS", href: "/activities/tennis", image: "https://redcateyewear.com/cdn/shop/files/AdobeStock_321178379.jpg?crop=center&height=800&v=1721052329&width=800", lens: "LumiGlo" },
   { name: "GOLF & OUTDOORS", href: "/activities/golf", image: "https://images.unsplash.com/photo-1611374243147-44a702c2d44c?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85", lens: "CarbonGlo" },
+  { name: "DRIVING", href: "/activities/driving", image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800", lens: "BronzeGlo / PolarGlo" },
 ];
 
 const CHAPTERS = [
@@ -62,7 +63,7 @@ export default function Home() {
         className="relative h-screen min-h-[700px] flex items-center overflow-hidden"
       >
         <motion.div style={{ y: heroImgY }} className="absolute inset-0 scale-110 origin-center">
-          <img src={HERO_IMG} alt="Redcat ROAR" className="w-full h-full object-cover" />
+          <img src={HERO_IMG} alt="Redcat ROAR" fetchpriority="high" decoding="async" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 to-black/20" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
         </motion.div>
@@ -316,7 +317,7 @@ export default function Home() {
             Your Sport. Your Edge.
           </h2>
         </motion.div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {ACTIVITIES.map((act, i) => (
             <motion.div
               key={act.name}
