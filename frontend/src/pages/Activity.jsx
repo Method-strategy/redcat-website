@@ -6,6 +6,36 @@ import { useSEO } from "@/hooks/useSEO";
 
 const FEATURE_ICONS = { eye: Eye, shield: Shield, sun: Sun, zap: Zap };
 const CDN = "https://cdn.shopify.com/s/files/1/0774/1784/0936/files";
+const CDN_ASSETS = "https://customer-assets-v7afamib.emergentagent.net/job_redcat-astro-build/artifacts";
+
+const LENS_IMAGES = {
+  "LumiGlo Outdoor": `${CDN_ASSETS}/5cgbmphe_PC-G1608%20LumiGlo%20Outdoor.webp`,
+  "LumiGlo Indoor":  `${CDN_ASSETS}/7ojiofny_PC-G3902%20LumiGlo%20Indoor.webp`,
+  "FireGlo Outdoor": `${CDN_ASSETS}/tnnn27ci_PC-V3001%20FireGlo%20Outdoor.webp`,
+  "FireGlo Indoor":  `${CDN_ASSETS}/9yg7mbam_PC-R4704%20FireGlo%20Indoor.webp`,
+  "CarbonGlo":       `${CDN_ASSETS}/s1chu67m_PC-SG1511%20CarbonGlo.webp`,
+  "BronzeGlo":         `${CDN_ASSETS}/vi0k8fqs_PCPL-B2003-v%20BronzeGlo.webp`,
+  "BronzeGlo Outdoor": `${CDN_ASSETS}/vi0k8fqs_PCPL-B2003-v%20BronzeGlo.webp`,
+};
+
+const PICKLEBALL_BALLS = [
+  {
+    label: "Hi-Vis Yellow-Green",
+    img: `${CDN_ASSETS}/f3hz4co2_Outdoor%20Optic%20Yellow%20Green.png`,
+    lenses: ["LumiGlo Outdoor", "LumiGlo Indoor"],
+    copy: "The standard USAPA outdoor ball and tennis ball. LumiGlo amplifies yellow-green by up to 35% — it practically glows.",
+  },
+  {
+    label: "Orange, Pink & Red",
+    imgs: [
+      `${CDN_ASSETS}/el95giqx_Outdoor%20Orange.png`,
+      `${CDN_ASSETS}/9psdsdjo_Outdoor%20Pink.png`,
+      `${CDN_ASSETS}/jmiicab0_Outdoor%20Red.png`,
+    ],
+    lenses: ["FireGlo Outdoor", "FireGlo Indoor"],
+    copy: "Selkirk, Onix, and colored balls. FireGlo boosts warm tones by up to 30% — they catch fire.",
+  },
+];
 
 const ACTIVITY_CONFIG = {
   pickleball: {
@@ -38,7 +68,7 @@ const ACTIVITY_CONFIG = {
     name: "Cycling",
     headline: "See Every Road Detail.",
     sub: "CarbonGlo lenses",
-    description: "CarbonGlo is the primary lens for road cycling — sharpening aquas, greens, and blue-gray tones for road surface clarity, pothole definition, and obstacle contrast. Add PolarGlo to eliminate glare off wet roads, parked cars, and glass.",
+    description: "Road surfaces, obstacles, and hazards become sharper through CarbonGlo. Aqua and green tones amplify by up to 37% — sharpening tarmac grain, road markings, and the gap between you and the wheel ahead. Add PolarGlo and wet road glare disappears entirely. Ride faster. Read more.",
     heroImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=srgb&fm=jpg&q=85&w=1920",
     lenses: ["CarbonGlo", "PolarGlo"],
     color: "#00C9D4",
@@ -52,7 +82,7 @@ const ACTIVITY_CONFIG = {
     name: "Mountain Biking",
     headline: "Read the Trail. Ride Faster.",
     sub: "BronzeGlo & FireGlo lenses",
-    description: "In full sun, BronzeGlo or FireGlo Outdoor amplify warm tones to sharpen trail texture, rock hazards, and root detection. In shaded singletrack and tree canopy, switch to FireGlo Indoor — it boosts contrast without over-brightening, keeping vision calibrated through rapid light changes.",
+    description: "Full sun turns technical trail into a blur. BronzeGlo cuts through it — warming up rock textures, root hazards, and dirt definition so you're reading the terrain ahead, not reacting to it. When singletrack dives under the canopy, switch to FireGlo Indoor. Contrast stays sharp without the over-brightness that blinds you at trail-speed.",
     heroImage: "https://redcateyewear.com/cdn/shop/files/mountain-bike-cycling-and-fitness.jpg?crop=center&height=900&v=1719939492&width=1920",
     lenses: ["BronzeGlo Outdoor", "FireGlo Outdoor", "FireGlo Indoor"],
     color: "#7BC743",
@@ -146,6 +176,7 @@ export default function Activity() {
     tennis: ["strike", "leap"],
     cycling: ["beast", "roar"],
     "mountain-biking": ["beast", "roar", "strike"],
+    driving: ["beast", "roar"],
   };
   const allProducts = !isLoading && liveProducts.length > 0 ? liveProducts : STATIC_PRODUCTS;
   const allowedHandles = ACTIVITY_MODEL_FILTER[activity];
@@ -219,15 +250,93 @@ export default function Activity() {
         <div className="max-w-screen-xl mx-auto flex flex-wrap items-center gap-4">
           <span className="text-xs font-bold tracking-widest uppercase text-gray-400">Recommended Lenses:</span>
           {config.lenses.map((lens) => (
-            <span
+            <div
               key={lens}
-              className="text-xs font-bold tracking-widest uppercase px-3 py-1.5 border border-black/10 text-gray-600 bg-white"
+              className="flex items-center gap-2.5 px-3 py-2 border border-black/10 bg-white"
             >
-              {lens}
-            </span>
+              {LENS_IMAGES[lens] && (
+                <img
+                  src={LENS_IMAGES[lens]}
+                  alt={lens}
+                  className="w-12 h-7 object-cover rounded-sm"
+                  loading="lazy"
+                />
+              )}
+              <span className="text-xs font-bold tracking-widest uppercase text-gray-600 whitespace-nowrap">{lens}</span>
+            </div>
           ))}
         </div>
       </div>
+
+      {/* Pickleball: Ball × Lens matching section */}
+      {activity === "pickleball" && (
+        <section className="py-20 px-6 bg-white" data-testid="pickleball-ball-lens">
+          <div className="max-w-screen-xl mx-auto">
+            <motion.div
+              variants={fadeUp()}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              className="mb-12"
+            >
+              <span className="text-xs font-bold tracking-[0.3em] uppercase text-rc-red">Lens Science</span>
+              <h2
+                className="font-display font-black uppercase leading-tight text-gray-900 mt-1"
+                style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
+              >
+                Your Ball. Your Lens.
+              </h2>
+              <p className="text-sm text-gray-500 mt-3 max-w-xl leading-relaxed">
+                Different ball colors need different lens tuning. Pick the one that matches what you play with.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-px bg-black/5">
+              {PICKLEBALL_BALLS.map((ball, i) => (
+                <motion.div
+                  key={ball.label}
+                  variants={fadeUp(i * 0.1)}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-60px" }}
+                  className="bg-[#F9F9F7] p-8 md:p-10"
+                >
+                  {/* Ball image(s) */}
+                  <div className="flex items-center gap-3 mb-6 h-20">
+                    {ball.img ? (
+                      <img src={ball.img} alt={ball.label} className="h-20 w-20 object-contain drop-shadow-md" loading="lazy" />
+                    ) : (
+                      ball.imgs.map((src, j) => (
+                        <img key={j} src={src} alt="" className="h-14 w-14 object-contain drop-shadow-sm" loading="lazy" />
+                      ))
+                    )}
+                  </div>
+
+                  <h3 className="font-display text-xl font-black uppercase tracking-widest text-gray-900 mb-2">
+                    {ball.label}
+                  </h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-8">{ball.copy}</p>
+
+                  {/* Lens pair */}
+                  <div className="flex gap-8">
+                    {ball.lenses.map((lensName) => (
+                      <div key={lensName} className="flex flex-col items-start gap-2">
+                        <img
+                          src={LENS_IMAGES[lensName]}
+                          alt={lensName}
+                          className="w-20 h-12 object-contain"
+                          loading="lazy"
+                        />
+                        <span className="text-[9px] font-bold tracking-widest uppercase text-gray-400">{lensName}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Activity features block (dark — editorial) */}
       {config.features && (

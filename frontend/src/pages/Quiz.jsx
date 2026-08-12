@@ -1,50 +1,52 @@
 import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, RotateCcw } from "lucide-react";
+import { ArrowRight, ArrowLeft, RotateCcw, Bike, Mountain, Flag, Zap, Disc } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
+
+const CDN_ASSETS = "https://customer-assets-v7afamib.emergentagent.net/job_redcat-astro-build/artifacts";
 
 // ─── Lens data ────────────────────────────────────────────────────────────────
 const LENS_DATA = {
   "LumiGlo Outdoor": {
-    base: "LumiGlo",
-    color: "#9ACD32",
+    base: "LumiGlo", color: "#9ACD32",
+    image: `${CDN_ASSETS}/5cgbmphe_PC-G1608%20LumiGlo%20Outdoor.webp`,
     tagline: "Yellow-green balls practically glow. No tracking them — you just see them.",
     detail: "Amplifies yellow-green wavelengths by up to 35%. The pickleball and tennis lens for outdoor play — the hi-vis ball pops like it has a light inside it, in full sun or overcast.",
   },
   "LumiGlo Indoor": {
-    base: "LumiGlo",
-    color: "#B5E853",
+    base: "LumiGlo", color: "#B5E853",
+    image: `${CDN_ASSETS}/7ojiofny_PC-G3902%20LumiGlo%20Indoor.webp`,
     tagline: "Same yellow-green pop, calibrated for gym courts and covered facilities.",
     detail: "Built for indoor and low-light play. The hi-vis ball stays sharp under flat artificial lighting — no squinting, no losing it in the shadows.",
   },
   "FireGlo Outdoor": {
-    base: "FireGlo",
-    color: "#FF5500",
+    base: "FireGlo", color: "#FF5500",
+    image: `${CDN_ASSETS}/tnnn27ci_PC-V3001%20FireGlo%20Outdoor.webp`,
     tagline: "Pink, orange, red pickleballs? They catch fire.",
     detail: "Boosts warm ball colors by up to 30% in bright outdoor conditions. If you play with a pink, orange, or red pickleball outdoors, this is your lens — it's not subtle.",
   },
   "FireGlo Indoor": {
-    base: "FireGlo",
-    color: "#FF7A33",
+    base: "FireGlo", color: "#FF7A33",
+    image: `${CDN_ASSETS}/9yg7mbam_PC-R4704%20FireGlo%20Indoor.webp`,
     tagline: "Warm-tone balls pop hard even under flat gym light.",
     detail: "FireGlo tuned for indoor courts and covered facilities. Red, orange, and pink pickleballs stay vivid and trackable under artificial lighting. Stop losing them in the fluorescents.",
   },
   BronzeGlo: {
-    base: "BronzeGlo",
-    color: "#C87941",
+    base: "BronzeGlo", color: "#C87941",
+    image: `${CDN_ASSETS}/vi0k8fqs_PCPL-B2003-v%20BronzeGlo.webp`,
     tagline: "Full-sun clarity. Safety colors amplified. Hazards visible sooner.",
     detail: "Boosts reds, oranges, and warm tones — including brake lights, orange cones, and safety vests. Built for driving, trail running, and outdoor living in variable light.",
   },
   CarbonGlo: {
-    base: "CarbonGlo",
-    color: "#5BAFD6",
+    base: "CarbonGlo", color: "#5BAFD6",
+    image: `${CDN_ASSETS}/s1chu67m_PC-SG1511%20CarbonGlo.webp`,
     tagline: "Every road detail. Every green's grain. Terrain vision, maxed.",
     detail: "Amplifies aqua and green-spectrum tones by up to 37%. The lens for cycling, golf, and any sport where reading the terrain or tracking a ball against the sky is the whole game.",
   },
   PolarGlo: {
-    base: "PolarGlo",
-    color: "#8ECAE6",
+    base: "PolarGlo", color: "#8ECAE6",
+    image: null,
     tagline: "Kill the glare. Keep every bit of the color.",
     detail: "Polarized and color-tuned. Cuts reflections off water, wet roads, hoods, and glass — without washing out the enhanced colors that give you your edge.",
   },
@@ -103,12 +105,12 @@ const SPORT_STEP = {
   id: "sport",
   question: "What's your primary sport or activity?",
   options: [
-    { id: "pickleball",  label: "Pickleball",        sub: "Indoor or outdoor" },
-    { id: "tennis",      label: "Tennis",             sub: "Court & clay" },
-    { id: "cycling",     label: "Cycling",            sub: "Road & trail" },
-    { id: "mtb",         label: "Mountain Biking",    sub: "Off-road & enduro" },
-    { id: "golf",        label: "Golf",               sub: "Fairway & green" },
-    { id: "running",     label: "Running & General",  sub: "Road, trail, everyday" },
+    { id: "pickleball", label: "Pickleball",       sub: "Indoor or outdoor",     Icon: Disc },
+    { id: "tennis",     label: "Tennis",            sub: "Court & clay",          Icon: Disc },
+    { id: "cycling",    label: "Cycling",           sub: "Road & trail",          Icon: Bike },
+    { id: "mtb",        label: "Mountain Biking",   sub: "Off-road & enduro",     Icon: Mountain },
+    { id: "golf",       label: "Golf",              sub: "Fairway & green",       Icon: Flag },
+    { id: "running",    label: "Running & General", sub: "Road, trail, everyday", Icon: Zap },
   ],
 };
 
@@ -265,7 +267,7 @@ export default function Quiz() {
                 {currentStepDef?.options?.map((opt) => (
                   <button key={opt.id} data-testid={`quiz-option-${opt.id}`}
                     onClick={() => handleSelect(opt.id)}
-                    className={`relative flex flex-col items-start justify-end p-5 min-h-[100px] border text-left transition-all duration-200 focus:outline-none rounded-sm ${
+                    className={`relative flex flex-col items-start justify-between p-5 min-h-[110px] border text-left transition-all duration-200 focus:outline-none rounded-sm ${
                       selected === opt.id
                         ? "border-rc-red bg-rc-red/15 text-white"
                         : "border-white/15 bg-rc-surface text-white/70 hover:border-white/40 hover:text-white hover:bg-white/5"
@@ -278,6 +280,7 @@ export default function Quiz() {
                         </svg>
                       </span>
                     )}
+                    {opt.Icon && <opt.Icon size={18} className="opacity-40" />}
                     <div>
                       <div className="font-display font-black uppercase text-base sm:text-lg tracking-wide leading-tight mb-0.5">{opt.label}</div>
                       <div className="text-xs text-white/40">{opt.sub}</div>
@@ -305,7 +308,11 @@ export default function Quiz() {
               {/* Lens card */}
               <div className="rounded-sm p-8 mb-5 text-center"
                 style={{ background: `linear-gradient(135deg, ${lens?.color}22, ${lens?.color}08)`, border: `1px solid ${lens?.color}33` }}>
-                <div className="w-14 h-14 rounded-full mx-auto mb-5" style={{ background: lens?.color }}/>
+                {lens?.image ? (
+                  <img src={lens.image} alt={rec?.lens} className="w-32 h-20 object-contain mx-auto mb-5" loading="lazy" />
+                ) : (
+                  <div className="w-14 h-14 rounded-full mx-auto mb-5" style={{ background: lens?.color }}/>
+                )}
                 <h2 className="font-display font-black uppercase text-white mb-2"
                   style={{ fontSize: "clamp(2rem, 6vw, 3.5rem)", lineHeight: 1 }}>
                   {rec?.lens}

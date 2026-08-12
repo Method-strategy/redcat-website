@@ -129,6 +129,17 @@ Sports-active consumers (pickleball, MTB, cycling, tennis, golf) seeking premium
 - **Quiz background image**: Added full-bleed Unsplash sport photo (volleyball above clouds, photo-1558546798) at 12% opacity behind quiz cards. Progress bar and content given `relative z-10` to stay legible.
 - Testing: iteration_16 — 100% pass (7/7 tests)
 
+### Phase 12 (Session 12 — Ball/Lens Images, Activity Filters, Quiz Icons) — Feb 2026
+- **LENS_IMAGES constant**: All 6 lens images (LumiGlo Outdoor/Indoor, FireGlo Outdoor/Indoor, CarbonGlo, BronzeGlo) mapped in Activity.jsx and Quiz.jsx using CDN_ASSETS URLs from uploaded customer assets.
+- **Pickleball ball×lens section**: New "Your Ball. Your Lens." section on the pickleball page. Two editorial panels — Hi-Vis Yellow-Green (ball + LumiGlo lens pair) and Orange/Pink/Red (3 balls + FireGlo lens pair). 8 images total, triggered by activity==='pickleball'.
+- **Recommended Lenses bar**: All activity pages now show actual lens images as chips alongside lens names (img element per lens). BronzeGlo Outdoor alias added to LENS_IMAGES for MTB page compatibility.
+- **Driving page filter**: Added `driving: ["beast","roar"]` to ACTIVITY_MODEL_FILTER — now shows 2 curated products.
+- **MTB/Cycling descriptions rewritten**: MTB "Full sun turns technical trail into a blur..."; Cycling "Road surfaces, obstacles, and hazards become sharper through CarbonGlo..."
+- **Homepage activity grid**: ACTIVITIES array `lens` field updated to benefit copy — "See the ball glow", "Kill the road glare", "Track every shot", "Read every green", "Own the low-angle sun".
+- **Quiz sport icons**: Imported Bike, Mountain, Flag, Zap, Disc from lucide-react. SPORT_STEP options include Icon components. Quiz buttons now show icons at top, text at bottom.
+- **Quiz lens image in result**: LENS_DATA extended with `image` URLs. Result card shows actual lens img instead of colored circle (fallback to circle if no image).
+- Testing: iteration_17 — 100% pass (9/9 tests) + BronzeGlo Outdoor alias fix applied
+
 ---
 - **Mountain Biking page corrected**: Lens recommendations updated to BronzeGlo Outdoor & FireGlo Outdoor (full sun) + FireGlo Indoor (shaded trails). Added 4-feature dark section (same pattern as Driving page). Description rewritten with accurate light-condition guidance.
 - **Cycling page corrected**: Primary lens changed to CarbonGlo only (removed BronzeGlo from recommended list). Description updated to emphasize road-surface clarity.

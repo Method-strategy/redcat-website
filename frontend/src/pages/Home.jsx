@@ -20,11 +20,11 @@ const STATIC_PRODUCTS = [
 ];
 
 const ACTIVITIES = [
-  { name: "PICKLEBALL", href: "/activities/pickleball", image: "https://redcateyewear.com/cdn/shop/files/LEAP_Pickleball_-_Dark_Blue_with_Dark_Green_Lenses_3840x2160_12ac36d4-ede4-4785-811b-4ac3d3ec569c.jpg?crop=center&height=800&v=1713192324&width=800", lens: "LumiGlo / FireGlo" },
-  { name: "CYCLING", href: "/activities/cycling", image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=srgb&fm=jpg&q=85&w=800", lens: "CarbonGlo" },
-  { name: "TENNIS", href: "/activities/tennis", image: "https://redcateyewear.com/cdn/shop/files/AdobeStock_321178379.jpg?crop=center&height=800&v=1721052329&width=800", lens: "LumiGlo" },
-  { name: "GOLF & OUTDOORS", href: "/activities/golf", image: "https://images.unsplash.com/photo-1611374243147-44a702c2d44c?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85", lens: "CarbonGlo" },
-  { name: "DRIVING", href: "/activities/driving", image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800", lens: "BronzeGlo / PolarGlo" },
+  { name: "PICKLEBALL", href: "/activities/pickleball", image: "https://redcateyewear.com/cdn/shop/files/LEAP_Pickleball_-_Dark_Blue_with_Dark_Green_Lenses_3840x2160_12ac36d4-ede4-4785-811b-4ac3d3ec569c.jpg?crop=center&height=800&v=1713192324&width=800", lens: "See the ball glow" },
+  { name: "CYCLING", href: "/activities/cycling", image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=srgb&fm=jpg&q=85&w=800", lens: "Kill the road glare" },
+  { name: "TENNIS", href: "/activities/tennis", image: "https://redcateyewear.com/cdn/shop/files/AdobeStock_321178379.jpg?crop=center&height=800&v=1721052329&width=800", lens: "Track every shot" },
+  { name: "GOLF & OUTDOORS", href: "/activities/golf", image: "https://images.unsplash.com/photo-1611374243147-44a702c2d44c?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85", lens: "Read every green" },
+  { name: "DRIVING", href: "/activities/driving", image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=800", lens: "Own the low-angle sun" },
 ];
 
 const CHAPTERS = [
