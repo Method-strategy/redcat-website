@@ -256,6 +256,52 @@ function Section({ section }) {
   }
 }
 
+const SITE_URL = "https://redcateyewear.com";
+const PUBLISHER = {
+  "@type": "Organization",
+  "name": "Redcat® Eyewear",
+  "url": SITE_URL,
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://redcateyewear.com/cdn/shop/files/Redcat_Logo_v3_Redcat_PMS_185C_cat_only.png",
+    "width": 120,
+    "height": 60,
+  },
+};
+
+function buildArticleSchema(meta) {
+  const articleUrl = `${SITE_URL}/blog/${meta.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${articleUrl}#article`,
+        "headline": meta.title,
+        "description": meta.excerpt,
+        "image": { "@type": "ImageObject", "url": meta.image, "width": 1600, "height": 800 },
+        "datePublished": meta.dateISO,
+        "dateModified": meta.dateISO,
+        "author": { "@type": "Organization", "name": "Redcat Eyewear", "url": SITE_URL },
+        "publisher": PUBLISHER,
+        "url": articleUrl,
+        "mainEntityOfPage": { "@type": "WebPage", "@id": articleUrl },
+        "keywords": meta.tags.join(", "),
+        "articleSection": "The Redcat Edge",
+        "inLanguage": "en-US",
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${SITE_URL}/blog` },
+          { "@type": "ListItem", "position": 3, "name": meta.title, "item": articleUrl },
+        ],
+      },
+    ],
+  };
+}
+
 const fadeUp = (delay = 0) => ({
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1], delay } },
@@ -270,7 +316,12 @@ export default function BlogPost() {
     title: meta ? `${meta.title} | Redcat Edge` : "Blog | Redcat® Eyewear",
     description: meta?.excerpt || "",
     keywords: meta?.tags.join(", ") || "",
+    image: meta?.image,
     path: `/blog/${slug}`,
+    ogType: "article",
+    articlePublishedTime: meta?.dateISO,
+    articleTags: meta?.tags,
+    schema: meta ? buildArticleSchema(meta) : undefined,
   });
 
   if (!meta || !article) return <Navigate to="/blog" replace />;

@@ -35,7 +35,7 @@ function setSchema(schema) {
   el.textContent = JSON.stringify(schema);
 }
 
-export function useSEO({ title, description, keywords, image, schema, path }) {
+export function useSEO({ title, description, keywords, image, schema, path, ogType, articlePublishedTime, articleTags }) {
   useEffect(() => {
     const fullTitle = title.includes("Redcat") ? title : `${title} | Redcat® Eyewear`;
     document.title = fullTitle;
@@ -47,10 +47,14 @@ export function useSEO({ title, description, keywords, image, schema, path }) {
     // Open Graph
     setMeta("property", "og:title", fullTitle);
     setMeta("property", "og:description", description);
-    setMeta("property", "og:type", "website");
+    setMeta("property", "og:type", ogType || "website");
     setMeta("property", "og:url", path ? `${SITE_URL}${path}` : SITE_URL);
     setMeta("property", "og:site_name", "Redcat® Eyewear");
     setMeta("property", "og:image", image || DEFAULT_OG_IMAGE);
+
+    // Article-specific OG tags
+    if (articlePublishedTime) setMeta("property", "article:published_time", articlePublishedTime);
+    if (articleTags) articleTags.forEach((tag) => setMeta("property", "article:tag", tag));
 
     // Twitter
     setMeta("name", "twitter:card", "summary_large_image");
@@ -64,5 +68,5 @@ export function useSEO({ title, description, keywords, image, schema, path }) {
     return () => {
       document.getElementById("page-schema")?.remove();
     };
-  }, [title, description, keywords, image, path]);
+  }, [title, description, keywords, image, path, ogType, articlePublishedTime]);
 }

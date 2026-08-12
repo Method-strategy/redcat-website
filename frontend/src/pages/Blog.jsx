@@ -8,6 +8,7 @@ export const BLOG_POSTS_META = [
     slug: "pickleball-eye-safety",
     title: "Pickleball Eye Injuries Are Real. Here's What Actually Protects You.",
     date: "August 14, 2024",
+    dateISO: "2024-08-14",
     excerpt: "Pickleball puts a hard plastic ball and a swinging paddle in a small court at close range. The eye is the one part of your face with no bone in front of it. Here's what actually protects you.",
     image: "https://redcateyewear.com/cdn/shop/articles/injuryed_man_on_court_2_fdbe364c-70cb-488c-9b83-83ee55e0637c.jpg?crop=center&height=800&v=1783973764&width=1600",
     tags: ["Eye Safety", "Pickleball", "Polycarbonate"],
@@ -17,6 +18,7 @@ export const BLOG_POSTS_META = [
     slug: "enhancing-color-vision",
     title: "How Color Vision Works, Why It Fades, and What You Can Do About It.",
     date: "August 2, 2024",
+    dateISO: "2024-08-02",
     excerpt: "Color vision is how your eyes separate objects from their backgrounds — and it declines with age. A spectrally tuned lens can restore some of what you've lost, especially for players over 40.",
     image: "https://redcateyewear.com/cdn/shop/articles/Enhancing_Color_Vision_post_9c963ac7-c7e4-4652-b802-a60d9d98efb9.jpg?crop=center&height=800&v=1783973921&width=1600",
     tags: ["Color Vision", "Technology", "Science"],
@@ -26,6 +28,7 @@ export const BLOG_POSTS_META = [
     slug: "pickleball-game",
     title: "The Best Lens Color for Pickleball: What the Science Actually Says",
     date: "July 30, 2024",
+    dateISO: "2024-07-30",
     excerpt: "The best lens for pickleball is the one tuned to the color of the ball you play with. Yellow balls — use LumiGlo™. Pink or orange — FireGlo™. Here's why, with the numbers to back it up.",
     image: "https://redcateyewear.com/cdn/shop/articles/Pickleball_Game_post_77fc65c8-3d27-45f3-b1c9-fc8fefd67095.webp?crop=center&height=800&v=1783972981&width=1600",
     tags: ["Pickleball", "Lenses", "LumiGlo", "FireGlo"],
@@ -35,6 +38,7 @@ export const BLOG_POSTS_META = [
     slug: "polarized-sunglasses",
     title: "Polarized Lenses: When They Help, When They Hurt, and What They Don't Do",
     date: "August 1, 2024",
+    dateISO: "2024-08-01",
     excerpt: "Polarized lenses cut glare off flat surfaces. They're excellent for fishing, boating, and driving — and a poor choice on a dry pickleball court. Here's when to reach for them and when not to.",
     image: "https://redcateyewear.com/cdn/shop/articles/Redcat_PolarGlo_Lenses_8f08bff5-cfc6-436b-b204-9de148acf88e.jpg?crop=center&height=800&v=1783973296&width=1600",
     tags: ["PolarGlo", "Polarized", "Glare"],
@@ -42,17 +46,53 @@ export const BLOG_POSTS_META = [
   },
 ];
 
+const SITE_URL = "https://redcateyewear.com";
+
 const fadeUp = (delay = 0) => ({
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1], delay } },
 });
 
 export default function Blog() {
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Blog",
+        "@id": `${SITE_URL}/blog#blog`,
+        "name": "The Redcat Edge",
+        "description": "Deep dives into lens science, color vision, eye safety, and sport performance from Redcat® Eyewear.",
+        "url": `${SITE_URL}/blog`,
+        "publisher": {
+          "@type": "Organization",
+          "name": "Redcat® Eyewear",
+          "url": SITE_URL,
+        },
+        "blogPost": BLOG_POSTS_META.map((p) => ({
+          "@type": "BlogPosting",
+          "headline": p.title,
+          "url": `${SITE_URL}/blog/${p.slug}`,
+          "datePublished": p.dateISO,
+          "image": p.image,
+          "description": p.excerpt,
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${SITE_URL}/blog` },
+        ],
+      },
+    ],
+  };
+
   useSEO({
     title: "Redcat Edge Blog | Sport Eyewear Science & Performance Guides",
     description: "The Redcat Edge — deep dives into lens science, color vision, eye safety, and sport performance. Built for serious athletes who want to understand their gear.",
     keywords: "pickleball eye safety, color vision, polarized sunglasses, lens color pickleball, sport eyewear science",
     path: "/blog",
+    schema: blogSchema,
   });
 
   return (
