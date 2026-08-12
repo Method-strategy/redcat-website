@@ -61,15 +61,26 @@ export default function Home() {
         data-testid="hero-section"
         className="relative min-h-screen bg-white flex items-center overflow-hidden pt-[var(--navbar-h)]"
       >
-        {/* Aron image — right-flushed, full height */}
-        <div className="hidden lg:block absolute right-0 top-0 h-full w-1/2 pointer-events-none select-none overflow-hidden">
+        {/* Mobile hero — Aron full-bleed background */}
+        <div className="lg:hidden absolute inset-0 pointer-events-none select-none">
           <img
             src={ARON_IMG}
             alt="Redcat athlete in action"
             fetchpriority="high"
             decoding="async"
-            className="absolute right-0 top-0 h-full w-auto"
-            style={{ objectFit: "contain", objectPosition: "right top", maxWidth: "none" }}
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/88 via-black/65 to-black/20" />
+        </div>
+
+        {/* Desktop hero image — right-flushed, no clip */}
+        <div className="hidden lg:block absolute right-0 top-0 h-full w-[55%] pointer-events-none select-none">
+          <img
+            src={ARON_IMG}
+            alt="Redcat athlete in action"
+            fetchpriority="high"
+            decoding="async"
+            className="w-full h-full object-contain object-right-top"
           />
         </div>
 
@@ -92,8 +103,8 @@ export default function Home() {
                   initial={{ y: "105%" }}
                   animate={{ y: "0%" }}
                   transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1], delay: 0.25 + i * 0.14 }}
-                  className="font-display font-black uppercase leading-[0.88] block"
-                  style={{ fontSize: "clamp(3.8rem, 9vw, 9rem)", color: i === 1 ? "#D90012" : "#0A0A0A" }}
+                  className={`font-display font-black uppercase leading-[0.88] block ${i === 0 ? "text-white lg:text-[#0A0A0A]" : "text-rc-red"}`}
+                  style={{ fontSize: "clamp(3.8rem, 9vw, 9rem)" }}
                 >
                   {line}
                 </motion.h1>
@@ -104,7 +115,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.58 }}
-              className="text-base text-gray-600 mt-6 max-w-lg leading-relaxed"
+              className="text-base text-white/80 lg:text-gray-600 mt-6 max-w-lg leading-relaxed"
             >
               Redcat® Eyewear amplifies select color wavelengths — making colors more vivid, vibrant, and alive. Sharper acuity, heightened clarity, and a true performance advantage in high-velocity sports and everyday life.
             </motion.p>

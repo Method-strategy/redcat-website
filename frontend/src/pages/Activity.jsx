@@ -12,13 +12,11 @@ const ACTIVITY_CONFIG = {
     name: "Pickleball",
     headline: "See the Ball Like It Glows.",
     sub: "LumiGlo & FireGlo lenses",
-    description: "LumiGlo amplifies yellow-green tones to make the green ball pop. FireGlo boosts pinks and oranges for the colored ball. Both available Indoor and Outdoor for any light condition.",
+    description: "Redcat's LumiGlo lenses amplify yellow-green tones to make the high-vis yellow ball practically glow. FireGlo lenses boost warm tones to make red, orange, or pink pickleballs really pop if those are your jam. Both are available in outdoor and indoor variants to cover your game in any light condition.",
     heroImage: "https://redcateyewear.com/cdn/shop/files/LEAP_Pickleball_-_Dark_Blue_with_Dark_Green_Lenses_3840x2160_12ac36d4-ede4-4785-811b-4ac3d3ec569c.jpg?crop=center&height=900&v=1713192324&width=1920",
     lenses: ["LumiGlo Outdoor", "LumiGlo Indoor", "FireGlo Outdoor", "FireGlo Indoor"],
     color: "#7BC743",
     featuredImages: {
-      beast: `${CDN}/beast_red_frame_brown_with_red_mirror_lenses_1.jpg`,
-      roar: `${CDN}/roar_matte_blk_brown_red_2_mirror_1.jpg`,
       leap: `${CDN}/leap_matte_black_lumiglo_outdoor_1.jpg`,
       strike: `${CDN}/strike_matte_smoke_translucent_fireglo_indoor_1.jpg`,
     },
@@ -144,7 +142,11 @@ export default function Activity() {
   const { activity } = useParams();
   const config = ACTIVITY_CONFIG[activity] || ACTIVITY_CONFIG.outdoors;
   const { products: liveProducts, isLoading } = useProductsByActivity(activity);
-  const displayProducts = !isLoading && liveProducts.length > 0 ? liveProducts : STATIC_PRODUCTS;
+  const PICKLEBALL_HANDLES = ["strike", "leap"];
+  const allProducts = !isLoading && liveProducts.length > 0 ? liveProducts : STATIC_PRODUCTS;
+  const displayProducts = activity === "pickleball"
+    ? allProducts.filter((p) => PICKLEBALL_HANDLES.includes(p.handle))
+    : allProducts;
 
   useSEO({
     title: `${config.name} Sunglasses | Redcat® ${config.lenses[0]} Lenses`,

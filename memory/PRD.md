@@ -103,6 +103,14 @@ Sports-active consumers (pickleball, MTB, cycling, tennis, golf) seeking premium
 - **Activity.jsx product card label**: Changed from misleading `{config.lenses[0]}` to "Redcat Eyewear"
 - Testing: iteration_13 — 87% pass (Beast/Roar pickleball label fixed post-test)
 
+### Phase 9 (Session 9 — Hero Fix + Pickleball Filter) — Feb 2026
+- **Hero image desktop fix**: Removed `overflow-hidden` from `w-1/2` container that was clipping the Aron image's left edge. Container now `w-[55%]`, image uses `object-contain object-right-top` — fully visible, no cropping.
+- **Mobile hero**: Aron image added as full-bleed mobile background (lg:hidden) with `object-cover` + dark left-gradient overlay for contrast. "SEE FASTER." text is white on mobile, black on desktop via responsive Tailwind classes.
+- **Pickleball product filter**: Activity.jsx now filters `displayProducts` to only `["strike", "leap"]` when `activity === "pickleball"`. Beast and Roar no longer appear on Pickleball page.
+- **Pickleball description rewrite**: Updated to user-provided copy emphasizing LumiGlo/FireGlo lens benefits for yellow and colored balls.
+- **Pickleball featuredImages cleanup**: Removed Beast/Roar entries from pickleball config (only Leap + Strike images remain).
+- Testing: iteration_14 — 100% pass
+
 ---
 - **Mountain Biking page corrected**: Lens recommendations updated to BronzeGlo Outdoor & FireGlo Outdoor (full sun) + FireGlo Indoor (shaded trails). Added 4-feature dark section (same pattern as Driving page). Description rewritten with accurate light-condition guidance.
 - **Cycling page corrected**: Primary lens changed to CarbonGlo only (removed BronzeGlo from recommended list). Description updated to emphasize road-surface clarity.
