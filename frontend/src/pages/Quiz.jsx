@@ -9,52 +9,52 @@ const LENS_DATA = {
   "LumiGlo Outdoor": {
     base: "LumiGlo",
     color: "#9ACD32",
-    tagline: "Makes hi-vis yellow-green balls practically glow in full sun.",
-    detail: "Boosts yellow-green hues by up to 35%. Designed for outdoor play in full sun or overcast light with standard hi-vis pickleball and tennis balls.",
+    tagline: "Yellow-green balls practically glow. No tracking them — you just see them.",
+    detail: "Amplifies yellow-green wavelengths by up to 35%. The pickleball and tennis lens for outdoor play — the hi-vis ball pops like it has a light inside it, in full sun or overcast.",
   },
   "LumiGlo Indoor": {
     base: "LumiGlo",
     color: "#B5E853",
-    tagline: "Same yellow-green boost, tuned for indoor and low-light play.",
-    detail: "Engineered for indoor courts, gyms, and low-light environments. Amplifies hi-vis yellow-green balls under artificial or dim lighting.",
+    tagline: "Same yellow-green pop, calibrated for gym courts and covered facilities.",
+    detail: "Built for indoor and low-light play. The hi-vis ball stays sharp under flat artificial lighting — no squinting, no losing it in the shadows.",
   },
   "FireGlo Outdoor": {
     base: "FireGlo",
     color: "#FF5500",
-    tagline: "Amplifies red, orange, and pink balls in full sun.",
-    detail: "Boosts warm ball colors by up to 30% in bright outdoor conditions. Ideal for playing with red, orange, or pink pickleballs in full sun or overcast.",
+    tagline: "Pink, orange, red pickleballs? They catch fire.",
+    detail: "Boosts warm ball colors by up to 30% in bright outdoor conditions. If you play with a pink, orange, or red pickleball outdoors, this is your lens — it's not subtle.",
   },
   "FireGlo Indoor": {
     base: "FireGlo",
     color: "#FF7A33",
-    tagline: "Red, orange, and pink ball boost for indoor and low-light play.",
-    detail: "The indoor version of FireGlo. Tuned for gym courts and low-light environments. Amplifies red, orange, and pink pickleball colors under artificial light.",
+    tagline: "Warm-tone balls pop hard even under flat gym light.",
+    detail: "FireGlo tuned for indoor courts and covered facilities. Red, orange, and pink pickleballs stay vivid and trackable under artificial lighting. Stop losing them in the fluorescents.",
   },
   BronzeGlo: {
     base: "BronzeGlo",
     color: "#C87941",
-    tagline: "Full-sun lens. Amplifies warm tones and safety colors.",
-    detail: "Boosts reds, oranges, and pinks — including safety colors like brake lights, stop signs, and orange cones. A solid general-purpose outdoor lens for driving and everyday activity.",
+    tagline: "Full-sun clarity. Safety colors amplified. Hazards visible sooner.",
+    detail: "Boosts reds, oranges, and warm tones — including brake lights, orange cones, and safety vests. Built for driving, trail running, and outdoor living in variable light.",
   },
   CarbonGlo: {
     base: "CarbonGlo",
     color: "#5BAFD6",
-    tagline: "Boosts aquas, greens, and cool tones for terrain clarity.",
-    detail: "Enhances cool-spectrum contrast by up to 37%. The lens for cycling, mountain biking, golf, and any activity where reading the terrain or ball against sky matters.",
+    tagline: "Every road detail. Every green's grain. Terrain vision, maxed.",
+    detail: "Amplifies aqua and green-spectrum tones by up to 37%. The lens for cycling, golf, and any sport where reading the terrain or tracking a ball against the sky is the whole game.",
   },
   PolarGlo: {
     base: "PolarGlo",
     color: "#8ECAE6",
-    tagline: "Cuts glare. Still color-tuned.",
-    detail: "Polarized and color-tuned. Eliminates reflection off water, asphalt, and wet surfaces without dulling the world.",
+    tagline: "Kill the glare. Keep every bit of the color.",
+    detail: "Polarized and color-tuned. Cuts reflections off water, wet roads, hoods, and glass — without washing out the enhanced colors that give you your edge.",
   },
 };
 
 const MODEL_DATA = {
-  beast:  { name: "Beast",  tagline: "Shield wrap for cycling & MTB", price: "$204.99" },
-  roar:   { name: "Roar",   tagline: "Wrap shield for racket sports",  price: "$184.99" },
-  leap:   { name: "Leap",   tagline: "Versatile all-sport wrap frame", price: "$144.99" },
-  strike: { name: "Strike", tagline: "Classic lightweight wrap",        price: "$119.99" },
+  beast:  { name: "Beast",  tagline: "Full-coverage shield wrap for cycling and trail riding", price: "$204.99" },
+  roar:   { name: "Roar",   tagline: "Performance sport wrap for road cycling and all-day wear",  price: "$184.99" },
+  leap:   { name: "Leap",   tagline: "The all-rounder — courts, courses, and everything between", price: "$144.99" },
+  strike: { name: "Strike", tagline: "Lightweight precision frame for fast, clean vision",        price: "$119.99" },
 };
 
 // ─── Recommendation engine ────────────────────────────────────────────────────
@@ -64,7 +64,7 @@ function getRecommendation(sport, ballColor, lighting) {
 
   // Racket sports: driven by ball color + lighting
   if (sport === "pickleball" || sport === "tennis") {
-    const model  = sport === "pickleball" ? "roar" : "leap";
+    const model  = "leap";
     if (ballColor === "pink") {
       return {
         lens:  isIndoor ? "FireGlo Indoor" : "FireGlo Outdoor",

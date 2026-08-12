@@ -111,6 +111,16 @@ Sports-active consumers (pickleball, MTB, cycling, tennis, golf) seeking premium
 - **Pickleball featuredImages cleanup**: Removed Beast/Roar entries from pickleball config (only Leap + Strike images remain).
 - Testing: iteration_14 — 100% pass
 
+### Phase 10 (Session 10 — Tennis Filter, Copy Rewrites, Quiz Fix) — Feb 2026
+- **Tennis page filter**: Added tennis to LUMIGLO_HANDLES filter — now shows only Leap + Strike (Roar removed). Removed Roar from tennis featuredImages config.
+- **Pickleball hero image**: Swapped dark glasses-closeup CDN image for Unsplash outdoor action shot (photo-1756477558468 — player mid-swing, yellow ball visible).
+- **Golf description rewrite**: "CarbonGlo lenses amplify aqua and green tones so you're reading the course — not guessing at it..." with PolarGlo glare benefit added.
+- **Outdoors description rewrite**: "Color vision fades as you age — Redcat® slows that down..." — emotional, benefit-led copy.
+- **Quiz pickleball model bug fixed**: `getRecommendation()` was returning `roar` for pickleball (which doesn't carry LumiGlo/FireGlo lenses). Fixed to return `leap` for both pickleball and tennis.
+- **Quiz LENS_DATA copy**: All 7 lens entries rewritten with punchy taglines and vivid detail copy (e.g. "like it has a light inside it" for LumiGlo Outdoor).
+- **Quiz MODEL_DATA copy**: All 4 frame taglines rewritten to be sport-specific and benefit-led.
+- Testing: iteration_15 — 100% pass (9/9 tests)
+
 ---
 - **Mountain Biking page corrected**: Lens recommendations updated to BronzeGlo Outdoor & FireGlo Outdoor (full sun) + FireGlo Indoor (shaded trails). Added 4-feature dark section (same pattern as Driving page). Description rewritten with accurate light-condition guidance.
 - **Cycling page corrected**: Primary lens changed to CarbonGlo only (removed BronzeGlo from recommended list). Description updated to emphasize road-surface clarity.

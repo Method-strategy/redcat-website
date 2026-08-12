@@ -13,7 +13,7 @@ const ACTIVITY_CONFIG = {
     headline: "See the Ball Like It Glows.",
     sub: "LumiGlo & FireGlo lenses",
     description: "Redcat's LumiGlo lenses amplify yellow-green tones to make the high-vis yellow ball practically glow. FireGlo lenses boost warm tones to make red, orange, or pink pickleballs really pop if those are your jam. Both are available in outdoor and indoor variants to cover your game in any light condition.",
-    heroImage: "https://redcateyewear.com/cdn/shop/files/LEAP_Pickleball_-_Dark_Blue_with_Dark_Green_Lenses_3840x2160_12ac36d4-ede4-4785-811b-4ac3d3ec569c.jpg?crop=center&height=900&v=1713192324&width=1920",
+    heroImage: "https://images.unsplash.com/photo-1756477558468-b3e485757470?crop=entropy&cs=srgb&fm=jpg&q=85&w=1920",
     lenses: ["LumiGlo Outdoor", "LumiGlo Indoor", "FireGlo Outdoor", "FireGlo Indoor"],
     color: "#7BC743",
     featuredImages: {
@@ -32,7 +32,6 @@ const ACTIVITY_CONFIG = {
     featuredImages: {
       leap: `${CDN}/leap_matte_black_lumiglo_outdoor_1.jpg`,
       strike: `${CDN}/strike_matte_crystal_lumiglo_outdoor_1.jpg`,
-      roar: `${CDN}/roar_matte_blk_brown_silver_mirror_1.jpg`,
     },
   },
   cycling: {
@@ -77,7 +76,7 @@ const ACTIVITY_CONFIG = {
     name: "Golf",
     headline: "Read Every Green. Track Every Ball.",
     sub: "CarbonGlo lenses",
-    description: "CarbonGlo boosts green-aqua tones for exceptional course visibility, ball tracking against the sky, and hazard definition. See the grain on every green.",
+    description: "CarbonGlo lenses amplify aqua and green tones so you're reading the course — not guessing at it. Ball tracking against the sky snaps into focus, fairway detail sharpens, and every green's grain is yours to read. Add PolarGlo to eliminate glare off the water and wet fairway and you're playing with an unfair advantage.",
     heroImage: "https://images.unsplash.com/photo-1611374243147-44a702c2d44c?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=1920",
     lenses: ["CarbonGlo", "PolarGlo"],
     color: "#00C9D4",
@@ -91,7 +90,7 @@ const ACTIVITY_CONFIG = {
     name: "Outdoors",
     headline: "See More. Go Further.",
     sub: "All Redcat lenses",
-    description: "Whether you're hiking, driving, or just living life, Redcat® color-tuned lenses counteract the natural decline in color vision, restoring vibrancy and contrast to everything you see.",
+    description: "Color vision fades as you age — Redcat® slows that down. Whether you're out on the trail, behind the wheel, or just living wide open, our lenses restore the contrast and vibrancy your eyes have been quietly losing. The world looks the way it used to. Maybe better.",
     heroImage: "https://redcateyewear.com/cdn/shop/files/Redcat_BEAST_Aron_in_the_Wild.png?crop=center&height=900&v=1764667927&width=1920",
     lenses: ["BronzeGlo", "CarbonGlo", "PolarGlo"],
     color: "#D90012",
@@ -142,10 +141,10 @@ export default function Activity() {
   const { activity } = useParams();
   const config = ACTIVITY_CONFIG[activity] || ACTIVITY_CONFIG.outdoors;
   const { products: liveProducts, isLoading } = useProductsByActivity(activity);
-  const PICKLEBALL_HANDLES = ["strike", "leap"];
+  const LUMIGLO_HANDLES = ["strike", "leap"];
   const allProducts = !isLoading && liveProducts.length > 0 ? liveProducts : STATIC_PRODUCTS;
-  const displayProducts = activity === "pickleball"
-    ? allProducts.filter((p) => PICKLEBALL_HANDLES.includes(p.handle))
+  const displayProducts = (activity === "pickleball" || activity === "tennis")
+    ? allProducts.filter((p) => LUMIGLO_HANDLES.includes(p.handle))
     : allProducts;
 
   useSEO({
