@@ -62,29 +62,20 @@ export default function Collections() {
       });
 
   return (
-    <div className="bg-white dark:bg-rc-dark pt-[var(--navbar-h)]" data-testid="collections-page">
+    <div className="bg-white pt-[var(--navbar-h)]" data-testid="collections-page">
       {/* Header */}
       <div className="py-16 px-6 max-w-screen-xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-rc-red">All Products</span>
-          <h1
-            className="font-display font-black uppercase leading-tight text-gray-900 dark:text-white mt-1"
-            style={{ fontSize: "clamp(3rem, 7vw, 6rem)" }}
-          >
+          <h1 className="font-display font-black uppercase leading-tight text-gray-900 mt-1" style={{ fontSize: "clamp(3rem, 7vw, 6rem)" }}>
             Performance<br />Eyewear
           </h1>
-          <p className="text-gray-500 dark:text-white/45 text-sm mt-3 max-w-lg">
-            Made in Italy. Color-tuned lens technology. Lifetime warranty. See faster. Be faster.
-          </p>
+          <p className="text-gray-500 text-sm mt-3 max-w-lg">Made in Italy. Color-tuned lens technology. Lifetime warranty. See faster. Be faster.</p>
         </motion.div>
       </div>
 
       {/* Filters */}
-      <div className="border-t border-black/10 dark:border-white/10 px-6 sticky top-[var(--navbar-h)] z-30 bg-white/95 dark:bg-rc-dark/95 backdrop-blur-xl" data-testid="filter-bar">
+      <div className="border-t border-black/10 px-6 sticky top-[var(--navbar-h)] z-30 bg-white/95 backdrop-blur-xl" data-testid="filter-bar">
         <div className="max-w-screen-xl mx-auto flex gap-0 overflow-x-auto">
           {FILTERS.map((f) => (
             <button
@@ -93,8 +84,8 @@ export default function Collections() {
               data-testid={`filter-${f.id}`}
               className={`px-5 py-4 text-xs font-bold tracking-widest uppercase whitespace-nowrap border-b-2 transition-colors duration-150 ${
                 activeFilter === f.id
-                  ? "border-rc-red text-gray-900 dark:text-white"
-                  : "border-transparent text-gray-400 dark:text-white/35 hover:text-gray-900 dark:hover:text-white"
+                  ? "border-rc-red text-gray-900"
+                  : "border-transparent text-gray-400 hover:text-gray-900"
               }`}
             >
               {f.label}
@@ -106,42 +97,30 @@ export default function Collections() {
       {/* Grid */}
       <div className="max-w-screen-xl mx-auto px-6 py-12">
         {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-black/5 dark:bg-white/8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-black/5">
             {[1, 2, 3, 4].map((n) => (
-              <div key={n} className="bg-white dark:bg-rc-dark">
-                <div className="aspect-square bg-gray-100 dark:bg-rc-surface animate-pulse" />
+              <div key={n} className="bg-white">
+                <div className="aspect-square bg-gray-100 animate-pulse" />
                 <div className="p-5 space-y-2">
-                  <div className="h-6 bg-gray-100 dark:bg-rc-surface animate-pulse w-1/2" />
-                  <div className="h-4 bg-gray-100 dark:bg-rc-surface animate-pulse w-1/3" />
+                  <div className="h-6 bg-gray-100 animate-pulse w-1/2" />
+                  <div className="h-4 bg-gray-100 animate-pulse w-1/3" />
                 </div>
               </div>
             ))}
           </div>
         ) : displayProducts.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-gray-400 dark:text-white/30 text-sm mb-4">No products found for this activity.</p>
-            <button
-              onClick={() => setActiveFilter("all")}
-              className="text-xs font-bold tracking-widest uppercase text-rc-cyan underline"
-            >
+            <p className="text-gray-400 text-sm mb-4">No products found for this activity.</p>
+            <button onClick={() => setActiveFilter("all")} className="text-xs font-bold tracking-widest uppercase text-rc-cyan underline">
               Show All Products
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-black/5 dark:bg-white/8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-black/5">
             {displayProducts.map((product, i) => (
-              <motion.div
-                key={product.id || product.handle}
-                variants={fadeUp(i * 0.06)}
-                initial="hidden"
-                animate="visible"
-                className="bg-white dark:bg-rc-dark group"
-              >
-                <Link
-                  to={`/products/${product.handle}`}
-                  data-testid={`collection-product-${product.handle}`}
-                >
-                  <div className="product-img-wrap aspect-square overflow-hidden bg-white dark:bg-rc-surface flex items-center justify-center p-4">
+              <motion.div key={product.id || product.handle} variants={fadeUp(i * 0.06)} initial="hidden" animate="visible" className="bg-white group">
+                <Link to={`/products/${product.handle}`} data-testid={`collection-product-${product.handle}`}>
+                  <div className="product-img-wrap aspect-square overflow-hidden bg-[#FAFAFA] flex items-center justify-center p-4">
                     <img
                       src={product.images?.[0]?.url || ""}
                       alt={product.images?.[0]?.altText || product.title}
@@ -149,24 +128,17 @@ export default function Collections() {
                       loading="lazy"
                     />
                   </div>
-                  <div className="p-5 border-t border-black/5 dark:border-white/8">
-                    <p className="text-[10px] text-gray-400 dark:text-white/30 tracking-widest uppercase mb-1">Redcat Eyewear</p>
-                    <h3 className="font-display text-2xl font-black uppercase tracking-wider text-gray-900 dark:text-white group-hover:text-rc-red transition-colors duration-200">
+                  <div className="p-5 border-t border-black/5">
+                    <p className="text-[10px] text-gray-400 tracking-widest uppercase mb-1">Redcat Eyewear</p>
+                    <h3 className="font-display text-2xl font-black uppercase tracking-wider text-gray-900 group-hover:text-rc-red transition-colors duration-200">
                       {product.title}
                     </h3>
                     {product.description && (
-                      <p className="text-xs text-gray-500 dark:text-white/35 mt-1.5 leading-relaxed line-clamp-2">
-                        {product.description.slice(0, 80)}...
-                      </p>
+                      <p className="text-xs text-gray-500 mt-1.5 leading-relaxed line-clamp-2">{product.description.slice(0, 80)}...</p>
                     )}
                     <div className="flex items-center justify-between mt-3">
-                      <p className="text-sm text-gray-500 dark:text-white/55">
-                        From ${parseFloat(product.priceRange?.minVariantPrice?.amount || 0).toFixed(2)}
-                      </p>
-                      <ArrowRight
-                        size={14}
-                        className="text-rc-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                      />
+                      <p className="text-sm text-gray-500">From ${parseFloat(product.priceRange?.minVariantPrice?.amount || 0).toFixed(2)}</p>
+                      <ArrowRight size={14} className="text-rc-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                     </div>
                   </div>
                 </Link>
@@ -176,25 +148,13 @@ export default function Collections() {
         )}
 
         {/* Bottom CTA */}
-        <motion.div
-          variants={fadeUp(0.1)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mt-16 border border-black/10 dark:border-white/10 p-10 text-center"
-        >
-          <p className="text-xs font-bold tracking-widest uppercase text-gray-400 dark:text-white/30 mb-3">Need Help Choosing?</p>
-          <h3 className="font-display text-2xl font-black uppercase text-gray-900 dark:text-white mb-4">Shop by Activity</h3>
-          <p className="text-sm text-gray-500 dark:text-white/45 mb-6 max-w-sm mx-auto">
-            We'll match you with the right lens for your sport. Every model available in multiple lens systems.
-          </p>
+        <motion.div variants={fadeUp(0.1)} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-16 border border-black/10 p-10 text-center bg-[#F5F0E8]">
+          <p className="text-xs font-bold tracking-widest uppercase text-gray-400 mb-3">Need Help Choosing?</p>
+          <h3 className="font-display text-2xl font-black uppercase text-gray-900 mb-4">Shop by Activity</h3>
+          <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">We'll match you with the right lens for your sport. Every model available in multiple lens systems.</p>
           <div className="flex flex-wrap justify-center gap-3">
             {["pickleball", "cycling", "tennis", "golf"].map((act) => (
-              <Link
-                key={act}
-                to={`/activities/${act}`}
-                className="px-5 py-2.5 border border-black/10 dark:border-white/15 text-xs font-bold tracking-widest uppercase text-gray-500 dark:text-white/55 hover:border-rc-red hover:text-rc-red transition-colors"
-              >
+              <Link key={act} to={`/activities/${act}`} className="px-5 py-2.5 border border-black/10 text-xs font-bold tracking-widest uppercase text-gray-500 hover:border-rc-red hover:text-rc-red transition-colors">
                 {act}
               </Link>
             ))}

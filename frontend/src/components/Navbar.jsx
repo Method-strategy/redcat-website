@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, X, ChevronDown, Menu, Sun, Moon } from "lucide-react";
+import { ShoppingBag, X, ChevronDown, Menu } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import { useTheme } from "@/context/ThemeContext";
 import { Logo } from "@/components/Logo";
 
 const navLinks = [
@@ -28,6 +27,7 @@ const navLinks = [
       { label: "Cycling", href: "/activities/cycling" },
       { label: "Mountain Biking", href: "/activities/mountain-biking" },
       { label: "Golf", href: "/activities/golf" },
+      { label: "Driving", href: "/activities/driving" },
     ],
   },
   { label: "FIND YOUR REDCATS", href: "/quiz", accent: true },
@@ -35,11 +35,9 @@ const navLinks = [
 
 export default function Navbar() {
   const { totalItems, openCart } = useCart();
-  const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -51,7 +49,9 @@ export default function Navbar() {
     <header
       data-testid="navbar"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-rc-dark/95 backdrop-blur-xl border-b border-white/10" : "bg-transparent"
+        scrolled
+          ? "bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-sm"
+          : "bg-white/90 backdrop-blur-md"
       }`}
       style={{ height: "var(--navbar-h)" }}
     >
@@ -72,8 +72,8 @@ export default function Navbar() {
                 to={link.href}
                 className={`flex items-center gap-1 text-xs font-body font-semibold tracking-widest uppercase transition-colors duration-200 ${
                   link.accent
-                    ? "text-rc-red hover:text-red-400 border border-rc-red/40 hover:border-rc-red px-3 py-1.5"
-                    : "text-white/80 hover:text-white"
+                    ? "text-rc-red hover:text-red-700 border border-rc-red/40 hover:border-rc-red px-3 py-1.5"
+                    : "text-gray-700 hover:text-gray-900"
                 }`}
                 data-testid={`nav-${link.label.toLowerCase().replace(/ /g, "-")}`}
               >
@@ -87,13 +87,13 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 8 }}
                     transition={{ duration: 0.18 }}
-                    className="absolute top-full left-0 mt-2 bg-rc-surface border border-white/10 min-w-[180px] py-2"
+                    className="absolute top-full left-0 mt-2 bg-white border border-gray-100 shadow-lg min-w-[180px] py-2"
                   >
                     {link.children.map((child) => (
                       <Link
                         key={child.label}
                         to={child.href}
-                        className="block px-5 py-2.5 text-xs font-semibold tracking-widest uppercase text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+                        className="block px-5 py-2.5 text-xs font-semibold tracking-widest uppercase text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors"
                         onClick={() => setActiveDropdown(null)}
                       >
                         {child.label}
@@ -109,17 +109,9 @@ export default function Navbar() {
         {/* Right actions */}
         <div className="flex items-center gap-4">
           <button
-            onClick={toggleTheme}
-            data-testid="theme-toggle"
-            className="text-white/60 hover:text-white transition-colors duration-200"
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
-          <button
             data-testid="cart-button"
             onClick={openCart}
-            className="relative text-white hover:text-rc-cyan transition-colors duration-200"
+            className="relative text-gray-700 hover:text-rc-red transition-colors duration-200"
             aria-label="Open cart"
           >
             <ShoppingBag size={22} />
@@ -135,7 +127,7 @@ export default function Navbar() {
 
           {/* Mobile menu toggle */}
           <button
-            className="lg:hidden text-white hover:text-rc-cyan transition-colors"
+            className="lg:hidden text-gray-700 hover:text-gray-900 transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
             data-testid="mobile-menu-toggle"
             aria-label="Toggle menu"
@@ -153,7 +145,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="lg:hidden bg-rc-dark border-t border-white/10 overflow-hidden"
+            className="lg:hidden bg-white border-t border-gray-100 shadow-md overflow-hidden"
             data-testid="mobile-menu"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
@@ -161,7 +153,7 @@ export default function Navbar() {
                 <div key={link.label}>
                   <Link
                     to={link.href}
-                    className="block py-3 text-sm font-semibold tracking-widest uppercase text-white/80 hover:text-white transition-colors border-b border-white/5"
+                    className="block py-3 text-sm font-semibold tracking-widest uppercase text-gray-700 hover:text-gray-900 transition-colors border-b border-gray-50"
                     onClick={() => setMobileOpen(false)}
                   >
                     {link.label}
@@ -172,7 +164,7 @@ export default function Navbar() {
                         <Link
                           key={child.label}
                           to={child.href}
-                          className="block py-2 text-xs tracking-widest uppercase text-white/50 hover:text-white transition-colors"
+                          className="block py-2 text-xs tracking-widest uppercase text-gray-500 hover:text-gray-900 transition-colors"
                           onClick={() => setMobileOpen(false)}
                         >
                           {child.label}

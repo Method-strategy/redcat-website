@@ -90,7 +90,20 @@ Sports-active consumers (pickleball, MTB, cycling, tennis, golf) seeking premium
 - **Fonts preconnect + cat icon preload** added to index.html for LCP
 - **Footer lede updated**: "Performance sport sunglasses engineered with color-tuned lens technology."
 
-### Phase 7 (Session 7 — Meta.docx Integration + Activity Page Corrections) — Feb 2026
+### Phase 8 (Session 8 — White Theme Redesign + Image Matching Fix) — Feb 2026
+- **Dark mode removed**: ThemeContext gutted to always force light. localStorage "rc_theme" cleared. No more `dark:` Tailwind classes active.
+- **Aron hero**: Homepage hero redesigned as split layout — "SEE FASTER." / "BE FASTER." text block left, Aron MTB rider image right-flushed on white background
+- **Activity product card images**: `getActivityImage()` uses `config.featuredImages[product.handle]` to show the correct lens context per activity (cycling → CarbonGlo gray lenses, MTB → BronzeGlo amber, pickleball → LumiGlo/FireGlo)
+- **Hero images corrected**: Cycling page now uses Unsplash road cycling photo. MTB keeps Shopify CDN MTB image. Both distinct.
+- **REDCAT all caps on Brand page**: h1 changed from "Redcat" to "REDCAT" (marketing text, not brand mark)
+- **Period spacing fix**: `clean_desc()` strips HTML tags with spaces, preventing "sentence.Next sentence" pattern from Shopify API
+- **Greige accent rows**: `bg-[#F5F0E8]` warm tan used for alt sections (not cool gray)
+- **Navbar white**: White background, dark text, no dark toggle button, Driving in Activities dropdown
+- **Collections.jsx rewritten**: Complete overwrite to fix JSX double-return error from previous search_replace, now fully white-themed
+- **Activity.jsx product card label**: Changed from misleading `{config.lenses[0]}` to "Redcat Eyewear"
+- Testing: iteration_13 — 87% pass (Beast/Roar pickleball label fixed post-test)
+
+---
 - **Mountain Biking page corrected**: Lens recommendations updated to BronzeGlo Outdoor & FireGlo Outdoor (full sun) + FireGlo Indoor (shaded trails). Added 4-feature dark section (same pattern as Driving page). Description rewritten with accurate light-condition guidance.
 - **Cycling page corrected**: Primary lens changed to CarbonGlo only (removed BronzeGlo from recommended list). Description updated to emphasize road-surface clarity.
 - **Per-variant image system**: Rewrote `v()` helper + all VI maps (BEAST_VI, ROAR_VI, LEAP_VI, STRIKE_VI) with `{frame}/{lens}` keys — selecting a lens now shows the exact product image (e.g. CarbonGlo Black Matte shows gray lens, not BronzeGlo amber).

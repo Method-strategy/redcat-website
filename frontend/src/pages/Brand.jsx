@@ -6,7 +6,6 @@ import { useSEO } from "@/hooks/useSEO";
 const HERO_IMG = "https://redcateyewear.com/cdn/shop/files/Redcat_Hero_1_4K_7d6a3cb8-6a17-4bc8-9c40-1e9b6b5b2cae.png?crop=center&v=1724073572&width=1920";
 const MTB_IMG = "https://redcateyewear.com/cdn/shop/files/mountain-bike-cycling-and-fitness.jpg?crop=center&height=900&v=1719939492&width=1600";
 const PICKLEBALL_IMG = "https://redcateyewear.com/cdn/shop/files/LEAP_Pickleball_-_Dark_Blue_with_Dark_Green_Lenses_3840x2160_12ac36d4-ede4-4785-811b-4ac3d3ec569c.jpg?crop=center&height=900&v=1713192324&width=1600";
-const ROAR_IMG = "https://redcateyewear.com/cdn/shop/files/ROAR_Matte_Crystal_with_Carbon_Crush_Lens_with_Oil_Slick_Mirror.png?crop=center&v=1720544252&width=1600";
 const BEAST_IMG = "https://redcateyewear.com/cdn/shop/files/John_in_BEAST.png?crop=center&v=1720547259&width=1600";
 
 const BRAND_PILLARS = [
@@ -40,7 +39,7 @@ export default function Brand() {
   const heroY = useTransform(scrollY, [0, 700], [0, 100]);
 
   return (
-    <div className="bg-white dark:bg-rc-dark pt-[var(--navbar-h)]" data-testid="brand-page">
+    <div className="bg-white pt-[var(--navbar-h)]" data-testid="brand-page">
       {/* HERO */}
       <section className="relative h-[85vh] min-h-[600px] flex items-end overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0 scale-110">
@@ -63,10 +62,10 @@ export default function Brand() {
               initial={{ y: "105%" }}
               animate={{ y: "0%" }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-              className="font-display font-black text-white"
+              className="font-display font-black uppercase text-white"
               style={{ fontSize: "clamp(3.5rem, 9vw, 8rem)", lineHeight: "0.9" }}
             >
-              Redcat
+              REDCAT
             </motion.h1>
           </div>
           <div className="line-mask">
@@ -84,7 +83,7 @@ export default function Brand() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.65 }}
-            className="text-white/55 text-base mt-6 max-w-lg leading-relaxed"
+            className="text-white/60 text-base mt-6 max-w-lg leading-relaxed"
           >
             Elite performance eyewear built for athletes who refuse to accept average vision.
           </motion.p>
@@ -93,7 +92,7 @@ export default function Brand() {
 
       {/* PILLARS */}
       <section className="py-24 px-6 max-w-screen-xl mx-auto" data-testid="brand-pillars">
-        <div className="grid md:grid-cols-2 gap-px bg-black/5 dark:bg-white/8">
+        <div className="grid md:grid-cols-2 gap-px bg-black/5">
           {BRAND_PILLARS.map((p, i) => (
             <motion.div
               key={p.icon}
@@ -101,38 +100,38 @@ export default function Brand() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
-              className="bg-white dark:bg-rc-dark p-10"
+              className="bg-white p-10"
             >
-              <span className="font-display text-7xl font-black text-black/5 dark:text-white/6 leading-none block mb-3">{p.icon}</span>
-              <h3 className="font-display text-xl font-black uppercase tracking-widest text-gray-900 dark:text-white mb-4">{p.title}</h3>
-              <p className="text-sm text-gray-500 dark:text-white/50 leading-relaxed">{p.body}</p>
+              <span className="font-display text-7xl font-black text-black/5 leading-none block mb-3">{p.icon}</span>
+              <h3 className="font-display text-xl font-black uppercase tracking-widest text-gray-900 mb-4">{p.title}</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">{p.body}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* SPLIT — MTB IMAGE */}
+      {/* SPLIT — PICKLEBALL IMAGE */}
       <section className="grid lg:grid-cols-2 min-h-[500px]">
         <motion.div
           variants={fadeUp()}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="flex flex-col justify-center px-8 lg:px-16 py-16 bg-[#FAFAFA] dark:bg-rc-surface order-2 lg:order-1"
+          className="flex flex-col justify-center px-8 lg:px-16 py-16 bg-[#F5F0E8] order-2 lg:order-1"
         >
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-rc-cyan mb-5">Sport-Specific Performance</span>
           <h2
-            className="font-display font-black uppercase leading-tight text-gray-900 dark:text-white mb-5"
+            className="font-display font-black uppercase leading-tight text-gray-900 mb-5"
             style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
           >
             Lens Technology for Every Sport
           </h2>
-          <p className="text-gray-500 dark:text-white/50 text-sm leading-relaxed mb-6 max-w-md">
+          <p className="text-gray-500 text-sm leading-relaxed mb-6 max-w-md">
             From LumiGlo and FireGlo for racket sports to BronzeGlo and CarbonGlo for outdoor and road — every lens is tuned to a specific performance spectrum.
           </p>
           <Link
             to="/collections"
-            className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-gray-900 dark:text-white border-b border-black/15 dark:border-white/15 pb-1 hover:border-rc-red hover:text-rc-red transition-colors duration-200 w-fit"
+            className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-gray-900 border-b border-black/15 pb-1 hover:border-rc-red hover:text-rc-red transition-colors duration-200 w-fit"
           >
             Shop by Activity <ArrowRight size={11} />
           </Link>
@@ -143,7 +142,7 @@ export default function Brand() {
       </section>
 
       {/* LENS GUIDE */}
-      <section className="py-24 px-6 bg-white dark:bg-rc-dark" data-testid="lens-guide">
+      <section className="py-24 px-6 bg-white" data-testid="lens-guide">
         <div className="max-w-screen-xl mx-auto">
           <motion.div
             variants={fadeUp()}
@@ -154,13 +153,13 @@ export default function Brand() {
           >
             <span className="text-xs font-bold tracking-[0.3em] uppercase text-rc-red">Vision System</span>
             <h2
-              className="font-display font-black uppercase leading-tight text-gray-900 dark:text-white mt-1"
+              className="font-display font-black uppercase leading-tight text-gray-900 mt-1"
               style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
             >
               The Lens Guide
             </h2>
           </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-px bg-black/5 dark:bg-white/8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-px bg-black/5">
             {LENSES.map((lens, i) => (
               <motion.div
                 key={lens.name}
@@ -168,19 +167,19 @@ export default function Brand() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}
-                className="bg-white dark:bg-rc-dark p-6"
+                className="bg-white p-6"
               >
                 <div className="w-10 h-10 mb-4 rounded-full" style={{ backgroundColor: lens.color + "40", border: `2px solid ${lens.color}` }} />
-                <h3 className="font-display font-black uppercase text-lg tracking-widest text-gray-900 dark:text-white mb-1">{lens.name}</h3>
-                <p className="text-[10px] text-gray-400 dark:text-white/35 uppercase tracking-widest mb-3">{lens.sub}</p>
-                <p className="text-sm text-gray-500 dark:text-white/50 leading-relaxed">{lens.desc}</p>
+                <h3 className="font-display font-black uppercase text-lg tracking-widest text-gray-900 mb-1">{lens.name}</h3>
+                <p className="text-[10px] text-gray-400 uppercase tracking-widest mb-3">{lens.sub}</p>
+                <p className="text-sm text-gray-500 leading-relaxed">{lens.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ITALY */}
+      {/* ITALY — editorial dark section */}
       <section className="grid lg:grid-cols-2 min-h-[500px]">
         <div className="relative overflow-hidden h-[380px] lg:h-auto">
           <img src={BEAST_IMG} alt="Redcat BEAST athlete" className="w-full h-full object-cover" />
@@ -190,29 +189,29 @@ export default function Brand() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="flex flex-col justify-center px-8 lg:px-16 py-16 bg-[#FAFAFA] dark:bg-rc-surface"
+          className="flex flex-col justify-center px-8 lg:px-16 py-16 bg-[#F5F0E8]"
         >
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-rc-cyan mb-5">Manufacturing</span>
           <h2
-            className="font-display font-black uppercase leading-tight text-gray-900 dark:text-white mb-5"
+            className="font-display font-black uppercase leading-tight text-gray-900 mb-5"
             style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
           >
             Made in Italy.<br />You Can Feel the Difference.
           </h2>
-          <p className="text-gray-500 dark:text-white/50 text-sm leading-relaxed mb-6 max-w-md">
+          <p className="text-gray-500 text-sm leading-relaxed mb-6 max-w-md">
             Most sport eyewear in this price range is made in China. Ours isn't. Every Redcat frame carries the CE marking, meeting European standards for safety, health, and environmental protection.
           </p>
           <div className="grid grid-cols-2 gap-4 mb-8">
             {[["TR-90", "Thermoplastic frames"], ["CE Rated", "EU certified"], ["Polycarbonate", "Shatterproof lenses"], ["UV400", "Full protection"]].map(([val, label]) => (
-              <div key={label} className="border border-black/10 dark:border-white/10 p-4">
-                <p className="font-display font-black text-lg uppercase text-gray-900 dark:text-white">{val}</p>
-                <p className="text-xs text-gray-400 dark:text-white/35 uppercase tracking-widest mt-1">{label}</p>
+              <div key={label} className="border border-black/10 p-4 bg-white">
+                <p className="font-display font-black text-lg uppercase text-gray-900">{val}</p>
+                <p className="text-xs text-gray-400 uppercase tracking-widest mt-1">{label}</p>
               </div>
             ))}
           </div>
           <Link
             to="/collections"
-            className="inline-flex items-center gap-2 bg-rc-red text-white px-7 py-3.5 text-xs font-bold tracking-widest uppercase hover:bg-gray-900 dark:hover:bg-white dark:hover:text-rc-red transition-colors duration-200 w-fit"
+            className="inline-flex items-center gap-2 bg-rc-red text-white px-7 py-3.5 text-xs font-bold tracking-widest uppercase hover:bg-gray-900 transition-colors duration-200 w-fit"
           >
             Shop Now <ArrowRight size={12} />
           </Link>

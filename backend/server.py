@@ -250,7 +250,16 @@ mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
 """
 
 
+def clean_desc(html_or_text):
+    """Strip HTML tags and ensure spaces at paragraph boundaries."""
+    if not html_or_text:
+        return ""
+    text = re.sub(r'<[^>]+>', ' ', html_or_text)
+    text = re.sub(r'\s+', ' ', text).strip()
+    return text
+
 CDN = "https://cdn.shopify.com/s/files/1/0774/1784/0936/files"
+
 POUCH = f"{CDN}/redcat-eyewear-case-cloth-pouch.png"
 POUCH_LEAP = f"{CDN}/redcat-eyewear-case-cloth-pouch_9bb7c203-447d-4bae-8948-3cf49bffb6fe.png"
 POUCH_STRIKE = f"{CDN}/redcat-eyewear-case-cloth-pouch_2522e8ab-d458-4cfb-9c25-024080f4d084.png"
@@ -646,7 +655,7 @@ async def get_products():
                 "id": n["id"],
                 "handle": n["handle"],
                 "title": n["title"],
-                "description": n["description"],
+                "description": clean_desc(n.get("descriptionHtml") or n.get("description", "")),
                 "tags": n["tags"],
                 "productType": n["productType"],
                 "priceRange": n["priceRange"],
@@ -693,7 +702,7 @@ async def get_product(handle: str):
                 "id": p["id"],
                 "handle": p["handle"],
                 "title": p["title"],
-                "description": p["description"],
+                "description": clean_desc(p.get("descriptionHtml") or p.get("description", "")),
                 "descriptionHtml": p.get("descriptionHtml", ""),
                 "tags": p["tags"],
                 "productType": p["productType"],
