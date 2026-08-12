@@ -60,38 +60,33 @@ const MODEL_DATA = {
 };
 
 // ─── Recommendation engine ────────────────────────────────────────────────────
-// sport, ballColor (null for non-ball sports), lighting → { lens, model, link }
+// sport, ballColor (null for non-ball sports), lighting → { lens, models: [], links: [] }
 function getRecommendation(sport, ballColor, lighting) {
   const isIndoor = lighting === "indoor";
 
-  // Racket sports: driven by ball color + lighting
+  // Racket sports: both LEAP and STRIKE carry every racket-sport lens
   if (sport === "pickleball" || sport === "tennis") {
-    const model  = "leap";
+    const models = ["leap", "strike"];
+    const links  = models.map((m) => `/products/${m}`);
     if (ballColor === "pink") {
-      return {
-        lens:  isIndoor ? "FireGlo Indoor" : "FireGlo Outdoor",
-        model, link: `/products/${model}`,
-      };
+      return { lens: isIndoor ? "FireGlo Indoor" : "FireGlo Outdoor", models, links };
     }
     // yellow (default) or mixed → LumiGlo
-    return {
-      lens:  isIndoor ? "LumiGlo Indoor" : "LumiGlo Outdoor",
-      model, link: `/products/${model}`,
-    };
+    return { lens: isIndoor ? "LumiGlo Indoor" : "LumiGlo Outdoor", models, links };
   }
 
   // Cycling / MTB
   if (sport === "cycling" || sport === "mtb") {
-    return { lens: "CarbonGlo", model: "beast", link: "/products/beast" };
+    return { lens: "CarbonGlo", models: ["beast"], links: ["/products/beast"] };
   }
 
   // Golf
   if (sport === "golf") {
-    return { lens: "CarbonGlo", model: "leap", link: "/products/leap" };
+    return { lens: "CarbonGlo", models: ["leap"], links: ["/products/leap"] };
   }
 
-  // Running or Driving/General → BronzeGlo (full-sun / safety colors)
-  return { lens: "BronzeGlo", model: "strike", link: "/products/strike" };
+  // Running or Driving → BronzeGlo (STRIKE is the most versatile daily frame)
+  return { lens: "BronzeGlo", models: ["strike"], links: ["/products/strike"] };
 }
 
 // ─── Quiz step definitions ────────────────────────────────────────────────────
@@ -180,8 +175,8 @@ export default function Quiz() {
   const currentStepDef = steps[step] || null;
 
   const rec   = done ? getRecommendation(answers.sport, answers.ballColor, answers.lighting) : null;
-  const lens  = rec  ? LENS_DATA[rec.lens]   : null;
-  const model = rec  ? MODEL_DATA[rec.model] : null;
+  const lens  = rec  ? LENS_DATA[rec.lens]            : null;
+  const model = rec  ? MODEL_DATA[rec.models?.[0]]    : null;   // primary model
 
   const handleSelect = useCallback((id) => setSelected(id), []);
 
@@ -322,28 +317,66 @@ export default function Quiz() {
               </div>
 
               {/* Frame recommendation */}
-              <div className="border border-white/10 bg-rc-surface p-5 rounded-sm flex items-center justify-between mb-6">
-                <div>
-                  <p className="text-white/40 text-xs tracking-widest uppercase mb-0.5">Recommended Frame</p>
-                  <p className="font-display font-black uppercase text-white text-xl tracking-wide">{model?.name}</p>
-                  <p className="text-white/50 text-sm">{model?.tagline}</p>
+              {rec?.models?.length > 1 ? (
+                <div className="mb-6">
+                  <p className="text-white/40 text-xs tracking-[0.3em] uppercase mb-3 text-center">Recommended Frames</p>
+                  <div className="grid grid-cols-2 gap-3">
+                    {rec.models.map((modelId) => {
+                      const m = MODEL_DATA[modelId];
+                      return (
+                        <div key={modelId} className="border border-white/10 bg-rc-surface p-5 rounded-sm">
+                          <p className="font-display font-black uppercase text-white text-lg tracking-wide leading-tight">{m?.name}</p>
+                          <p className="text-white/45 text-xs mt-1">{m?.tagline}</p>
+                          <p className="text-white/30 text-xs mt-3">From <span className="text-white font-semibold">{m?.price}</span></p>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-                <div className="text-right">
-                  <p className="text-white/30 text-xs mb-0.5">Starting at</p>
-                  <p className="text-white font-display font-black text-2xl">{model?.price}</p>
+              ) : (
+                <div className="border border-white/10 bg-rc-surface p-5 rounded-sm flex items-center justify-between mb-6">
+                  <div>
+                    <p className="text-white/40 text-xs tracking-widest uppercase mb-0.5">Recommended Frame</p>
+                    <p className="font-display font-black uppercase text-white text-xl tracking-wide">{model?.name}</p>
+                    <p className="text-white/50 text-sm">{model?.tagline}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-white/30 text-xs mb-0.5">Starting at</p>
+                    <p className="text-white font-display font-black text-2xl">{model?.price}</p>
+                  </div>
                 </div>
-              </div>
+              )}
 
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link to={rec?.link || "/collections"} data-testid="quiz-shop-cta"
-                  className="flex-1 flex items-center justify-center gap-2 bg-rc-red text-white font-display font-black uppercase px-8 py-4 text-sm tracking-widest hover:bg-red-700 transition-colors">
-                  Shop {model?.name} <ArrowRight size={16}/>
-                </Link>
-                <Link to="/collections"
-                  className="flex-1 flex items-center justify-center gap-2 border border-white/20 text-white/70 font-display uppercase px-8 py-4 text-sm tracking-widest hover:border-white/40 hover:text-white transition-colors">
-                  Browse All
-                </Link>
-              </div>
+              {/* CTAs */}
+              {rec?.models?.length > 1 ? (
+                <div className="grid grid-cols-2 gap-3">
+                  {rec.models.map((modelId, i) => (
+                    <Link
+                      key={modelId}
+                      to={`/products/${modelId}`}
+                      data-testid={`quiz-shop-cta-${modelId}`}
+                      className={`flex items-center justify-center gap-2 font-display font-black uppercase px-6 py-4 text-sm tracking-widest transition-colors ${
+                        i === 0
+                          ? "bg-rc-red text-white hover:bg-red-700"
+                          : "border border-white/20 text-white/70 hover:border-white/40 hover:text-white"
+                      }`}
+                    >
+                      Shop {MODEL_DATA[modelId]?.name} <ArrowRight size={14} />
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Link to={rec?.links?.[0] || "/collections"} data-testid="quiz-shop-cta"
+                    className="flex-1 flex items-center justify-center gap-2 bg-rc-red text-white font-display font-black uppercase px-8 py-4 text-sm tracking-widest hover:bg-red-700 transition-colors">
+                    Shop {model?.name} <ArrowRight size={16}/>
+                  </Link>
+                  <Link to="/collections"
+                    className="flex-1 flex items-center justify-center gap-2 border border-white/20 text-white/70 font-display uppercase px-8 py-4 text-sm tracking-widest hover:border-white/40 hover:text-white transition-colors">
+                    Browse All
+                  </Link>
+                </div>
+              )}
 
               <button onClick={handleReset} data-testid="quiz-retake-btn"
                 className="flex items-center gap-2 text-white/30 hover:text-white/60 transition-colors text-sm mx-auto mt-6 w-full justify-center">

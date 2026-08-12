@@ -324,17 +324,19 @@ export default function Product() {
           {/* Add to Cart */}
           <button
             onClick={handleAddToCart}
-            disabled={!currentVariant?.availableForSale}
+            disabled={isLoading || !currentVariant || !currentVariant.availableForSale}
             data-testid="add-to-cart-button"
             className={`w-full py-4 text-xs font-bold tracking-widest uppercase transition-all duration-200 flex items-center justify-center gap-2 ${
               addedToCart
                 ? "bg-green-600 text-white"
-                : "bg-rc-red text-white hover:bg-gray-900 dark:hover:bg-white dark:hover:text-rc-red disabled:opacity-40 disabled:cursor-not-allowed"
+                : "bg-rc-red text-white hover:bg-gray-900 disabled:opacity-40 disabled:cursor-not-allowed"
             }`}
           >
             {addedToCart ? (
               <><Check size={14} /> Added to Cart</>
-            ) : currentVariant?.availableForSale ? (
+            ) : isLoading || !currentVariant ? (
+              "Add to Cart"
+            ) : currentVariant.availableForSale ? (
               "Add to Cart"
             ) : (
               "Out of Stock"

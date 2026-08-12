@@ -90,7 +90,11 @@ See CHANGELOG for full history. Core: React scaffold, live Shopify API, checkout
 - Tennis Ball×Lens section, Golf CarbonGlo panel
 - Driving hero upgrade
 
-### Phase 14 (Session 14 — Support Section, Blogs, Trust/Reviews) — Feb 2026
+### Phase 15 (Session 15 — Product Filtering Bugfixes) — Feb 2026
+- **Quiz.jsx** `getRecommendation`: Pickleball/tennis now returns `models: ["leap", "strike"]` (was hardcoded to `"leap"` only). Result screen shows dual frame cards + dual Shop CTAs.
+- **Activity.jsx** `ACTIVITY_MODEL_FILTER.driving`: Added `"strike"` (was `["beast","roar"]`). STRIKE has BronzeGlo — now correctly appears on Driving activity page.
+- **Product.jsx** Add to Cart: `isLoading || !currentVariant` now guards button text — never shows "Out of Stock" during Shopify API load. "Out of Stock" only shows for genuinely unavailable variants.
+- Testing: iteration_20 — 100% pass, all 7 flows confirmed.
 - **Blog.jsx** (`/blog`): Index page listing 4 native articles with editorial cards
 - **BlogPost.jsx** (`/blog/:slug`): Full article renderer with all 4 scraped Shopify blog articles:
   1. Pickleball Eye Safety (`/blog/pickleball-eye-safety`)

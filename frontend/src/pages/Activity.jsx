@@ -185,7 +185,7 @@ export default function Activity() {
     tennis: ["strike", "leap"],
     cycling: ["beast", "roar"],
     "mountain-biking": ["beast", "roar", "strike"],
-    driving: ["beast", "roar"],
+    driving: ["beast", "roar", "strike"],
   };
   const allProducts = !isLoading && liveProducts.length > 0 ? liveProducts : STATIC_PRODUCTS;
   const allowedHandles = ACTIVITY_MODEL_FILTER[activity];
