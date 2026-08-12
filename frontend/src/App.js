@@ -15,6 +15,9 @@ const Product = lazy(() => import("@/pages/Product"));
 const Activity = lazy(() => import("@/pages/Activity"));
 const Collections = lazy(() => import("@/pages/Collections"));
 const Quiz = lazy(() => import("@/pages/Quiz"));
+const Technology = lazy(() => import("@/pages/Technology"));
+const Frames = lazy(() => import("@/pages/Frames"));
+const LensGallery = lazy(() => import("@/pages/LensGallery"));
 
 function AppInner() {
   useLenis();
@@ -31,6 +34,9 @@ function AppInner() {
           <Route path="/collections" element={<Collections />} />
           <Route path="/collections/:collection" element={<Collections />} />
           <Route path="/quiz" element={<Quiz />} />
+          <Route path="/technology" element={<Technology />} />
+          <Route path="/frames" element={<Frames />} />
+          <Route path="/lenses" element={<LensGallery />} />
         </Routes>
       </Suspense>
       <Footer />

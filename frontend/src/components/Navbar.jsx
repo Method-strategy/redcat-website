@@ -19,6 +19,15 @@ const navLinks = [
   },
   { label: "BRAND", href: "/brand" },
   {
+    label: "TECHNOLOGY",
+    href: "/technology",
+    children: [
+      { label: "Lens Science", href: "/technology" },
+      { label: "Lens Gallery", href: "/lenses" },
+      { label: "Frame Technology", href: "/frames" },
+    ],
+  },
+  {
     label: "ACTIVITIES",
     href: "/activities/pickleball",
     children: [

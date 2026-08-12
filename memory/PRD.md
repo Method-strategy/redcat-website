@@ -140,6 +140,17 @@ Sports-active consumers (pickleball, MTB, cycling, tennis, golf) seeking premium
 - **Quiz lens image in result**: LENS_DATA extended with `image` URLs. Result card shows actual lens img instead of colored circle (fallback to circle if no image).
 - Testing: iteration_17 — 100% pass (9/9 tests) + BronzeGlo Outdoor alias fix applied
 
+### Phase 13 (Session 13 — Technology/Frames/Lenses pages, Activity panels) — Feb 2026
+- **Technology.jsx** (`/technology`): New full page — dark hero with 6-lens mosaic; polycarbonate science (4 property cards + CR-39 comparison table); all 6 lens color science cards with images. Original Redcat copy rewritten from Eluno source material.
+- **Frames.jsx** (`/frames`): New full page — TR90 Swiss memory plastic (5 benefit cards + 3 science panels in dark section); CE certification section (4 test criteria); shop/quiz CTAs.
+- **LensGallery.jsx** (`/lenses`): New full page — 6 lens cards in grid, each with image, accent color, sport tags, tagline, detail, and Find Frames CTA.
+- **App.js**: 3 new lazy routes added: /technology, /frames, /lenses.
+- **Navbar.jsx**: "TECHNOLOGY" dropdown added between BRAND and ACTIVITIES, linking to Lens Science (/technology), Lens Gallery (/lenses), Frame Technology (/frames).
+- **Tennis Ball×Lens section**: Added to Activity.jsx — "The Ball Doesn't Change" panel with yellow-green ball + LumiGlo Outdoor/Indoor lens images (conditional on activity==='tennis').
+- **Golf CarbonGlo panel**: "Why CarbonGlo Wins on the Course" — two-column layout with 5 golf benefits + CarbonGlo lens image card (conditional on activity==='golf').
+- **Driving hero**: Upgraded to Pexels dramatic sunset road photo (14242028 — low-angle golden clouds, open highway).
+- Testing: iteration_18 — 100% pass (8/8 tests)
+
 ---
 - **Mountain Biking page corrected**: Lens recommendations updated to BronzeGlo Outdoor & FireGlo Outdoor (full sun) + FireGlo Indoor (shaded trails). Added 4-feature dark section (same pattern as Driving page). Description rewritten with accurate light-condition guidance.
 - **Cycling page corrected**: Primary lens changed to CarbonGlo only (removed BronzeGlo from recommended list). Description updated to emphasize road-surface clarity.

@@ -18,6 +18,15 @@ const LENS_IMAGES = {
   "BronzeGlo Outdoor": `${CDN_ASSETS}/vi0k8fqs_PCPL-B2003-v%20BronzeGlo.webp`,
 };
 
+const TENNIS_BALLS = [
+  {
+    label: "Hi-Vis Yellow-Green",
+    img: `${CDN_ASSETS}/f3hz4co2_Outdoor%20Optic%20Yellow%20Green.png`,
+    lenses: ["LumiGlo Outdoor", "LumiGlo Indoor"],
+    copy: "Every tennis ball — from recreational to tournament — is that same iconic yellow-green. LumiGlo amplifies it by up to 35%. Tracking a fast serve or a topspin volley stops being hard work.",
+  },
+];
+
 const PICKLEBALL_BALLS = [
   {
     label: "Hi-Vis Yellow-Green",
@@ -134,7 +143,7 @@ const ACTIVITY_CONFIG = {
     headline: "See Every Hazard. React Faster.",
     sub: "BronzeGlo lenses",
     description: "BronzeGlo lenses make low-angle sun your problem no more. Amber-tuned to cut through dawn glare, late-afternoon blaze, and flat overcast — sharpening road markings, brake lights, and hazards before you even consciously register them. Add PolarGlo and windshield reflections disappear entirely. See further. React sooner. Drive safer.",
-    heroImage: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=1920",
+    heroImage: "https://images.pexels.com/photos/14242028/pexels-photo-14242028.jpeg?auto=compress&cs=tinysrgb&h=900&w=1600",
     lenses: ["BronzeGlo", "PolarGlo"],
     color: "#C8812E",
     featuredImages: {
@@ -333,6 +342,117 @@ export default function Activity() {
                   </div>
                 </motion.div>
               ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Tennis: Ball × Lens matching section */}
+      {activity === "tennis" && (
+        <section className="py-20 px-6 bg-white" data-testid="tennis-ball-lens">
+          <div className="max-w-screen-xl mx-auto">
+            <motion.div
+              variants={fadeUp()}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              className="mb-12"
+            >
+              <span className="text-xs font-bold tracking-[0.3em] uppercase text-rc-red">Lens Science</span>
+              <h2
+                className="font-display font-black uppercase leading-tight text-gray-900 mt-1"
+                style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
+              >
+                The Ball Doesn't Change.<br />Your Advantage Does.
+              </h2>
+              <p className="text-sm text-gray-500 mt-3 max-w-xl leading-relaxed">
+                Every tennis ball is that same yellow-green. LumiGlo is built for exactly that.
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp(0.1)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+              className="bg-[#F9F9F7] p-8 md:p-12 max-w-2xl"
+            >
+              <div className="flex items-center gap-4 mb-6 h-20">
+                <img src={TENNIS_BALLS[0].img} alt={TENNIS_BALLS[0].label} className="h-20 w-20 object-contain drop-shadow-md" loading="lazy" />
+              </div>
+              <h3 className="font-display text-xl font-black uppercase tracking-widest text-gray-900 mb-2">
+                {TENNIS_BALLS[0].label}
+              </h3>
+              <p className="text-sm text-gray-500 leading-relaxed mb-8">{TENNIS_BALLS[0].copy}</p>
+              <div className="flex gap-8">
+                {TENNIS_BALLS[0].lenses.map((lensName) => (
+                  <div key={lensName} className="flex flex-col items-start gap-2">
+                    <img src={LENS_IMAGES[lensName]} alt={lensName} className="w-20 h-12 object-contain" loading="lazy" />
+                    <span className="text-[9px] font-bold tracking-widest uppercase text-gray-400">{lensName}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
+      {/* Golf: CarbonGlo lens science panel */}
+      {activity === "golf" && (
+        <section className="py-20 px-6 bg-white" data-testid="golf-carbonglo">
+          <div className="max-w-screen-xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <motion.div
+                variants={fadeUp()}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+              >
+                <span className="text-xs font-bold tracking-[0.3em] uppercase text-rc-red">Lens Science</span>
+                <h2
+                  className="font-display font-black uppercase leading-tight text-gray-900 mt-1"
+                  style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
+                >
+                  Why CarbonGlo<br />Wins on the Course
+                </h2>
+                <p className="text-sm text-gray-500 mt-4 leading-relaxed">
+                  CarbonGlo amplifies aqua and green-spectrum tones by up to 37% — the wavelengths that define fairway grain, green contour, and ball trajectory against the sky. You stop guessing the lie. You start reading it.
+                </p>
+                <ul className="mt-6 space-y-2.5">
+                  {[
+                    "Ball tracking against sky and tree lines",
+                    "Fairway grain and surface lie",
+                    "Green contour, break, and depth",
+                    "Water hazard definition and distance",
+                    "Add PolarGlo to kill glare off wet fairway",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm text-gray-600">
+                      <span className="text-rc-red font-bold mt-0.5">—</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              <motion.div
+                variants={fadeUp(0.15)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+                className="flex flex-col items-start gap-4 bg-[#F9F9F7] p-10"
+              >
+                <img
+                  src={LENS_IMAGES["CarbonGlo"]}
+                  alt="CarbonGlo"
+                  className="w-32 h-20 object-contain"
+                  loading="lazy"
+                />
+                <h3 className="font-display font-black uppercase text-2xl tracking-widest text-gray-900">CarbonGlo</h3>
+                <p className="text-[10px] text-rc-red font-bold tracking-widest uppercase">Cycling · Golf · Outdoors</p>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                  Aqua and green tones amplified up to 37%. The course lens. Reads better than eyes that haven't been tuned.
+                </p>
+              </motion.div>
             </div>
           </div>
         </section>
